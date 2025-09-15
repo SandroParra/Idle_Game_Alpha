@@ -1,3 +1,9 @@
-[gd_scene format=3 uid="uid://blqtjsjjgwxs"]
+[gd_scene load_steps=2 format=3 uid="uid://blqtjsjjgwxs"]
+
+[ext_resource type="Texture2D" uid="uid://gerpkvftp2j6" path="res://Assets/Maps/placeholder_Arena.webp" id="1_wtcfe"]
 
 [node name="Game" type="Node2D"]
+
+[node name="PlaceholderArena" type="Sprite2D" parent="."]
+position = Vector2(-4, 2)
+texture = ExtResource("1_wtcfe")
