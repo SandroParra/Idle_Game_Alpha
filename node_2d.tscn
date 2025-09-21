@@ -20,9 +20,6 @@ texture = ExtResource("1_wtcfe")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.07, 1.2)
 
-[node name="Hyena" parent="." instance=ExtResource("2_0e48y")]
-position = Vector2(343, 168)
-
 [node name="Colliders" type="Node2D" parent="."]
 
 [node name="ColliderUp" parent="Colliders" instance=ExtResource("3_epypp")]
@@ -57,11 +54,16 @@ position = Vector2(230, 244)
 [node name="ColliderDown2" parent="Colliders" instance=ExtResource("3_epypp")]
 position = Vector2(-292, 245)
 
-[node name="GraveRobber" parent="." instance=ExtResource("4_q6r6c")]
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Hyena" parent="Enemies" instance=ExtResource("2_0e48y")]
+position = Vector2(343, 168)
+
+[node name="Snake2" parent="Enemies" instance=ExtResource("4_q6r6c")]
 position = Vector2(388, -39)
 
-[node name="Hyena2" parent="." instance=ExtResource("2_0e48y")]
+[node name="Hyena2" parent="Enemies" instance=ExtResource("2_0e48y")]
 position = Vector2(270, 128)
 
-[node name="Snake" parent="." instance=ExtResource("4_q6r6c")]
+[node name="Snake" parent="Enemies" instance=ExtResource("4_q6r6c")]
 position = Vector2(315, -92)
