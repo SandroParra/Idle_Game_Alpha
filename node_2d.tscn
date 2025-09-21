@@ -1,9 +1,67 @@
-[gd_scene load_steps=2 format=3 uid="uid://blqtjsjjgwxs"]
+[gd_scene load_steps=7 format=3 uid="uid://blqtjsjjgwxs"]
 
 [ext_resource type="Texture2D" uid="uid://gerpkvftp2j6" path="res://Assets/Maps/placeholder_Arena.webp" id="1_wtcfe"]
+[ext_resource type="PackedScene" uid="uid://cudo3yq0tmt8v" path="res://Scenes/Enemy_Created/hyena.tscn" id="2_0e48y"]
+[ext_resource type="PackedScene" uid="uid://bun51il4b3qtm" path="res://Scenes/colliders/colliders.tscn" id="3_epypp"]
+[ext_resource type="PackedScene" uid="uid://b1su76foe56yi" path="res://Scenes/Enemy_Created/Snake.tscn" id="4_q6r6c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0hol4"]
+radius = 37.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q6r6c"]
+size = Vector2(17.5, 360.5)
 
 [node name="Game" type="Node2D"]
 
 [node name="PlaceholderArena" type="Sprite2D" parent="."]
 position = Vector2(-4, 2)
 texture = ExtResource("1_wtcfe")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.07, 1.2)
+
+[node name="Hyena" parent="." instance=ExtResource("2_0e48y")]
+position = Vector2(343, 168)
+
+[node name="Colliders" type="Node2D" parent="."]
+
+[node name="ColliderUp" parent="Colliders" instance=ExtResource("3_epypp")]
+position = Vector2(-228, -132)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Colliders/ColliderUp"]
+position = Vector2(-35, 141)
+shape = SubResource("CircleShape2D_0hol4")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Colliders/ColliderUp"]
+position = Vector2(-252, 186.75)
+shape = SubResource("RectangleShape2D_q6r6c")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Colliders/ColliderUp"]
+position = Vector2(723, 190.5)
+shape = SubResource("RectangleShape2D_q6r6c")
+
+[node name="ArenaDivisor" type="CollisionShape2D" parent="Colliders/ColliderUp"]
+position = Vector2(226, 189)
+shape = SubResource("RectangleShape2D_q6r6c")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Colliders/ColliderUp"]
+position = Vector2(490, 139)
+shape = SubResource("CircleShape2D_0hol4")
+
+[node name="ColliderUp2" parent="Colliders" instance=ExtResource("3_epypp")]
+position = Vector2(294, -131)
+
+[node name="ColliderDown" parent="Colliders" instance=ExtResource("3_epypp")]
+position = Vector2(230, 244)
+
+[node name="ColliderDown2" parent="Colliders" instance=ExtResource("3_epypp")]
+position = Vector2(-292, 245)
+
+[node name="GraveRobber" parent="." instance=ExtResource("4_q6r6c")]
+position = Vector2(388, -39)
+
+[node name="Hyena2" parent="." instance=ExtResource("2_0e48y")]
+position = Vector2(270, 128)
+
+[node name="Snake" parent="." instance=ExtResource("4_q6r6c")]
+position = Vector2(315, -92)
