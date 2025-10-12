@@ -1,0 +1,160 @@
+[gd_scene load_steps=21 format=3 uid="uid://b1su76foe56yi"]
+
+[ext_resource type="Script" uid="uid://dwrdhcvslj56q" path="res://Scripts/Enemy.gd" id="1_0207w"]
+[ext_resource type="Texture2D" uid="uid://djvnkx7dh6gih" path="res://Assets/Enemies/1 Snake/Snake_attack.png" id="2_0207w"]
+[ext_resource type="Texture2D" uid="uid://ccxw45tii7ce1" path="res://Assets/Enemies/1 Snake/Snake_idle.png" id="3_xdkis"]
+[ext_resource type="Texture2D" uid="uid://bmwykvk2shy0k" path="res://Assets/Enemies/1 Snake/Snake_walk.png" id="4_7m7b1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogvv4"]
+atlas = ExtResource("2_0207w")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tkjkg"]
+atlas = ExtResource("2_0207w")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_647en"]
+atlas = ExtResource("2_0207w")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vx0v4"]
+atlas = ExtResource("2_0207w")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltmh0"]
+atlas = ExtResource("2_0207w")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kuf3h"]
+atlas = ExtResource("2_0207w")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02cyl"]
+atlas = ExtResource("3_xdkis")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75km2"]
+atlas = ExtResource("3_xdkis")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynl1d"]
+atlas = ExtResource("3_xdkis")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2fak"]
+atlas = ExtResource("3_xdkis")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4vqk"]
+atlas = ExtResource("4_7m7b1")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_my8nj"]
+atlas = ExtResource("4_7m7b1")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecbwc"]
+atlas = ExtResource("4_7m7b1")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y75pl"]
+atlas = ExtResource("4_7m7b1")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f27bh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ogvv4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tkjkg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_647en")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vx0v4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ltmh0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kuf3h")
+}],
+"loop": true,
+"name": &"Attack",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02cyl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75km2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynl1d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b2fak")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k4vqk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_my8nj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ecbwc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y75pl")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h1li4"]
+radius = 11.1803
+
+[node name="Snake" type="CharacterBody2D"]
+texture_filter = 1
+script = ExtResource("1_0207w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_f27bh")
+animation = &"Attack"
+autoplay = "Idle"
+frame_progress = 0.74294
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 19)
+shape = SubResource("CircleShape2D_h1li4")
+
+[node name="DirectionTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="RaycastRight" type="RayCast2D" parent="."]
+position = Vector2(4, 20)
+target_position = Vector2(-19, 0)
+
+[node name="RaycastLeft" type="RayCast2D" parent="."]
+position = Vector2(4, 20)
+target_position = Vector2(19, 0)
+
+[node name="RaycastUp" type="RayCast2D" parent="."]
+position = Vector2(4, 20)
+target_position = Vector2(0, -19)
+
+[node name="RaycastDown" type="RayCast2D" parent="."]
+position = Vector2(4, 20)
+target_position = Vector2(0, 19)
+
+[connection signal="timeout" from="DirectionTimer" to="." method="_on_direction_timer_timeout"]
