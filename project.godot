@@ -11,5 +11,10 @@ config_version=5
 [application]
 
 config/name="Race_Game"
+run/main_scene="uid://cc2as7kj22xgb"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://Game_Icon/icon.svg"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
