@@ -1,6 +1,6 @@
 [gd_scene load_steps=33 format=3 uid="uid://cudo3yq0tmt8v"]
 
-[ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_8qkfy"]
+[ext_resource type="Script" uid="uid://dwrdhcvslj56q" path="res://Scripts/Enemy.gd" id="1_8qkfy"]
 [ext_resource type="Texture2D" uid="uid://davrusw03n346" path="res://Assets/Enemies/2 Hyena/Hyena_attack.png" id="2_8u44c"]
 [ext_resource type="Texture2D" uid="uid://r4hppw313d6t" path="res://Assets/Enemies/2 Hyena/Hyena_death.png" id="3_3k7d3"]
 [ext_resource type="Texture2D" uid="uid://blo7olwsbgg10" path="res://Assets/Enemies/2 Hyena/Hyena_hurt.png" id="4_1tpiu"]

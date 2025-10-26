@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://daa8cndyu4ey7"]
+
+[ext_resource type="Script" uid="uid://c4wccxusvejfd" path="res://Scripts/enemy_spawner.gd" id="1_4l55s"]
+[ext_resource type="PackedScene" uid="uid://b1su76foe56yi" path="res://Scenes/Enemy_Created/Snake.tscn" id="2_8h7h8"]
+[ext_resource type="PackedScene" uid="uid://cudo3yq0tmt8v" path="res://Scenes/Enemy_Created/hyena.tscn" id="3_cdqhx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4l55s"]
+size = Vector2(213, 345)
+
+[node name="enemy_spawner" type="Node2D"]
+position = Vector2(0, 1)
+script = ExtResource("1_4l55s")
+enemy_type_a = ExtResource("3_cdqhx")
+enemy_type_b = ExtResource("2_8h7h8")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="spawnArea" type="Node2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="spawnArea"]
+top_level = true
+position = Vector2(9.5, 56.5)
+shape = SubResource("RectangleShape2D_4l55s")
+disabled = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
