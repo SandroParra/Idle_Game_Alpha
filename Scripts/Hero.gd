@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var targetMode = "closest"
 
-const SPEED = 50.0
+var speed = 50.0
 
 func get_closest_enemy():
 	var shortest_distance = 99999 # Initialize with a very large number
@@ -25,13 +25,19 @@ func _physics_process(_delta: float) -> void:
 	var enemy = get_closest_enemy()
 	var enemy_distance = global_position.distance_to(enemy.global_position)
 	var direction = position.direction_to(enemy.global_position)
-	velocity = direction * SPEED
+	velocity = direction * speed
 	
 	if enemy_distance <= 50:
 		animated_sprite.play("Attack_1")
 	else:
-		animated_sprite.play("Walk")
+		if speed > 50:
+			animated_sprite.play("Run")
+		else:
+			animated_sprite.play("Walk")
 
+		if Input.is_action_just_pressed("ui_accept"):
+			speed = 100
+			
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	move_and_slide()
