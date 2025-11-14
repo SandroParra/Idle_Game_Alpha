@@ -1,7 +1,7 @@
 [gd_scene load_steps=55 format=3 uid="uid://fiye0vg6cikv"]
 
 [ext_resource type="Texture2D" uid="uid://bu11ttvqaes6o" path="res://Assets/Heroes/1 Woodcutter/Woodcutter_idle.png" id="1_87ico"]
-[ext_resource type="Script" uid="uid://0arpysjejmia" path="res://Scripts/woodcutter.gd" id="1_h6hm8"]
+[ext_resource type="Script" uid="uid://0arpysjejmia" path="res://Scripts/Hero.gd" id="1_h6hm8"]
 [ext_resource type="Texture2D" uid="uid://csup21kxaerfh" path="res://Assets/Heroes/1 Woodcutter/Woodcutter_attack1.png" id="3_vgt6b"]
 [ext_resource type="Texture2D" uid="uid://74dynbnqi5eo" path="res://Assets/Heroes/1 Woodcutter/Woodcutter_attack2.png" id="4_fvmv5"]
 [ext_resource type="Texture2D" uid="uid://rbwy6tb80fqu" path="res://Assets/Heroes/1 Woodcutter/Woodcutter_attack3.png" id="5_jq88t"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://76wp2ploly2f" path="res://Assets/Heroes/1 Woodcutter/Woodcutter_run.png" id="6_jq88t"]
 [ext_resource type="Texture2D" uid="uid://b6ybmf15as5gf" path="res://Assets/Heroes/1 Woodcutter/Woodcutter_hurt.png" id="8_0pfuk"]
 [ext_resource type="Texture2D" uid="uid://3g6vx28u6553" path="res://Assets/Heroes/1 Woodcutter/Woodcutter_death.png" id="9_4yyh7"]
+
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h6hm8"]
 atlas = ExtResource("1_87ico")
