@@ -16,22 +16,19 @@ func get_closest_enemy():
 			# Ensure the enemy node is valid and not freed
 		if not is_instance_valid(enemy):
 			continue
-
 			# Calculate the distance to the current enemy
 			# Use distance_squared_to() for performance if only comparing distances
-			var distance = global_position.distance_to(enemy.global_position)
-
+		var distance = global_position.distance_to(enemy.global_position)
 			# If this enemy is closer than the current shortest distance, update
-			if distance < shortest_distance:
-				shortest_distance = distance
-				closest_enemy = enemy
+		if distance < shortest_distance:
+			shortest_distance = distance
+			closest_enemy = enemy
 	return closest_enemy
 
+func _physics_process(_delta: float) -> void:
+	var enemy = get_closest_enemy()
 
-func _physics_process(delta: float) -> void:
-	closest_enemy = get_closest_enemy()
-
-	var direction = position.direction_to(closest_enemy.global_position)
+	var direction = position.direction_to(enemy.global_position)
 	velocity = direction * SPEED
 
 	if direction.length() > 0.2:
@@ -42,6 +39,4 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-
-
 	move_and_slide()

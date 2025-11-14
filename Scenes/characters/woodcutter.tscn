@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://b6ybmf15as5gf" path="res://Assets/Heroes/1 Woodcutter/Woodcutter_hurt.png" id="8_0pfuk"]
 [ext_resource type="Texture2D" uid="uid://3g6vx28u6553" path="res://Assets/Heroes/1 Woodcutter/Woodcutter_death.png" id="9_4yyh7"]
 
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_h6hm8"]
 atlas = ExtResource("1_87ico")
 region = Rect2(0, 0, 48, 48)
