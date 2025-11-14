@@ -360,12 +360,11 @@ animations = [{
 script = ExtResource("1_h6hm8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -24)
+position = Vector2(8, -11)
 sprite_frames = SubResource("SpriteFrames_jq88t")
 animation = &"0_idle"
 autoplay = "0_idle"
 frame_progress = 0.765263
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-10, -16)
 shape = SubResource("CapsuleShape2D_bvved")

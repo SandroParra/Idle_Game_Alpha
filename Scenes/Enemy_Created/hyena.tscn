@@ -214,8 +214,8 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_l75lm")
 animation = &"Death"
 autoplay = "Idle"
-frame = 2
-frame_progress = 0.296869
+frame = 1
+frame_progress = 0.715312
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(7, 13)
@@ -232,13 +232,5 @@ target_position = Vector2(-25, 0)
 [node name="RaycastLeft" type="RayCast2D" parent="."]
 position = Vector2(6, 12)
 target_position = Vector2(25, 0)
-
-[node name="RaycastUp" type="RayCast2D" parent="."]
-position = Vector2(6, 12)
-target_position = Vector2(0, -23)
-
-[node name="RaycastDown" type="RayCast2D" parent="."]
-position = Vector2(6, 12)
-target_position = Vector2(0, 19)
 
 [connection signal="timeout" from="DirectionTimer" to="." method="_on_direction_timer_timeout"]
