@@ -1,5 +1,10 @@
 extends Area2D
 
+var enemy_list = [
+	preload("res://Scenes/enemies/Snake.tscn"),
+	preload("res://Scenes/enemies/hyena.tscn")
+]
+
 var enemyType = preload("res://Scenes/enemies/hyena.tscn")
 
 @export var spawn_interval: float = 2.0
@@ -17,7 +22,8 @@ func _ready() -> void:
 
 func _on_spawn_enemy():
 	if enemies_spawned < max_enemies:
-		var enemy = enemyType.instantiate()
+		var enemyPicked = enemy_list[randi() % enemy_list.size()]
+		var enemy = enemyPicked.instantiate()
 		enemy.position = get_random_point_in_rectangle()
 		get_parent().add_child(enemy)
 		enemies_spawned += 1
