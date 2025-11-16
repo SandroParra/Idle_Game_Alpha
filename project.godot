@@ -15,6 +15,10 @@ run/main_scene="uid://blqtjsjjgwxs"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://Game_Icon/icon.svg"
 
+[global_group]
+
+enemyGroup=""
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

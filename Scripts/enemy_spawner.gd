@@ -1,31 +1,37 @@
-extends Node2D
+extends Area2D
 
-@export var enemy_type_a : PackedScene
-@export var enemy_type_b : PackedScene
-@onready var spawn_area = $spawnArea
-var spawn_a := true
-var enemies_spawned := 0
-const max_enemies := 4
+var enemyType = preload("res://Scenes/enemies/hyena.tscn")
 
-func _on_timer_timeout() -> void:												
-	#spawn an enemy
-	if enemies_spawned >= max_enemies:
-		$Timer.stop()
-		return
-		
-	var enemy = enemy_type_a.instantiate() if spawn_a else enemy_type_b.instantiate()
-	enemy.global_position = get_random_position()
-	add_child(enemy)
-	enemies_spawned += 1
-	spawn_a = !spawn_a 
-		
+@export var spawn_interval: float = 2.0
+@export var max_enemies: int = 4
 
-func get_random_position() -> Vector2:
-	var shape = spawn_area.get_node("CollisionShape2D").shape
-	if(shape is RectangleShape2D):
+var enemies_spawned: int = 0
+
+func _ready() -> void:
+	var timer = Timer.new()
+	timer.wait_time = spawn_interval
+	timer.autostart = true
+	timer.one_shot = false
+	add_child(timer)
+	timer.timeout.connect(_on_spawn_enemy)
+
+func _on_spawn_enemy():
+	if enemies_spawned < max_enemies:
+		var enemy = enemyType.instantiate()
+		enemy.position = get_random_point_in_rectangle()
+		get_parent().add_child(enemy)
+		enemies_spawned += 1
+		enemy.tree_exited.connect(_on_enemy_removed)
+
+func _on_enemy_removed():
+	enemies_spawned -= 1
+
+func get_random_point_in_rectangle() -> Vector2:
+	var shape = $CollisionShape2D.shape
+	if shape is RectangleShape2D:
 		var extents = shape.extents
-		var random_x = randf_range(-extents.x, extents.x)
-		var random_y = randf_range(-extents.y, extents.y)
-		return spawn_area.global_position + Vector2(random_x, random_y)
-	return spawn_area.global_position
-		
+		return position + Vector2(
+			randf_range(-extents.x, extents.x),
+			randf_range(-extents.y, extents.y)
+		)
+	return position

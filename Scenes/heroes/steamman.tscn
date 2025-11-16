@@ -1,6 +1,7 @@
-[gd_scene load_steps=29 format=3 uid="uid://bxtxq367cbkfm"]
+[gd_scene load_steps=30 format=3 uid="uid://bxtxq367cbkfm"]
 
 [ext_resource type="Texture2D" uid="uid://dsxxob54gxoa2" path="res://Assets/Heroes/3 SteamMan/SteamMan_idle.png" id="1_3yrf4"]
+[ext_resource type="Script" uid="uid://0arpysjejmia" path="res://Scripts/Hero.gd" id="1_inixk"]
 [ext_resource type="Texture2D" uid="uid://b3sus4juv4s36" path="res://Assets/Heroes/3 SteamMan/SteamMan_attack1.png" id="1_jh4hj"]
 [ext_resource type="Texture2D" uid="uid://cdmlekdpxos8j" path="res://Assets/Heroes/3 SteamMan/SteamMan_run.png" id="2_my2r1"]
 [ext_resource type="Texture2D" uid="uid://cmctepq7rcl5u" path="res://Assets/Heroes/3 SteamMan/SteamMan_walk.png" id="2_v3nfr"]
@@ -132,7 +133,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_inixk")
 }],
 "loop": true,
-"name": &"Iddle",
+"name": &"Idle",
 "speed": 6.0
 }, {
 "frames": [{
@@ -185,11 +186,12 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3yrf4"]
 
 [node name="Steamman" type="CharacterBody2D"]
+script = ExtResource("1_inixk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(7, -11)
 sprite_frames = SubResource("SpriteFrames_wuq5p")
-animation = &"Attack_1"
+animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_3yrf4")

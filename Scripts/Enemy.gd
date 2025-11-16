@@ -1,18 +1,40 @@
 extends CharacterBody2D
 
-@export var move_speed: float = 55.0
-
-@onready var hero = get_tree().get_first_node_in_group("heroGroup")
+@onready var closest_enemy = null
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var targetMode = "closest"
 
-func _physics_process(delta: float) -> void: 
-	var direction = position.direction_to(hero.get_node("CollisionShape2D").global_position)
-	velocity = direction * move_speed
+var speed = 50.0
 
-	if direction.length() > 0.2:
-		velocity = direction * move_speed
-		animated_sprite.play("Walk")
-	else:
-		velocity = Vector2.ZERO
+func get_closest_enemy():
+	var shortest_distance = 99999 # Initialize with a very large number
+
+		# Get all nodes in the "enemies" group
+	var enemies = get_tree().get_nodes_in_group("heroGroup")
+
+	for enemy in enemies:
+			# Calculate the distance to the current enemy
+		var distance = global_position.distance_to(enemy.global_position)
+			# If this enemy is closer than the current shortest distance, update
+		if distance < shortest_distance:
+			shortest_distance = distance
+			closest_enemy = enemy
+	return closest_enemy
+
+func _physics_process(_delta: float) -> void:
+	var enemy = get_closest_enemy()
+	var enemy_distance = global_position.distance_to(enemy.global_position)
+	var direction = position.direction_to(enemy.global_position)
+	velocity = direction * speed
+	
+	if enemy_distance <= 50:
 		animated_sprite.play("Attack")
+	else:
+		if speed > 50:
+			animated_sprite.play("Run")
+		else:
+			animated_sprite.play("Walk")
+			
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
 	move_and_slide()
