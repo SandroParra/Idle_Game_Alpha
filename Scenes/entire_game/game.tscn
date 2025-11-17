@@ -43,7 +43,7 @@ shape = SubResource("CircleShape2D_0hol4")
 position = Vector2(294, -131)
 
 [node name="ColliderDown" parent="Colliders" instance=ExtResource("2_mchr6")]
-position = Vector2(228, 245)
+position = Vector2(229, 244)
 
 [node name="ColliderDown2" parent="Colliders" instance=ExtResource("2_mchr6")]
 position = Vector2(-292, 245)

@@ -124,7 +124,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_h1li4"]
 radius = 11.1803
 
-[node name="Snake" type="CharacterBody2D"]
+[node name="Snake" type="CharacterBody2D" groups=["enemyGroup"]]
 texture_filter = 1
 script = ExtResource("1_0207w")
 
