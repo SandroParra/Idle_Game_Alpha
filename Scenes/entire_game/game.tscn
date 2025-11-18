@@ -1,11 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://blqtjsjjgwxs"]
+[gd_scene load_steps=6 format=3 uid="uid://blqtjsjjgwxs"]
 
 [ext_resource type="Texture2D" uid="uid://gerpkvftp2j6" path="res://Assets/Maps/placeholder_Arena.webp" id="1_1flj3"]
 [ext_resource type="PackedScene" uid="uid://bun51il4b3qtm" path="res://Scenes/colliders/colliders.tscn" id="2_mchr6"]
 [ext_resource type="PackedScene" uid="uid://djhi3hrqutyni" path="res://Scenes/enemies/enemySpawner.tscn" id="3_mchr6"]
-[ext_resource type="PackedScene" uid="uid://fiye0vg6cikv" path="res://Scenes/heroes/woodcutter.tscn" id="5_qq3nh"]
-[ext_resource type="PackedScene" uid="uid://bxtxq367cbkfm" path="res://Scenes/heroes/steamman.tscn" id="6_ry85a"]
-[ext_resource type="PackedScene" uid="uid://c44hpys6rfp2h" path="res://Scenes/heroes/graverobber.tscn" id="8_qy8my"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0hol4"]
 radius = 27.0185
@@ -55,15 +52,6 @@ shape = SubResource("RectangleShape2D_q6r6c")
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Heroes" type="Node2D" parent="."]
-
-[node name="Alan" parent="Heroes" groups=["heroGroup"] instance=ExtResource("5_qq3nh")]
-position = Vector2(-400, -35)
-
-[node name="Getto" parent="Heroes" groups=["heroGroup"] instance=ExtResource("6_ry85a")]
-position = Vector2(-405, -104)
-
-[node name="Indi" parent="Heroes" groups=["heroGroup"] instance=ExtResource("8_qy8my")]
-position = Vector2(-399, 133)
 
 [node name="enemySpawner" parent="." instance=ExtResource("3_mchr6")]
 position = Vector2(390, 17)
