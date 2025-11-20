@@ -1,0 +1,141 @@
+[gd_scene load_steps=18 format=3 uid="uid://bixiv0365lcn6"]
+
+[ext_resource type="Texture2D" uid="uid://5nety2tfsvs4" path="res://Assets/Heroes/BlackDragon/blackDragon.png" id="1_3xuus"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5ps0"]
+atlas = ExtResource("1_3xuus")
+region = Rect2(0, 7168, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijsk7"]
+atlas = ExtResource("1_3xuus")
+region = Rect2(512, 7168, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgr0h"]
+atlas = ExtResource("1_3xuus")
+region = Rect2(1024, 7168, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ut65a"]
+atlas = ExtResource("1_3xuus")
+region = Rect2(1536, 7168, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xu3mf"]
+atlas = ExtResource("1_3xuus")
+region = Rect2(0, 7680, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sw11k"]
+atlas = ExtResource("1_3xuus")
+region = Rect2(512, 7680, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nf447"]
+atlas = ExtResource("1_3xuus")
+region = Rect2(1024, 7680, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gl036"]
+atlas = ExtResource("1_3xuus")
+region = Rect2(1536, 7680, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ysb0a"]
+atlas = ExtResource("1_3xuus")
+region = Rect2(0, 6144, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00bkx"]
+atlas = ExtResource("1_3xuus")
+region = Rect2(512, 6144, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iywge"]
+atlas = ExtResource("1_3xuus")
+region = Rect2(1024, 6144, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3u6ip"]
+atlas = ExtResource("1_3xuus")
+region = Rect2(1536, 6144, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q8136"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q5ps0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijsk7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qgr0h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ut65a")
+}],
+"loop": true,
+"name": &"Attack_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xu3mf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sw11k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nf447")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gl036")
+}],
+"loop": true,
+"name": &"Death",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ysb0a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_00bkx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iywge")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3u6ip")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3xuus"]
+radius = 148.03
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q5ps0"]
+radius = 90.2718
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ijsk7"]
+radius = 27.5359
+height = 112.774
+
+[node name="BlackDragon" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_q8136")
+animation = &"Death"
+frame_progress = 0.943374
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -1)
+shape = SubResource("CircleShape2D_3xuus")
+
+[node name="HurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(-19, 7)
+shape = SubResource("CircleShape2D_q5ps0")
+debug_color = Color(0.99878, 0, 0.132809, 0.42)
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(129, -93)
+rotation = 2.33874
+shape = SubResource("CapsuleShape2D_ijsk7")
+debug_color = Color(1.29953e-06, 0.638717, 0.374836, 0.42)

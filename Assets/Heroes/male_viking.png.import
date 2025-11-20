@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5nety2tfsvs4"
-path="res://.godot/imported/blackDragon.png-12b44efcef5548503a1a650ddf1120e0.ctex"
+uid="uid://clsou8x7r4e2r"
+path="res://.godot/imported/male_viking.png-bbface98ace95a739f2a46fb74371892.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Heroes/blackDragon.png"
-dest_files=["res://.godot/imported/blackDragon.png-12b44efcef5548503a1a650ddf1120e0.ctex"]
+source_file="res://Assets/Heroes/male_viking.png"
+dest_files=["res://.godot/imported/male_viking.png-bbface98ace95a739f2a46fb74371892.ctex"]
 
 [params]
 

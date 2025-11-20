@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clsou8x7r4e2r"
-path="res://.godot/imported/21.png-794c26211c4a660afe87d42449687217.ctex"
+uid="uid://5nety2tfsvs4"
+path="res://.godot/imported/blackDragon.png-28196501c2ad7207e6d73ce51d4e86f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Heroes/21.png"
-dest_files=["res://.godot/imported/21.png-794c26211c4a660afe87d42449687217.ctex"]
+source_file="res://Assets/Heroes/BlackDragon/blackDragon.png"
+dest_files=["res://.godot/imported/blackDragon.png-28196501c2ad7207e6d73ce51d4e86f1.ctex"]
 
 [params]
 
