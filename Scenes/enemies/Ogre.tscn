@@ -1,6 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://cqesnfnt1lfr1"]
+[gd_scene load_steps=22 format=3 uid="uid://cqesnfnt1lfr1"]
 
+[ext_resource type="Script" uid="uid://dwrdhcvslj56q" path="res://Scripts/Enemy.gd" id="1_0xnhj"]
 [ext_resource type="Texture2D" uid="uid://mhnpcmy5xbu" path="res://Assets/Enemies/cyclops.png" id="1_iktr5"]
+[ext_resource type="Resource" uid="uid://ckknx3dg5d34r" path="res://Data/Stats/enemies/OgreStats.tres" id="2_1848p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ux1ep"]
 atlas = ExtResource("1_iktr5")
@@ -141,12 +143,16 @@ animations = [{
 size = Vector2(41.75, 53.25)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_0xnhj")
+stats = ExtResource("2_1848p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_edhlf")
-animation = &"Walk"
+animation = &"Attack"
 autoplay = "Idle"
+frame = 2
+frame_progress = 0.0522555
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 10.625)

@@ -1,6 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://bn5ad10fvd4xq"]
+[gd_scene load_steps=18 format=3 uid="uid://bn5ad10fvd4xq"]
 
+[ext_resource type="Script" uid="uid://dwrdhcvslj56q" path="res://Scripts/Enemy.gd" id="1_4e8cb"]
 [ext_resource type="Texture2D" uid="uid://von3ed1iy7wt" path="res://Assets/Enemies/bigtick.png" id="1_cjsa8"]
+[ext_resource type="Resource" uid="uid://ro4871i5q7wt" path="res://Data/Stats/enemies/TickStats.tres" id="2_5h2ho"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5okmp"]
 atlas = ExtResource("1_cjsa8")
@@ -117,13 +119,15 @@ animations = [{
 size = Vector2(18, 10)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_4e8cb")
+stats = ExtResource("2_5h2ho")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_v5axp")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.0640864
+frame_progress = 0.706998
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 14)

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="heroStats" load_steps=2 format=3 uid="uid://2ruetkccpy46"]
+
+[ext_resource type="Script" uid="uid://l7lq4aggqvsu" path="res://Scripts/heroStats.gd" id="1_4uvgo"]
+
+[resource]
+script = ExtResource("1_4uvgo")
+health = 100
+damage = 10
+speed = 150.0
+defense = 0
+crit_chance = 0.0
+crit_damage = 0.0
+attack_speed = 0.0
+metadata/_custom_type_script = "uid://l7lq4aggqvsu"

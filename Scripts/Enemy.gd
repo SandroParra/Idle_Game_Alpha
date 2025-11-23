@@ -4,7 +4,15 @@ extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var targetMode = "closest"
 
-var speed = 50.0
+@export var stats: EnemyStats
+
+func _ready():
+	if stats == null:
+		push_warning("Enemy has no stats assigned")
+		return
+	
+	set_physics_process(true)
+	print("Enemy -> HP:", stats.health, " DMG:", stats.damage, " SPD:", stats.speed)
 
 func get_closest_enemy():
 	var shortest_distance = 99999 # Initialize with a very large number
@@ -33,17 +41,17 @@ func _physics_process(_delta: float) -> void:
 
 	var enemy_distance = global_position.distance_to(enemy.global_position)
 	var direction = position.direction_to(enemy.global_position)
-	velocity = direction * speed
+	velocity = direction * stats.speed
 
 	if enemy_distance <= 50:
 		animated_sprite.play("Attack_1")
 	else:
-		if speed > 50:
+		if stats.speed > 50:
 			animated_sprite.play("Run")
 		else:
 			animated_sprite.play("Walk")
 
 		if Input.is_action_just_pressed("ui_accept"):
-			speed = 100
+			stats.speed = 100
 
 	move_and_slide()
