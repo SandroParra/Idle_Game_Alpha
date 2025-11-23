@@ -1,11 +1,9 @@
 extends Area2D
 
 var enemy_list = [
-	preload("res://Scenes/enemies/Snake.tscn"),
-	preload("res://Scenes/enemies/hyena.tscn")
+	preload("res://Scenes/enemies/Ogre.tscn"),
+	preload("res://Scenes/enemies/BigTick.tscn")
 ]
-
-var enemyType = preload("res://Scenes/enemies/hyena.tscn")
 
 @export var spawn_interval: float = 2.0
 @export var max_enemies: int = 4

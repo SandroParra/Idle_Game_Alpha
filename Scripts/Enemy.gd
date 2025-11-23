@@ -23,18 +23,27 @@ func get_closest_enemy():
 
 func _physics_process(_delta: float) -> void:
 	var enemy = get_closest_enemy()
+
+	if enemy == null:
+		# No enemies yet → idle animation
+		animated_sprite.play("Idle")
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+
 	var enemy_distance = global_position.distance_to(enemy.global_position)
 	var direction = position.direction_to(enemy.global_position)
 	velocity = direction * speed
-	
+
 	if enemy_distance <= 50:
-		animated_sprite.play("Attack")
+		animated_sprite.play("Attack_1")
 	else:
 		if speed > 50:
 			animated_sprite.play("Run")
 		else:
 			animated_sprite.play("Walk")
-			
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+
+		if Input.is_action_just_pressed("ui_accept"):
+			speed = 100
+
 	move_and_slide()
