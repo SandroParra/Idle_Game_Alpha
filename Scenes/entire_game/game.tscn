@@ -55,9 +55,9 @@ shape = SubResource("RectangleShape2D_q6r6c")
 
 [node name="Heroes" type="Node2D" parent="."]
 
-[node name="enemySpawner" parent="." instance=ExtResource("3_mchr6")]
-position = Vector2(601, 20)
-
-[node name="BlackDragon" parent="." instance=ExtResource("4_qgn2x")]
-position = Vector2(-151, 221)
+[node name="BlackDragon" parent="Heroes" instance=ExtResource("4_qgn2x")]
+position = Vector2(-336, 181)
 script = ExtResource("5_1flj3")
+
+[node name="enemySpawner" parent="." instance=ExtResource("3_mchr6")]
+position = Vector2(591, 2)

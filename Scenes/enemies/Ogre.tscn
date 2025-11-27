@@ -146,7 +146,7 @@ size = Vector2(41.75, 53.25)
 script = ExtResource("1_0xnhj")
 stats = ExtResource("2_1848p")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["enemyGroup"]]
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_edhlf")
 animation = &"Attack"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bixiv0365lcn6"]
+[gd_scene load_steps=21 format=3 uid="uid://bixiv0365lcn6"]
 
 [ext_resource type="Texture2D" uid="uid://5nety2tfsvs4" path="res://Assets/Heroes/BlackDragon/blackDragon.png" id="1_3xuus"]
 
@@ -34,10 +34,6 @@ region = Rect2(1024, 7680, 512, 512)
 atlas = ExtResource("1_3xuus")
 region = Rect2(1536, 7680, 512, 512)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bjkif"]
-atlas = ExtResource("1_3xuus")
-region = Rect2(0, 0, 512, 512)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ysb0a"]
 atlas = ExtResource("1_3xuus")
 region = Rect2(0, 6144, 512, 512)
@@ -53,6 +49,22 @@ region = Rect2(1024, 6144, 512, 512)
 [sub_resource type="AtlasTexture" id="AtlasTexture_3u6ip"]
 atlas = ExtResource("1_3xuus")
 region = Rect2(1536, 6144, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjkif"]
+atlas = ExtResource("1_3xuus")
+region = Rect2(0, 6656, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bns0n"]
+atlas = ExtResource("1_3xuus")
+region = Rect2(512, 6656, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stpiw"]
+atlas = ExtResource("1_3xuus")
+region = Rect2(1024, 6656, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8lnqe"]
+atlas = ExtResource("1_3xuus")
+region = Rect2(1536, 6656, 512, 512)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_q8136"]
 animations = [{
@@ -71,7 +83,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Attack_1",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -88,15 +100,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Death",
-"speed": 6.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bjkif")
-}],
-"loop": true,
-"name": &"Icon",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -113,7 +117,24 @@ animations = [{
 }],
 "loop": true,
 "name": &"Idle",
-"speed": 6.0
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bjkif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bns0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stpiw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8lnqe")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 8.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3xuus"]
@@ -122,13 +143,14 @@ radius = 148.03
 [sub_resource type="CircleShape2D" id="CircleShape2D_q5ps0"]
 radius = 90.2718
 
-[node name="BlackDragon" type="CharacterBody2D"]
+[node name="BlackDragon" type="CharacterBody2D" groups=["heroGroup"]]
 scale = Vector2(0.5, 0.5)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_q8136")
-animation = &"Icon"
+animation = &"Attack_1"
+frame_progress = 0.186643
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -1)
