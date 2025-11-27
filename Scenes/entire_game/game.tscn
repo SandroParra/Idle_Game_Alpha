@@ -4,16 +4,17 @@
 [ext_resource type="PackedScene" uid="uid://bun51il4b3qtm" path="res://Scenes/colliders/colliders.tscn" id="2_mchr6"]
 [ext_resource type="PackedScene" uid="uid://djhi3hrqutyni" path="res://Scenes/enemies/enemySpawner.tscn" id="3_mchr6"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q6r6c"]
+size = Vector2(11.375, 585.625)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_0hol4"]
 radius = 27.0185
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q6r6c"]
-size = Vector2(12.75, 509.25)
 
 [node name="Game" type="Node2D"]
 
 [node name="PlaceholderArena" type="Sprite2D" parent="."]
-position = Vector2(0, 4)
+position = Vector2(0.999962, -1.00004)
+scale = Vector2(1.65926, 1.63803)
 texture = ExtResource("1_1flj3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -22,36 +23,36 @@ zoom = Vector2(1.07, 1.2)
 [node name="Colliders" type="Node2D" parent="."]
 
 [node name="ColliderUp" parent="Colliders" instance=ExtResource("2_mchr6")]
-position = Vector2(-228, -132)
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Colliders/ColliderUp"]
-position = Vector2(-33, 149)
-shape = SubResource("CircleShape2D_0hol4")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Colliders/ColliderUp"]
-position = Vector2(-253, 143)
-shape = SubResource("RectangleShape2D_q6r6c")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Colliders/ColliderUp"]
-position = Vector2(492, 147)
-shape = SubResource("CircleShape2D_0hol4")
+position = Vector2(-530, -197)
 
 [node name="ColliderUp2" parent="Colliders" instance=ExtResource("2_mchr6")]
-position = Vector2(294, -131)
+position = Vector2(539, -197)
 
 [node name="ColliderDown" parent="Colliders" instance=ExtResource("2_mchr6")]
-position = Vector2(229, 244)
+position = Vector2(1, 373)
 
 [node name="ColliderDown2" parent="Colliders" instance=ExtResource("2_mchr6")]
-position = Vector2(-292, 245)
+position = Vector2(-526, 374)
 
 [node name="limiteDerecho" type="CollisionShape2D" parent="Colliders"]
-position = Vector2(502, 7)
+position = Vector2(804, 89)
 shape = SubResource("RectangleShape2D_q6r6c")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Colliders"]
+position = Vector2(-450, 54)
+shape = SubResource("CircleShape2D_0hol4")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Colliders"]
+position = Vector2(-796.313, 81.8125)
+shape = SubResource("RectangleShape2D_q6r6c")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Colliders"]
+position = Vector2(434, 30)
+shape = SubResource("CircleShape2D_0hol4")
 
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Heroes" type="Node2D" parent="."]
 
 [node name="enemySpawner" parent="." instance=ExtResource("3_mchr6")]
-position = Vector2(390, 17)
+position = Vector2(651, 56)

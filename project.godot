@@ -15,6 +15,12 @@ run/main_scene="uid://blqtjsjjgwxs"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://Game_Icon/icon.svg"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/aspect="expand"
+
 [global_group]
 
 enemyGroup=""
