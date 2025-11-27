@@ -118,7 +118,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cjsa8"]
 size = Vector2(18, 10)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["enemyGroup"]]
 script = ExtResource("1_4e8cb")
 stats = ExtResource("2_5h2ho")
 
