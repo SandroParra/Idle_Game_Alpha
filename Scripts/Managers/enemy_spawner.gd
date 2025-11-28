@@ -1,8 +1,8 @@
 extends Area2D
 
 var enemy_list = [
-	preload("res://Scenes/enemies/Ogre.tscn"),
-	preload("res://Scenes/enemies/BigTick.tscn")
+	preload("res://Scenes/Units/enemies/Ogre.tscn"),
+	preload("res://Scenes/Units/enemies/BigTick.tscn")
 ]
 
 @export var spawn_interval: float = 2.0
