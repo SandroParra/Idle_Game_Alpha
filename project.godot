@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Race_Game"
 run/main_scene="uid://blqtjsjjgwxs"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://Resources/Game_Icon/icon.svg"
 
 [display]
