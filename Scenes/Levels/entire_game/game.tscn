@@ -69,6 +69,8 @@ offset_bottom = 1077.0
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="UI/Hand/Heroe_1"]
+light_mask = 16
+visibility_layer = 16
 layout_mode = 1
 offset_right = 49.0
 offset_bottom = 59.0
