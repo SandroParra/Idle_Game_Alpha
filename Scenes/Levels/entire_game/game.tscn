@@ -13,42 +13,45 @@ y_sort_enabled = true
 script = ExtResource("1_d4uca")
 
 [node name="PlaceholderArena" type="Sprite2D" parent="."]
-position = Vector2(0.499987, -1.56498)
-scale = Vector2(0.933854, 0.704008)
+scale = Vector2(0.9994792, 0.84375)
 texture = ExtResource("1_hlfm0")
+centered = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.07, 1.2)
+anchor_mode = 0
 
 [node name="Colliders" type="Node2D" parent="."]
+position = Vector2(942, 602)
 
 [node name="ColliderUp" parent="Colliders" instance=ExtResource("2_d4uca")]
-position = Vector2(-584, -105)
+position = Vector2(-582, -179)
 
 [node name="ColliderUp2" parent="Colliders" instance=ExtResource("2_d4uca")]
-position = Vector2(-32, -104)
+position = Vector2(-20, -180)
 
 [node name="ColliderUp3" parent="Colliders" instance=ExtResource("2_d4uca")]
-position = Vector2(552, -107)
+position = Vector2(552, -185)
 
 [node name="ColliderDown" parent="Colliders" instance=ExtResource("2_d4uca")]
-position = Vector2(-26, 381)
+position = Vector2(15, 397)
 
 [node name="ColliderDown2" parent="Colliders" instance=ExtResource("2_d4uca")]
-position = Vector2(538, 381)
+position = Vector2(612, 391)
 
 [node name="ColliderDown3" parent="Colliders" instance=ExtResource("2_d4uca")]
-position = Vector2(-571, 380)
+position = Vector2(-565, 396)
 
 [node name="Enemies" type="Node2D" parent="."]
+position = Vector2(3, 4)
 
 [node name="enemySpawner" parent="Enemies" instance=ExtResource("3_tqpib")]
-position = Vector2(951, 148)
+position = Vector2(1977, 700)
 
 [node name="Heroes" type="Node2D" parent="."]
+position = Vector2(5, 4)
 
 [node name="BlackDragon" parent="Heroes" instance=ExtResource("4_cv2yb")]
-position = Vector2(-766, 256)
+position = Vector2(131, 595)
 scale = Vector2(0.75, 0.75)
 script = ExtResource("5_075tl")
 
@@ -57,26 +60,17 @@ layer = 4
 
 [node name="Hand" type="HBoxContainer" parent="UI"]
 anchors_preset = -1
-anchor_left = -0.042
-anchor_top = 0.212
-anchor_right = -0.042
-anchor_bottom = 0.212
-offset_left = 84.64
-offset_top = -198.96
-offset_right = 124.64
-offset_bottom = -158.96
+offset_left = 408.0
+offset_top = 1015.0
+offset_right = 913.0
+offset_bottom = 1077.0
 
 [node name="Heroe_1" type="Control" parent="UI/Hand"]
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="UI/Hand/Heroe_1"]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 2.572
-anchor_bottom = 2.572
-offset_left = -40.0
-offset_top = -36.88
-offset_right = 36.0
-offset_bottom = 39.12
+offset_right = 49.0
+offset_bottom = 59.0
 texture = ExtResource("7_tqpib")
 expand_mode = 3
