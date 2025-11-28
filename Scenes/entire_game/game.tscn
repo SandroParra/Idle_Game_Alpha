@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://djhi3hrqutyni" path="res://Scenes/enemies/enemySpawner.tscn" id="3_mchr6"]
 [ext_resource type="PackedScene" uid="uid://bixiv0365lcn6" path="res://Scenes/heroes/BlackDragon.tscn" id="4_qgn2x"]
 [ext_resource type="Script" uid="uid://0arpysjejmia" path="res://Scripts/Hero.gd" id="5_1flj3"]
+[ext_resource type="PackedScene" uid="uid://cqesnfnt1lfr1" path="res://Scenes/enemies/Ogre.tscn" id="5_mchr6"]
 
 [node name="Game" type="Node2D"]
 
@@ -44,6 +45,9 @@ position = Vector2(-571, 380)
 position = Vector2(-583, 247)
 scale = Vector2(0.75, 0.75)
 script = ExtResource("5_1flj3")
+
+[node name="CharacterBody2D" parent="Heroes" instance=ExtResource("5_mchr6")]
+position = Vector2(-438, 188)
 
 [node name="enemySpawner" parent="." instance=ExtResource("3_mchr6")]
 position = Vector2(949, 110)

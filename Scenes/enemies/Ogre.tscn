@@ -84,7 +84,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_dtait")
 }],
 "loop": true,
-"name": &"Attack",
+"name": &"Attack_1",
 "speed": 6.0
 }, {
 "frames": [{
@@ -149,9 +149,12 @@ stats = ExtResource("2_1848p")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["enemyGroup"]]
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_edhlf")
-animation = &"Idle"
+animation = &"Attack_1"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemyGroup"]]
 position = Vector2(-1, 10.625)
 shape = SubResource("RectangleShape2D_iktr5")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(-44, 0)
