@@ -138,7 +138,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3xuus"]
-radius = 148.03
+radius = 112.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q5ps0"]
 radius = 90.2718
@@ -149,11 +149,12 @@ scale = Vector2(0.5, 0.5)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_q8136")
-animation = &"Attack_1"
-frame_progress = 0.186643
+animation = &"Walk"
+frame = 3
+frame_progress = 0.492414
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -1)
+position = Vector2(-28, 4)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_3xuus")
 
@@ -161,10 +162,30 @@ shape = SubResource("CircleShape2D_3xuus")
 scale = Vector2(0.5, 0.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(-19, 7)
+position = Vector2(-28, -20)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_q5ps0")
 debug_color = Color(0.99878, 0, 0.132809, 0.42)
 
 [node name="HitBox" type="Area2D" parent="."]
 scale = Vector2(0.5, 0.5)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -252.0
+offset_top = 110.0
+offset_right = -212.0
+offset_bottom = 150.0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.856
+anchor_top = 0.5
+anchor_right = -1.856
+anchor_bottom = 0.5
+offset_left = -19.76
+offset_top = -20.0
+offset_right = 20.24
+offset_bottom = 20.0
