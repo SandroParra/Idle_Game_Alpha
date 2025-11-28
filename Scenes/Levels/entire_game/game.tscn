@@ -1,12 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://blqtjsjjgwxs"]
+[gd_scene load_steps=8 format=3 uid="uid://blqtjsjjgwxs"]
 
+[ext_resource type="Script" uid="uid://jg0e88yfgkeh" path="res://Scripts/Managers/GameManager.gd" id="1_d4uca"]
 [ext_resource type="Texture2D" uid="uid://bmv6pr26ivn6e" path="res://Assets/Maps/Arena_v2.jpg" id="1_hlfm0"]
 [ext_resource type="PackedScene" uid="uid://bun51il4b3qtm" path="res://Scenes/Levels/colliders/colliders.tscn" id="2_d4uca"]
 [ext_resource type="PackedScene" uid="uid://djhi3hrqutyni" path="res://Scenes/Units/enemies/enemySpawner.tscn" id="3_tqpib"]
 [ext_resource type="PackedScene" uid="uid://bixiv0365lcn6" path="res://Scenes/Units/heroes/BlackDragon.tscn" id="4_cv2yb"]
 [ext_resource type="Script" uid="uid://0arpysjejmia" path="res://Scripts/Units/Hero.gd" id="5_075tl"]
+[ext_resource type="Texture2D" uid="uid://d6pjpd33g1mc" path="res://Resources/Cards/RedDragon.jpg" id="7_tqpib"]
 
 [node name="Game" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_d4uca")
 
 [node name="PlaceholderArena" type="Sprite2D" parent="."]
 position = Vector2(0.499987, -1.56498)
@@ -39,7 +43,7 @@ position = Vector2(-571, 380)
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="enemySpawner" parent="Enemies" instance=ExtResource("3_tqpib")]
-position = Vector2(949, 110)
+position = Vector2(951, 148)
 
 [node name="Heroes" type="Node2D" parent="."]
 
@@ -47,3 +51,10 @@ position = Vector2(949, 110)
 position = Vector2(-766, 256)
 scale = Vector2(0.75, 0.75)
 script = ExtResource("5_075tl")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RedDragon" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(-400, 408)
+scale = Vector2(0.132353, 0.120098)
+texture = ExtResource("7_tqpib")
