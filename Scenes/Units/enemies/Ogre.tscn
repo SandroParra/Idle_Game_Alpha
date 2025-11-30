@@ -83,7 +83,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dtait")
 }],
-"loop": true,
+"loop": false,
 "name": &"Attack_1",
 "speed": 8.0
 }, {
@@ -146,7 +146,7 @@ size = Vector2(26.21875, 20.8125)
 script = ExtResource("1_gqkln")
 stats = ExtResource("2_espuo")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["enemyGroup"]]
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_edhlf")
 animation = &"Attack_1"

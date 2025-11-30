@@ -1,57 +1,59 @@
 extends CharacterBody2D
 
-@onready var closest_enemy = null
-@onready var animated_sprite = $AnimatedSprite2D
-@onready var targetMode = "closest"
-
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @export var stats: EnemyStats
+
+var target: CharacterBody2D = null
 
 func _ready():
 	if stats == null:
 		push_warning("Enemy has no stats assigned")
 		return
-	
-	set_physics_process(true)
-	print("Enemy -> Name:",stats.name ," HP:", stats.health, " DMG:", stats.damage, " SPD:", stats.speed)
+	else:
+		stats = stats.duplicate()
 
-func get_closest_enemy():
-	var shortest_distance = 99999 # Initialize with a very large number
+	# Connect the AnimatedSprite2D signal properly
+	animated_sprite.animation_finished.connect(_on_animation_finished)
 
-		# Get all nodes in the "enemies" group
-	var enemies = get_tree().get_nodes_in_group("heroGroup")
-
-	for enemy in enemies:
-			# Calculate the distance to the current enemy
-		var distance = global_position.distance_to(enemy.global_position)
-			# If this enemy is closer than the current shortest distance, update
-		if distance < shortest_distance:
-			shortest_distance = distance
-			closest_enemy = enemy
-	return closest_enemy
+	print("Enemy -> Name:", stats.name, " HP:", stats.health, " DMG:", stats.damage, " SPD:", stats.speed)
 
 func _physics_process(_delta: float) -> void:
 	var enemy = get_closest_enemy()
-
 	if enemy == null:
-		# No enemies yet → idle animation
 		animated_sprite.play("Idle")
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
 
 	var enemy_distance = global_position.distance_to(enemy.global_position)
-	var direction = position.direction_to(enemy.global_position)
+	var direction = global_position.direction_to(enemy.global_position)
 	velocity = direction * stats.speed
 
-	if enemy_distance <= 50:
-		animated_sprite.play("Attack_1")
+	if enemy_distance <= 80:
+		attack(enemy)
 	else:
-		if stats.speed > 50:
-			animated_sprite.play("Run")
-		else:
-			animated_sprite.play("Walk")
-
-		if Input.is_action_just_pressed("ui_accept"):
-			stats.speed = 100
+		animated_sprite.play("Walk")
 
 	move_and_slide()
+
+func get_closest_enemy() -> CharacterBody2D:
+	var shortest_distance = INF
+	var closest: CharacterBody2D = null
+	for enemy in get_tree().get_nodes_in_group("heroGroup"):
+		var distance = global_position.distance_to(enemy.global_position)
+		if distance < shortest_distance:
+			shortest_distance = distance
+			closest = enemy as CharacterBody2D
+	return closest
+
+func attack(target_enemy: CharacterBody2D):
+	target = target_enemy
+	animated_sprite.play("Attack_1")
+
+func _on_animation_finished():
+	if animated_sprite.animation == "Attack_1" and target:
+		print("Animation finished!")
+		if target.has_method("take_damage"):
+			print("found take damage!")
+			target.take_damage(stats.damage)
+	target = null

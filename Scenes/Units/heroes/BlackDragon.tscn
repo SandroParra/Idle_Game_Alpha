@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bixiv0365lcn6"]
+[gd_scene load_steps=21 format=3 uid="uid://bixiv0365lcn6"]
 
 [ext_resource type="Script" uid="uid://c8x3gimh43cko" path="res://Scripts/Units/Hero.gd" id="1_1b7vl"]
 [ext_resource type="Texture2D" uid="uid://5nety2tfsvs4" path="res://Assets/Models/Heroes/BlackDragon/blackDragon.png" id="1_3xuus"]
@@ -18,6 +18,22 @@ region = Rect2(1024, 7168, 512, 512)
 [sub_resource type="AtlasTexture" id="AtlasTexture_xvfa8"]
 atlas = ExtResource("1_3xuus")
 region = Rect2(1536, 7168, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5s1k"]
+atlas = ExtResource("1_3xuus")
+region = Rect2(0, 7680, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mv1og"]
+atlas = ExtResource("1_3xuus")
+region = Rect2(512, 7680, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0b3is"]
+atlas = ExtResource("1_3xuus")
+region = Rect2(1024, 7680, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g6o3s"]
+atlas = ExtResource("1_3xuus")
+region = Rect2(1536, 7680, 512, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q4gqg"]
 atlas = ExtResource("1_3xuus")
@@ -72,6 +88,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_q5s1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mv1og")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0b3is")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g6o3s")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_q4gqg")
 }, {
 "duration": 1.0,
@@ -116,7 +149,7 @@ script = ExtResource("1_1b7vl")
 position = Vector2(50, -6)
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_q5s1k")
-animation = &"Attack_1"
+animation = &"Death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)

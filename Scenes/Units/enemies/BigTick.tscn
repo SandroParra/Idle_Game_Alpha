@@ -70,7 +70,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6cifr")
 }],
-"loop": true,
+"loop": false,
 "name": &"Attack_1",
 "speed": 8.0
 }, {
@@ -125,9 +125,8 @@ stats = ExtResource("2_5h2ho")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_v5axp")
-animation = &"Walk"
+animation = &"Attack_1"
 autoplay = "Idle"
-frame_progress = 0.77254534
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 14)
