@@ -12,7 +12,7 @@ func _ready():
 		return
 	
 	set_physics_process(true)
-	print("Enemy -> HP:", stats.health, " DMG:", stats.damage, " SPD:", stats.speed)
+	print("Enemy -> Name:",stats.name ," HP:", stats.health, " DMG:", stats.damage, " SPD:", stats.speed)
 
 func get_closest_enemy():
 	var shortest_distance = 99999 # Initialize with a very large number

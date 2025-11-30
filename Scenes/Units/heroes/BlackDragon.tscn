@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://bixiv0365lcn6"]
+[gd_scene load_steps=17 format=3 uid="uid://bixiv0365lcn6"]
 
+[ext_resource type="Script" uid="uid://c8x3gimh43cko" path="res://Scripts/Units/Unit.gd" id="1_1b7vl"]
 [ext_resource type="Texture2D" uid="uid://5nety2tfsvs4" path="res://Assets/Models/Heroes/BlackDragon/blackDragon.png" id="1_3xuus"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ojeot"]
@@ -104,18 +105,20 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_oo2ma"]
-radius = 619.31573
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1b7vl"]
+size = Vector2(363.25, 446.5)
 
 [node name="BlackDragon" type="CharacterBody2D" groups=["heroGroup"]]
 scale = Vector2(0.5, 0.5)
+script = ExtResource("1_1b7vl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(50, -6)
 sprite_frames = SubResource("SpriteFrames_q5s1k")
-animation = &"Walk"
+animation = &"Attack_1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(4, 2)
+position = Vector2(0, 2)
 scale = Vector2(0.25, 0.25)
-shape = SubResource("CircleShape2D_oo2ma")
+shape = SubResource("RectangleShape2D_1b7vl")
 debug_color = Color(0.065405846, 0.6132287, 0.610462, 0.41960785)

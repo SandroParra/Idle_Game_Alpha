@@ -18,8 +18,11 @@ func _gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
+				print("Click detectado - Iniciando arrastre") # Debug
+				drag_started.emit(card_data)
 				# Click presionado: Empezar arrastre
 				drag_started.emit(card_data)
 			else:
+				print("Click soltado - Terminando arrastre") # Debug
 				# Click soltado: Terminar arrastre
 				drag_ended.emit(card_data)

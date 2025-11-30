@@ -46,7 +46,7 @@ position = Vector2(3, 4)
 [node name="enemySpawner" parent="Enemies" instance=ExtResource("3_tqpib")]
 position = Vector2(1977, 700)
 
-[node name="Heroes" type="Node2D" parent="." groups=["heroGroup"]]
+[node name="Heroes" type="Node2D" parent="."]
 y_sort_enabled = true
 position = Vector2(5, 4)
 

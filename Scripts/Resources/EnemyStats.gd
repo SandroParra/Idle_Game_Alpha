@@ -1,6 +1,7 @@
 extends Resource
 class_name EnemyStats
 
+@export var name: String = "Unit Name"
 @export var health: int = 100
 @export var damage: int = 10
 @export var speed: float = 150.0

@@ -2,12 +2,8 @@
 
 [ext_resource type="Script" uid="uid://7uafb3ow5j1i" path="res://Scripts/Resources/EnemyStats.gd" id="1_mjyx6"]
 
-
 [resource]
 script = ExtResource("1_mjyx6")
-health = 100
-damage = 10
+name = "Ogre"
 speed = 25.0
-defense = 0
-crit_chance = 0.0
 metadata/_custom_type_script = "uid://7uafb3ow5j1i"
