@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var anim = $AnimatedSprite2D # Usaremos esto en el paso de animación
 
 var stats: CardData
-var target: Node2D # La torre enemiga o unidad enemiga
+var target: CharacterBody2D # La unidad enemiga
 
 func initialize(data: CardData, _target: CharacterBody2D):
 	stats = data
@@ -20,7 +20,6 @@ func _physics_process(_delta):
 	
 	# 2. Moverse
 	velocity = direction * stats.speed
-	print("velocidad es...", velocity)
 	move_and_slide()
 	
 	# 3. Mirar hacia donde va (Flip horizontal)
@@ -31,9 +30,6 @@ func _physics_process(_delta):
 			anim.flip_h = false # Mirar derecha
 	
 	# 4. Verificar si llegamos (para atacar)
-	print("rango es ",stats.attack_range)
-	print("distancia es ", global_position.distance_to(target.global_position))
-	
 	if global_position.distance_to(target.global_position) <= stats.attack_range:
 		velocity = Vector2.ZERO
 		anim.play("Attack_1")

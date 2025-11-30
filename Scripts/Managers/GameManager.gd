@@ -7,7 +7,7 @@ var ghost_sprite: Sprite2D # El visual transparente
 var is_dragging: bool = false
 var closest_enemy = null
 
-func get_closest_enemy():
+func get_closest_enemy()->CharacterBody2D:
 	var shortest_distance = INF
 	var enemies = get_tree().get_nodes_in_group("enemyGroup")
 
