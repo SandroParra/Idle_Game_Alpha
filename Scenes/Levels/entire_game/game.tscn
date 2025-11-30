@@ -6,13 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://djhi3hrqutyni" path="res://Scenes/Units/enemies/enemySpawner.tscn" id="3_tqpib"]
 [ext_resource type="PackedScene" uid="uid://bixiv0365lcn6" path="res://Scenes/Units/heroes/BlackDragon.tscn" id="4_cv2yb"]
 [ext_resource type="Script" uid="uid://0arpysjejmia" path="res://Scripts/Units/Hero.gd" id="5_075tl"]
-[ext_resource type="Texture2D" uid="uid://d6pjpd33g1mc" path="res://Resources/Cards/RedDragon.jpg" id="7_tqpib"]
+[ext_resource type="PackedScene" uid="uid://b6wu8x1fcuh2e" path="res://Scenes/UI/CardUI.tscn" id="7_tqpib"]
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_d4uca")
 
-[node name="PlaceholderArena" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="."]
 scale = Vector2(0.9994792, 0.84375)
 texture = ExtResource("1_hlfm0")
 centered = false
@@ -42,16 +42,19 @@ position = Vector2(612, 391)
 position = Vector2(-565, 396)
 
 [node name="Enemies" type="Node2D" parent="."]
+y_sort_enabled = true
 position = Vector2(3, 4)
 
 [node name="enemySpawner" parent="Enemies" instance=ExtResource("3_tqpib")]
 position = Vector2(1977, 700)
 
 [node name="Heroes" type="Node2D" parent="."]
+y_sort_enabled = true
 position = Vector2(5, 4)
 
 [node name="BlackDragon" parent="Heroes" instance=ExtResource("4_cv2yb")]
-position = Vector2(131, 595)
+visible = false
+position = Vector2(230, 704)
 scale = Vector2(0.75, 0.75)
 script = ExtResource("5_075tl")
 
@@ -59,20 +62,12 @@ script = ExtResource("5_075tl")
 layer = 4
 
 [node name="Hand" type="HBoxContainer" parent="UI"]
-anchors_preset = -1
 offset_left = 408.0
 offset_top = 1015.0
-offset_right = 913.0
+offset_right = 1547.0
 offset_bottom = 1077.0
 
-[node name="Heroe_1" type="Control" parent="UI/Hand"]
+[node name="CardUI" parent="UI/Hand" instance=ExtResource("7_tqpib")]
+light_mask = 3
+visibility_layer = 3
 layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="UI/Hand/Heroe_1"]
-light_mask = 16
-visibility_layer = 16
-layout_mode = 1
-offset_right = 49.0
-offset_bottom = 59.0
-texture = ExtResource("7_tqpib")
-expand_mode = 3

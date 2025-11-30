@@ -15,7 +15,7 @@ func _ready():
 	add_child(ghost_sprite)
 	
 	# Conectar señales de las cartas (esto hazlo en el editor o por código)
-	# Ejemplo: $CanvasLayer/Hand/Card1.card_selected.connect(_on_card_selected)
+	$CanvasLayer/Hand/CardUI.card_selected.connect(_on_card_selected)
 
 func _process(_delta):
 	if is_dragging and current_card:

@@ -1,22 +1,25 @@
-extends Control
+# res://Scripts/CardUI.gd
+extends TextureRect
 
-# Señales que escuchará el GameManager
-signal card_selected(card_data)
-signal card_deselected
+# Señales para avisar al juego que estamos tocando la carta
+signal drag_started(card_data)
+signal drag_ended(card_data)
 
-@export var card_data: CardData
-@onready var icon: TextureRect = $Icon
-@onready var cost_lbl: Label = $Cost
+@export var card_data: CardData # Arrastraremos BlackDragon.tres aquí
 
 func _ready():
+	# Cargar visuales automáticamente
 	if card_data:
-		icon.texture = card_data.icon
-		cost_lbl.text = str(card_data.cost)
+		texture = card_data.icon
+		# Si tienes un Label para el costo:
+		$Label.text = str(card_data.cost)
 
 func _gui_input(event):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		if event.pressed:
-			card_selected.emit(card_data)
-		else:
-			# Opcional: Si quieres lógica al soltar el clic
-			pass
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				# Click presionado: Empezar arrastre
+				drag_started.emit(card_data)
+			else:
+				# Click soltado: Terminar arrastre
+				drag_ended.emit(card_data)

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6wu8x1fcuh2e"]
+
+[ext_resource type="Texture2D" uid="uid://d6pjpd33g1mc" path="res://Assets/UI/BlackDragon/BlackDragon.jpg" id="1_7cml5"]
+[ext_resource type="Script" uid="uid://3lfv5qsd7vij" path="res://Scripts/UI/CardUI.gd" id="2_cw8tj"]
+[ext_resource type="Resource" uid="uid://c2mffwrbagbge" path="res://Resources/Cards/BlackDragon.tres" id="3_cw8tj"]
+
+[node name="CardUI" type="TextureRect"]
+offset_right = 153.0
+offset_bottom = 153.0
+texture = ExtResource("1_7cml5")
+expand_mode = 3
+stretch_mode = 4
+script = ExtResource("2_cw8tj")
+card_data = ExtResource("3_cw8tj")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 154.0

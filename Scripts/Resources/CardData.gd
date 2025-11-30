@@ -1,7 +1,7 @@
 class_name CardData extends Resource
 
 @export_group("Visuals")
-@export var name: String = "Guerrero"
+@export var name: String = "Unit Name"
 @export var icon: Texture2D          # Para la UI
 @export var unit_scene: PackedScene  # La escena del personaje (Unit.tscn)
 
