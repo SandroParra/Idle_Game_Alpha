@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://c2mffwrbagbge"]
 
-[ext_resource type="Texture2D" uid="uid://d6pjpd33g1mc" path="res://Assets/UI/BlackDragon/BlackDragon.jpg" id="1_h55ml"]
+[ext_resource type="Texture2D" uid="uid://dhd61qwqbctp5" path="res://Assets/UI/BlackDragon/Card.png" id="1_h55ml"]
 [ext_resource type="Script" uid="uid://fses6prrp6qw" path="res://Scripts/Resources/CardData.gd" id="2_bfr5d"]
 [ext_resource type="PackedScene" uid="uid://bixiv0365lcn6" path="res://Scenes/Units/heroes/BlackDragon.tscn" id="3_y6jrk"]
 
