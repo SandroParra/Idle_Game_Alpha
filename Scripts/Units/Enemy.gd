@@ -33,6 +33,11 @@ func _physics_process(_delta: float) -> void:
 		attack(enemy)
 	else:
 		animated_sprite.play("Walk")
+		if animated_sprite:
+			if direction.x < 0:
+				animated_sprite.flip_h = false # Mirar izquierda
+			elif direction.x > 0:
+				animated_sprite.flip_h = true # Mirar derecha
 
 	move_and_slide()
 
