@@ -5,16 +5,22 @@ extends Node2D
 var current_card: CardData = null
 var ghost_sprite: Sprite2D # El visual transparente
 var is_dragging: bool = false
-var closest_enemy = null
 
-func get_closest_enemy()->CharacterBody2D:
+func get_closest_enemy(reference_position: Vector2)->CharacterBody2D:
+	var closest_enemy = null
 	var shortest_distance = INF
 	var enemies = get_tree().get_nodes_in_group("enemyGroup")
 
+# Si no hay enemigos, retornamos null rápido
+	if enemies.is_empty():
+		return null
+		
 	for enemy in enemies:
 		if enemy == null:
 			continue
-		var distance = global_position.distance_to(enemy.global_position)
+			
+		var distance = reference_position.distance_to(enemy.global_position)
+		#var distance = abs(global_position.distance_to(enemy.global_position))
 		if distance < shortest_distance:
 			shortest_distance = distance
 			closest_enemy = enemy
@@ -65,8 +71,8 @@ func _on_card_drag_ended(data: CardData):
 	ghost_sprite.visible = false
 	
 	var drop_pos = get_global_mouse_position()
-	var enemy = get_closest_enemy()
-	
+	var enemy = get_closest_enemy(drop_pos)
+	print("closest enemy is ... ", enemy)
 	if is_valid_drop_zone(drop_pos) && enemy != null:
 		print("Data es ",data," posicion es ",drop_pos," el enemigo es ", enemy)
 		spawn_unit(data, drop_pos, enemy)
