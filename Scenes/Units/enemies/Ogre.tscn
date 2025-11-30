@@ -140,7 +140,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iktr5"]
-size = Vector2(41.75, 53.25)
+size = Vector2(26.21875, 20.8125)
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["enemyGroup"]]
 script = ExtResource("1_gqkln")
@@ -153,8 +153,9 @@ animation = &"Attack_1"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemyGroup"]]
-position = Vector2(-1, 10.625)
+position = Vector2(-1, 1)
 shape = SubResource("RectangleShape2D_iktr5")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-3, 1)
 target_position = Vector2(-44, 0)

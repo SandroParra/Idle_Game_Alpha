@@ -1,48 +1,36 @@
 extends CharacterBody2D
 
-@onready var animated_sprite = $AnimatedSprite2D
-@onready var targetMode = "closest"
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var anim = $AnimatedSprite2D # Usaremos esto en el paso de animación
 
-var speed: float = 50.0
-var closest_enemy: Node2D = null
+var stats: CardData
+var target: CharacterBody2D # La unidad enemiga
 
-func get_closest_enemy() -> Node2D:
-	var shortest_distance = INF
-	var enemies = get_tree().get_nodes_in_group("enemyGroup")
-
-	for enemy in enemies:
-		if enemy == null:
-			continue
-		var distance = global_position.distance_to(enemy.global_position)
-		if distance < shortest_distance:
-			shortest_distance = distance
-			closest_enemy = enemy
-
-	return closest_enemy
-
-func _physics_process(_delta: float) -> void:
-	var enemy = get_closest_enemy()
-
-	if enemy == null:
-		# No enemies yet → idle animation
-		animated_sprite.play("Idle")
-		velocity = Vector2.ZERO
-		move_and_slide()
-		return
-
-	var enemy_distance = global_position.distance_to(enemy.global_position)
-	var direction = position.direction_to(enemy.global_position)
-	velocity = direction * speed
-
-	if enemy_distance <= 50:
-		animated_sprite.play("Attack_1")
-	else:
-		if speed > 50:
-			animated_sprite.play("Run")
-		else:
-			animated_sprite.play("Walk")
-
-		if Input.is_action_just_pressed("ui_accept"):
-			speed = 100
-
+func initialize(data: CardData, _target: CharacterBody2D):
+	stats = data
+	target = _target
+	if anim:
+		anim.play("Walk")
+		
+func _physics_process(_delta):
+	if not target: return
+	# 1. Calcular dirección hacia el enemigo
+	var direction = global_position.direction_to(target.global_position)
+	
+	# 2. Moverse
+	velocity = direction * stats.speed
 	move_and_slide()
+	
+	# 3. Mirar hacia donde va (Flip horizontal)
+	if anim:
+		if direction.x < 0:
+			anim.flip_h = true # Mirar izquierda
+		elif direction.x > 0:
+			anim.flip_h = false # Mirar derecha
+	
+	# 4. Verificar si llegamos (para atacar)
+	if global_position.distance_to(target.global_position) <= stats.attack_range:
+		velocity = Vector2.ZERO
+		anim.play("Attack_1")
+		return

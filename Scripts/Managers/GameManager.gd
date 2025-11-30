@@ -28,8 +28,6 @@ func _ready():
 	add_child(ghost_sprite)
 	
 	var card_node = $UI/Hand/CardUI	
-	# Conectar señales de las cartas (esto hazlo en el editor o por código)
-	#$UI/Hand/CardUI.card_selected.connect(_on_card_selected)
 	
 	if card_node:
 		# Conectamos las señales definidas en CardUI.gd
@@ -74,9 +72,8 @@ func _on_card_drag_ended(data: CardData):
 		spawn_unit(data, drop_pos, enemy)
 		
 func is_valid_drop_zone(pos: Vector2) -> bool:
-	# Ejemplo simple: Solo puedes invocar en la mitad inferior de la pantalla
-	# Ajusta este valor según el tamaño de tu arena
-	return pos.y > 300
+	# Solo se puede invocar en la mitad inferior de la pantalla
+	return (pos.y > 440 && pos.y < 980) && (pos.x > 0 && pos.x < 1000)
 
 func spawn_unit(data: CardData, pos: Vector2, target: CharacterBody2D):
 	if data.unit_scene:

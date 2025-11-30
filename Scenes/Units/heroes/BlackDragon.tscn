@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://bixiv0365lcn6"]
 
-[ext_resource type="Script" uid="uid://c8x3gimh43cko" path="res://Scripts/Units/Unit.gd" id="1_1b7vl"]
+[ext_resource type="Script" uid="uid://c8x3gimh43cko" path="res://Scripts/Units/Hero.gd" id="1_1b7vl"]
 [ext_resource type="Texture2D" uid="uid://5nety2tfsvs4" path="res://Assets/Models/Heroes/BlackDragon/blackDragon.png" id="1_3xuus"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ojeot"]

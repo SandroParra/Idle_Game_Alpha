@@ -22,10 +22,10 @@ anchor_mode = 0
 position = Vector2(942, 602)
 
 [node name="ColliderUp" parent="Colliders" instance=ExtResource("2_d4uca")]
-position = Vector2(-582, -179)
+position = Vector2(-515, -188)
 
 [node name="ColliderUp2" parent="Colliders" instance=ExtResource("2_d4uca")]
-position = Vector2(-20, -180)
+position = Vector2(20, -186)
 
 [node name="ColliderUp3" parent="Colliders" instance=ExtResource("2_d4uca")]
 position = Vector2(552, -185)
@@ -34,10 +34,10 @@ position = Vector2(552, -185)
 position = Vector2(15, 397)
 
 [node name="ColliderDown2" parent="Colliders" instance=ExtResource("2_d4uca")]
-position = Vector2(612, 391)
+position = Vector2(551, 398)
 
 [node name="ColliderDown3" parent="Colliders" instance=ExtResource("2_d4uca")]
-position = Vector2(-565, 396)
+position = Vector2(-514, 396)
 
 [node name="Enemies" type="Node2D" parent="."]
 y_sort_enabled = true
