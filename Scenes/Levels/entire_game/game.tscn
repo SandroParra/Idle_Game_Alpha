@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://blqtjsjjgwxs"]
+[gd_scene load_steps=7 format=3 uid="uid://blqtjsjjgwxs"]
 
 [ext_resource type="Script" uid="uid://jg0e88yfgkeh" path="res://Scripts/Managers/GameManager.gd" id="1_d4uca"]
 [ext_resource type="Texture2D" uid="uid://bmv6pr26ivn6e" path="res://Assets/Maps/Arena_v2.jpg" id="1_hlfm0"]
 [ext_resource type="PackedScene" uid="uid://bun51il4b3qtm" path="res://Scenes/Levels/colliders/colliders.tscn" id="2_d4uca"]
 [ext_resource type="PackedScene" uid="uid://djhi3hrqutyni" path="res://Scenes/Units/enemies/enemySpawner.tscn" id="3_tqpib"]
 [ext_resource type="Texture2D" uid="uid://dhd61qwqbctp5" path="res://Assets/UI/BlackDragon/Card.png" id="6_d4uca"]
-[ext_resource type="PackedScene" uid="uid://cqesnfnt1lfr1" path="res://Scenes/Units/enemies/Ogre.tscn" id="7_cv2yb"]
 [ext_resource type="PackedScene" uid="uid://b6wu8x1fcuh2e" path="res://Scenes/UI/CardUI.tscn" id="7_tqpib"]
 
 [node name="Game" type="Node2D"]
@@ -46,7 +45,7 @@ y_sort_enabled = true
 position = Vector2(3, 4)
 
 [node name="enemySpawner" parent="Enemies" instance=ExtResource("3_tqpib")]
-position = Vector2(1977, 700)
+position = Vector2(1968, 684)
 
 [node name="Heroes" type="Node2D" parent="." groups=["heroGroup"]]
 y_sort_enabled = true
@@ -66,6 +65,3 @@ light_mask = 3
 visibility_layer = 3
 layout_mode = 2
 texture = ExtResource("6_d4uca")
-
-[node name="CharacterBody2D" parent="UI/Hand" instance=ExtResource("7_cv2yb")]
-position = Vector2(-120, -304)

@@ -25,6 +25,8 @@ window/stretch/mode="viewport"
 
 enemyGroup=""
 heroGroup=""
+enemy_hurtbox=""
+hero_hurtbox=""
 
 [rendering]
 

@@ -83,7 +83,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dtait")
 }],
-"loop": true,
+"loop": false,
 "name": &"Attack_1",
 "speed": 8.0
 }, {
@@ -100,7 +100,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uwma4")
 }],
-"loop": false,
+"loop": true,
 "name": &"Death",
 "speed": 8.0
 }, {
@@ -139,25 +139,28 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_gqkln"]
-radius = 18.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iktr5"]
+size = Vector2(26.21875, 20.8125)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gqkln"]
-radius = 43.73699
-height = 89.816086
+radius = 23.530525
+height = 72.97018
 
-[node name="CharacterBody2D" type="CharacterBody2D" groups=["enemyGroup", "enemy_hurtbox"]]
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["enemyGroup"]]
 script = ExtResource("1_gqkln")
 stats = ExtResource("2_espuo")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["enemy_hurtbox"]]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["enemyGroup", "enemy_hurtbox"]]
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_edhlf")
-animation = &"Walk"
+animation = &"Attack_1"
 autoplay = "Idle"
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_gqkln")
+position = Vector2(-1, 1)
+shape = SubResource("RectangleShape2D_iktr5")
 
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(-14, 12)
@@ -166,11 +169,11 @@ position = Vector2(-14, 12)
 polygon = PackedVector2Array(3, 30, -20, 38, -38, 5, -36, -23, -25, -47, -1, -62, 35, -63, 57, -43, 59, -10, 37, -12, 32, -38, 10, -42, -2, -31, -13, -9)
 disabled = true
 
-[node name="Hurtbox" type="Area2D" parent="." groups=["enemy_hurtbox"]]
+[node name="Hutbox" type="Area2D" parent="."]
 position = Vector2(11, 3)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" groups=["enemy_hurtbox"]]
-position = Vector2(-18.000023, -4.000002)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hutbox"]
+position = Vector2(-18.999998, 2.3841858e-07)
 rotation = -0.19024089
 shape = SubResource("CapsuleShape2D_gqkln")
 debug_color = Color(0.7, 0, 0.12833337, 0.41960785)

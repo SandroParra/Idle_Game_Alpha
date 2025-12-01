@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bixiv0365lcn6"]
+[gd_scene load_steps=22 format=3 uid="uid://bixiv0365lcn6"]
 
 [ext_resource type="Script" uid="uid://c8x3gimh43cko" path="res://Scripts/Units/Hero.gd" id="1_1b7vl"]
 [ext_resource type="Texture2D" uid="uid://5nety2tfsvs4" path="res://Assets/Models/Heroes/BlackDragon/blackDragon.png" id="1_3xuus"]
@@ -138,10 +138,14 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1b7vl"]
-size = Vector2(363.25, 446.5)
+[sub_resource type="CircleShape2D" id="CircleShape2D_1b7vl"]
+radius = 54.589375
 
-[node name="BlackDragon" type="CharacterBody2D" groups=["heroGroup"]]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1b7vl"]
+radius = 120.62145
+height = 359.17215
+
+[node name="BlackDragon" type="CharacterBody2D" groups=["heroGroup", "hero_hurtbox"]]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_1b7vl")
 
@@ -149,10 +153,23 @@ script = ExtResource("1_1b7vl")
 position = Vector2(50, -6)
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_q5s1k")
-animation = &"Death"
+animation = &"Idle"
+frame_progress = 0.41303152
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2)
-scale = Vector2(0.25, 0.25)
-shape = SubResource("RectangleShape2D_1b7vl")
-debug_color = Color(0.065405846, 0.6132287, 0.610462, 0.41960785)
+shape = SubResource("CircleShape2D_1b7vl")
+debug_color = Color(0, 1, 1, 0.41960785)
+
+[node name="Hurtbox" type="Area2D" parent="." groups=["hero_hurtbox"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(34, 15.999998)
+rotation = 0.76096356
+shape = SubResource("CapsuleShape2D_1b7vl")
+debug_color = Color(0.84, 0.19851997, 0.17639998, 0.41960785)
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
+polygon = PackedVector2Array(30, 46, 0, 88, -106, 94, -94, 164, 26, 146, 136, 108, 180, 50, 226, -26, 238, -88, 152, -130, 78, -150, 72, -102, 74, -44, 66, 2)
+disabled = true
