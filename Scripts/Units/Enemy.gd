@@ -117,11 +117,16 @@ func _on_hitbox_area_entered(area):
 			victim.take_damage(stats.damage)
 
 func _on_frame_changed():
+	if is_dead or not is_instance_valid(hitbox): return
+			
+	var shape = hitbox.get_node_or_null("CollisionShape2D")
+	var polygon = hitbox.get_node_or_null("CollisionPolygon2D")
+	if shape: shape.disabled = true
+	if polygon: polygon.disabled = true
+	
 	if anim.animation == "Attack_1":
 		# El golpe visual ocurre en el frame 2 y 3
-		var shape = hitbox.get_node_or_null("CollisionShape2D")
-		var polygon = hitbox.get_node_or_null("CollisionPolygon2D")
 		
-		if anim.frame >= 2 and anim.frame <= 3:
+		if (anim.frame >= 2 and anim.frame <= 3):
 			if shape: shape.disabled = false
-			if polygon:	polygon.disabled = false
+			if polygon: polygon.disabled = false
