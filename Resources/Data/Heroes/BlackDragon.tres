@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://c2mffwrbagbge"]
+[gd_resource type="Resource" script_class="HeroData" load_steps=4 format=3 uid="uid://c2mffwrbagbge"]
 
 [ext_resource type="Texture2D" uid="uid://dhd61qwqbctp5" path="res://Assets/UI/BlackDragon/BlackDragon.png" id="1_uk10f"]
 [ext_resource type="Script" uid="uid://fses6prrp6qw" path="res://Scripts/Resources/HeroStats.gd" id="2_mus3t"]
@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("2_mus3t")
+name = "Black Dragon"
 icon = ExtResource("1_uk10f")
 unit_scene = ExtResource("3_sk0s7")
 health = 500

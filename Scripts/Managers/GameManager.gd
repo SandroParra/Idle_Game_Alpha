@@ -33,15 +33,17 @@ func _ready():
 	ghost_sprite.visible = false
 	add_child(ghost_sprite)
 	
-	var card_node = $UI/Hand/CardUI	
+	var hand_container = $UI/Hand
 	
-	if card_node:
-		# Conectamos las señales definidas en CardUI.gd
-		card_node.drag_started.connect(_on_card_drag_started)
-		card_node.drag_ended.connect(_on_card_drag_ended)
-		print("Señales conectadas correctamente")
-	else:
-		print("ERROR FATAL: No encuentro el nodo CardUI. Revisa la ruta en GameManager.gd")
+	if hand_container:
+		for card in hand_container.get_children():
+		# Verificamos si el hijo tiene la señal que necesitamos (para evitar errores si hay un Label decorativo, etc)
+			if card.has_signal("drag_started"):
+				card.drag_started.connect(_on_card_drag_started)
+				card.drag_ended.connect(_on_card_drag_ended)
+				print("Señales conectadas para ", hand_container.get_child_count(), " cartas.")
+			else:
+				print("ERROR FATAL: No encuentro el nodo Hand en $UI/Hand")
 
 func _process(_delta):
 	if is_dragging and current_card:

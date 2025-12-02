@@ -12,7 +12,7 @@ func _ready():
 	if card_data:
 		texture = card_data.icon
 		# Si tienes un Label para el costo:
-		$Label.text = str(card_data.cost)
+		$Label.text = str(card_data.name)
 
 func _gui_input(event):
 	if event is InputEventMouseButton:
