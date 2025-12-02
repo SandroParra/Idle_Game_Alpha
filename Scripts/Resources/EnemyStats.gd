@@ -1,11 +1,10 @@
-class_name EnemyStats
+class_name EnemyData
 extends Resource
 
 @export_group("Visuals")
 @export var name: String = "Unit Name"
 
 @export_group("Stats")
-@export var cost: int = 3
 @export var health: int = 100
 @export var damage: int = 15
 @export var speed: float = 50.0     # Velocidad en píxeles/segundo

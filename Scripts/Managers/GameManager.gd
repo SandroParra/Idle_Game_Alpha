@@ -2,7 +2,7 @@ extends Node2D
 
 @export var valid_spawn_area: Rect2 # Define un área donde se puede invocar (o usa un Area2D)
 
-var current_card: CardData = null
+var current_card: HeroData = null
 var ghost_sprite: Sprite2D # El visual transparente
 var is_dragging: bool = false
 
@@ -54,7 +54,7 @@ func _process(_delta):
 		else:
 			ghost_sprite.modulate = Color(1, 0, 0, 0.5) # Rojo
 
-func _on_card_drag_started(data: CardData):
+func _on_card_drag_started(data: HeroData):
 	print("Drag iniciado recibido en Manager")
 	if data == null:
 		print("ERROR: La carta no tiene datos (Card Data está vacío)")
@@ -65,7 +65,7 @@ func _on_card_drag_started(data: CardData):
 	ghost_sprite.texture = data.icon
 	ghost_sprite.visible = true
 
-func _on_card_drag_ended(data: CardData):
+func _on_card_drag_ended(data: HeroData):
 	print("Drag terminado")
 	is_dragging = false
 	ghost_sprite.visible = false
@@ -81,7 +81,7 @@ func is_valid_drop_zone(pos: Vector2) -> bool:
 	# Solo se puede invocar en la mitad inferior de la pantalla
 	return (pos.y > 440 && pos.y < 980) && (pos.x > 0 && pos.x < 1000)
 
-func spawn_unit(data: CardData, pos: Vector2, target: CharacterBody2D):
+func spawn_unit(data: HeroData, pos: Vector2, target: CharacterBody2D):
 	if data.unit_scene:
 		var new_unit = data.unit_scene.instantiate()
 		new_unit.global_position = pos

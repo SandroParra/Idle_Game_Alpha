@@ -3,9 +3,8 @@ extends CharacterBody2D
 @onready var anim = $AnimatedSprite2D # Usaremos esto en el paso de animación
 @onready var hitbox = $Hitbox # Referencia al área de ataque
 @onready var hurtbox = $Hurtbox
-var stats: CardData
+var stats: HeroData
 var target: CharacterBody2D # La unidad enemiga
-var current_health: int
 
 var is_dead = false
 
@@ -18,10 +17,9 @@ func _ready():
 	anim.frame_changed.connect(_on_frame_changed)
 	
 
-func initialize(data: CardData, _target: CharacterBody2D):
+func initialize(data: HeroData, _target: CharacterBody2D):
 	stats = data.duplicate(true)
 	target = _target
-	current_health = stats.health
 	
 	# Configurar equipos para evitar fuego amigo
 	if is_in_group("heroGroup"):

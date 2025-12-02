@@ -1,4 +1,5 @@
-class_name CardData extends Resource
+class_name HeroData
+extends Resource
 
 @export_group("Visuals")
 @export var name: String = "Unit Name"

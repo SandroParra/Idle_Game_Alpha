@@ -5,7 +5,7 @@ extends TextureRect
 signal drag_started(card_data)
 signal drag_ended(card_data)
 
-@export var card_data: CardData # Arrastraremos BlackDragon.tres aquí
+@export var card_data: HeroData # Arrastraremos BlackDragon.tres aquí
 
 func _ready():
 	# Cargar visuales automáticamente

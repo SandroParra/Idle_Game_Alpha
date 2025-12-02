@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var hitbox = $Hitbox # Referencia al área de ataque
 @onready var hurtbox = $Hurtbox
 
-@export var stats: EnemyStats
+@export var stats: EnemyData
 
 var target: CharacterBody2D = null
 var is_dead = false

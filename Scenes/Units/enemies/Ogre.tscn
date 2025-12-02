@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://cqesnfnt1lfr1"]
 
 [ext_resource type="Script" uid="uid://dwrdhcvslj56q" path="res://Scripts/Units/Enemy.gd" id="1_gqkln"]
-[ext_resource type="Resource" uid="uid://ckknx3dg5d34r" path="res://Resources/Data/Stats/enemies/OgreStats.tres" id="2_espuo"]
+[ext_resource type="Resource" uid="uid://ckknx3dg5d34r" path="res://Resources/Data/Enemies/OgreStats.tres" id="2_espuo"]
 [ext_resource type="Texture2D" uid="uid://mhnpcmy5xbu" path="res://Assets/Models/Enemies/cyclops.png" id="3_0nv6k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ux1ep"]

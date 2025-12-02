@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://fses6prrp6qw" path="res://Scripts/Resources/HeroStats.gd" id="2_usan0"]
 [ext_resource type="PackedScene" uid="uid://dukonx2421ru8" path="res://Scenes/Units/heroes/MaleViking.tscn" id="3_usan0"]
 
+
 [resource]
 script = ExtResource("2_usan0")
 icon = ExtResource("1_6o2xi")
