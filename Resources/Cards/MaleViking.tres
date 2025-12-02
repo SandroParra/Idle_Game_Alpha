@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://5jm53d3cp8pj"]
+
+[ext_resource type="Texture2D" uid="uid://bxe8aoiu35bn3" path="res://Assets/UI/MaleViking/MaleViking.png" id="1_6o2xi"]
+[ext_resource type="Script" uid="uid://fses6prrp6qw" path="res://Scripts/Resources/HeroStats.gd" id="2_usan0"]
+[ext_resource type="PackedScene" uid="uid://dukonx2421ru8" path="res://Scenes/Units/heroes/MaleViking.tscn" id="3_usan0"]
+
+[resource]
+script = ExtResource("2_usan0")
+icon = ExtResource("1_6o2xi")
+unit_scene = ExtResource("3_usan0")
+metadata/_custom_type_script = "uid://fses6prrp6qw"

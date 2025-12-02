@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhd61qwqbctp5"
-path="res://.godot/imported/Card.png-49cbd37b7a772ad5105ddee3b844811f.ctex"
+uid="uid://clsou8x7r4e2r"
+path="res://.godot/imported/MaleViking.png-a891734754d32bb8256ce8703260eb57.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/BlackDragon/Card.png"
-dest_files=["res://.godot/imported/Card.png-49cbd37b7a772ad5105ddee3b844811f.ctex"]
+source_file="res://Assets/Models/Heroes/MaleViking/MaleViking.png"
+dest_files=["res://.godot/imported/MaleViking.png-a891734754d32bb8256ce8703260eb57.ctex"]
 
 [params]
 

@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var anim = $AnimatedSprite2D # Usaremos esto en el paso de animación
 @onready var hitbox = $Hitbox # Referencia al área de ataque
 @onready var hurtbox = $Hurtbox
@@ -72,6 +71,7 @@ func get_closest_enemy() -> CharacterBody2D:
 	return closest
 
 func take_damage(amount: int) -> void:
+	if is_dead: return
 	var damage = max(amount - stats.defense, 1)
 	stats.health -= damage
 	print("Hero took ", damage, " and has ", stats.health, " health remaining")
@@ -82,8 +82,9 @@ func take_damage(amount: int) -> void:
 	modulate = Color(1, 1, 1)
 	
 	if stats.health <= 0:
-		is_dead = true;
+		#is_dead = true;
 		die()
+		return
 	
 func die() -> void:
 	if is_dead: return

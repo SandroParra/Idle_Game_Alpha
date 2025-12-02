@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://b6rfnwr8tykr2"]
+
+[ext_resource type="Script" uid="uid://fses6prrp6qw" path="res://Scripts/Resources/HeroStats.gd" id="1_pvr1y"]
+
+[resource]
+script = ExtResource("1_pvr1y")
+name = "Male Viking"
+cost = 2
+health = 50
+damage = 8
+speed = 75.0
+attack_range = 30.0
+defense = 5.0
+crit_chance = 25.0
