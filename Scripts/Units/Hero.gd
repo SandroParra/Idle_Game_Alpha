@@ -5,8 +5,9 @@ extends CharacterBody2D
 @onready var hurtbox = $Hurtbox
 var stats: HeroData
 var target: CharacterBody2D # La unidad enemiga
-
 var is_dead = false
+var unit_name: String = "" # Para identificar si soy "BlackDragon" o "MaleViking"
+var current_health=0
 
 func _ready():
 	add_to_group("heroGroup")
@@ -20,6 +21,8 @@ func _ready():
 func initialize(data: HeroData, _target: CharacterBody2D):
 	stats = data.duplicate(true)
 	target = _target
+	unit_name = data.name
+	current_health=data.health
 	
 	# Configurar equipos para evitar fuego amigo
 	if is_in_group("heroGroup"):
@@ -72,7 +75,7 @@ func take_damage(amount: int) -> void:
 	if is_dead: return
 	var damage = max(amount - stats.defense, 1)
 	stats.health -= damage
-	print("Hero took ", damage, " and has ", stats.health, " health remaining")
+	#print("Hero took ", damage, " and has ", stats.health, " health remaining")
 	
 	# Feedback visual (parpadeo rojo)
 	modulate = Color(1, 0, 0)
@@ -87,7 +90,7 @@ func take_damage(amount: int) -> void:
 func die() -> void:
 	if is_dead: return
 	is_dead = true
-	print("Hero defeated!")
+	#print("Hero defeated!")
 		
 	# Limpieza de colisiones
 	if is_instance_valid(hitbox): hitbox.queue_free()
@@ -126,3 +129,18 @@ func _on_frame_changed():
 		if (anim.frame >= 2 and anim.frame <= 3):
 			if shape: shape.disabled = false
 			if polygon: polygon.disabled = false
+
+func apply_upgrade():
+	# Aumentar stats actuales (ej. +20%)
+	stats.health = int(stats.health * 1.2)
+	current_health = int(current_health * 1.2) # Curar la diferencia o subir el tope
+	stats.damage = int(stats.damage * 1.2)
+	
+	# Efecto visual (Crecer un poco y brillar amarillo)
+	var tween = create_tween()
+	tween.tween_property(self, "scale", scale * 1.2, 0.5).set_trans(Tween.TRANS_BOUNCE)
+	modulate = Color(2, 2, 0) # Brillo Amarillo intenso
+	await get_tree().create_timer(0.5).timeout
+	modulate = Color(1, 1, 1) # Volver a normal
+	
+	print(unit_name, " ha subido de nivel en pleno combate!")

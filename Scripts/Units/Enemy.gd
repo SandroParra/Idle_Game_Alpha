@@ -9,6 +9,7 @@ extends CharacterBody2D
 
 var target: CharacterBody2D = null
 var is_dead = false
+var xp_drop_scene = preload("res://Scenes/Levels/Drop/XPDrop.tscn")
 
 func _ready():
 	add_to_group("enemyGroup")
@@ -73,7 +74,7 @@ func take_damage(amount: int) -> void:
 
 	var damage = max(amount - stats.defense, 1)
 	stats.health -= damage
-	print(stats.name, " recibio daño. Vida: ", stats.health)
+	#print(stats.name, " recibio daño. Vida: ", stats.health)
 	
 	if stats.health <= 0:
 		die()
@@ -88,9 +89,11 @@ func take_damage(amount: int) -> void:
 
 func die() -> void:
 	if is_dead: return
-	
 	is_dead = true
-	print("Enemy defeated!")
+	
+	spawn_xp()
+	#print("Enemy defeated!")
+	
 	if hitbox: hitbox.queue_free()
 	if hurtbox: hurtbox.queue_free()
 	$CollisionShape2D.set_deferred("disabled", true)
@@ -113,7 +116,7 @@ func _on_hitbox_area_entered(area):
 		# El area es el Hurtbox, el padre es la Unidad (Unit.gd)
 		var victim = area.get_parent()
 		if victim and victim.has_method("take_damage"):
-			print("¡Golpe exitoso a ", victim.name, "!")
+			#print("¡Golpe exitoso a ", victim.name, "!")
 			victim.take_damage(stats.damage)
 
 func _on_frame_changed():
@@ -130,3 +133,18 @@ func _on_frame_changed():
 		if (anim.frame >= 2 and anim.frame <= 3):
 			if shape: shape.disabled = false
 			if polygon: polygon.disabled = false
+
+func spawn_xp():
+	var drop = xp_drop_scene.instantiate()
+	# Lo añadimos a la raíz del juego para que no se mueva con el enemigo muerto
+	get_tree().root.add_child(drop) 
+	
+	# Obtenemos la posición destino del GameManager
+	var target_pos = Vector2(50, 50) # Default
+	# Como GameManager es un nodo en la escena, accedemos vía ruta absoluta o Singleton
+	# Asumiendo que GameManager es el nodo raiz "/root/Game"
+	var game = get_node("/root/Game") 
+	if game and game.has_method("get_xp_icon_position"):
+		target_pos = game.get_xp_icon_position()
+		
+	drop.initialize(global_position, target_pos)

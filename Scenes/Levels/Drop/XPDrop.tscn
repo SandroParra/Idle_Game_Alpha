@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c86wexxsccppr"]
+
+[ext_resource type="Script" uid="uid://b7ds5suk61e8g" path="res://Scripts/Managers/XPDrop.gd" id="1_ycdjs"]
+
+[node name="XpDrop" type="Area2D"]
+script = ExtResource("1_ycdjs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+disabled = true

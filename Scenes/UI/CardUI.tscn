@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://doydumisi600q"]
+[gd_scene load_steps=4 format=3 uid="uid://doydumisi600q"]
 
 [ext_resource type="Texture2D" uid="uid://chl813fh6crc7" path="res://Resources/Game_Icon/icon.svg" id="1_7cml5"]
 [ext_resource type="Script" uid="uid://3lfv5qsd7vij" path="res://Scripts/UI/CardUI.gd" id="2_cw8tj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7cml5"]
+outline_size = 5
 
 [node name="CardUI" type="TextureRect"]
 custom_minimum_size = Vector2(50, 50)
@@ -11,7 +14,22 @@ expand_mode = 1
 stretch_mode = 5
 script = ExtResource("2_cw8tj")
 
-[node name="Label" type="Label" parent="."]
+[node name="BtnLevelUp" type="Button" parent="."]
+layout_mode = 0
+offset_right = 19.0
+offset_bottom = 23.0
+
+[node name="Label" type="Label" parent="BtnLevelUp"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+text = " +"
+
+[node name="LevelLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 30.0
+offset_right = 44.0
+offset_bottom = 53.0
+text = "Lvl 1"
+label_settings = SubResource("LabelSettings_7cml5")

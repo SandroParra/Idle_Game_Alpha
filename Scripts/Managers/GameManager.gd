@@ -3,9 +3,18 @@ extends Node2D
 @export var valid_spawn_area: Rect2 # Define un área donde se puede invocar (o usa un Area2D)
 @export var card_ui_scene: PackedScene
 
+signal xp_updated(new_amount: int)
+signal hero_level_changed(hero_name: String, new_level: int)
+
+var current_xp: int = 0
 var current_card: HeroData = null
 var ghost_sprite: Sprite2D # El visual transparente
 var is_dragging: bool = false
+# Referencia visual a donde volarán las orbes de exp (ej. un icono en la esquina)
+@onready var xp_ui_icon = $UI/XP_Counter/Icon
+# Diccionario para guardar el nivel actual de cada tipo de héroe
+# Ejemplo: { "BlackDragon": 1, "MaleViking": 2 }
+var hero_levels: Dictionary = {}
 
 func get_closest_enemy(reference_position: Vector2)->CharacterBody2D:
 	var closest_enemy = null
@@ -60,8 +69,8 @@ func _on_deck_confirmed(selected_deck: Array[HeroData]):
 			hand_container.add_child(new_card)
 			
 			# IMPORTANTE: Asignar los datos a la carta
-			# Asumimos que CardUI tiene una variable 'card_data' y un _ready que carga el icono
-			#new_card.card_data = data 
+			# Asumimos que CardUI tiene una variable 'data' y un _ready que carga el icono
+			#new_card.data = data 
 			new_card.setup(data)
 			# 3. Conectar señales (Igual que antes pero ahora dinámico)
 			new_card.drag_started.connect(_on_card_drag_started)
@@ -119,3 +128,52 @@ func spawn_unit(data: HeroData, pos: Vector2, target: CharacterBody2D):
 		print("Unidad creada")
 	else:
 		print("ERROR: El recurso .tres no tiene asignada una Escena (Unit Scene)")
+
+func add_experience(amount: int):
+	current_xp += amount
+	print("XP Total: ", current_xp)
+	xp_updated.emit(current_xp)
+
+func get_xp_icon_position() -> Vector2:
+	if has_node("UI/XP_Counter/Icon"):
+		return $UI/XP_Counter/Icon.get_global_rect().get_center()
+	return Vector2(100, 100) # Default por si acaso
+
+# Función para subir de nivel
+func upgrade_hero_type(data: HeroData):
+	var cost = calculate_upgrade_cost(data)
+	
+	if current_xp >= cost:
+		current_xp -= cost
+		xp_updated.emit(current_xp)
+		print("Experiencia restante ...", current_xp)
+		# 1. Registrar subida de nivel
+		var hero_name = data.name
+		if not hero_levels.has(hero_name):
+			hero_levels[hero_name] = 1
+		hero_levels[hero_name] += 1
+		hero_level_changed.emit(hero_name, hero_levels[hero_name])
+		print("¡Mejorando ", hero_name, " a Nivel ", hero_levels[hero_name], "!")
+		
+		# 2. Mejorar la CARTA ORIGINAL (para futuros spawns)
+		# Aumentamos stats base un 20% por ejemplo
+		data.health = int(data.health * 1.2)
+		data.damage = int(data.damage * 1.2)
+		
+		# 3. Mejorar las UNIDADES YA VIVAS en el mapa
+		var heroes = get_tree().get_nodes_in_group("heroGroup")
+		for hero in heroes:
+			# Verificamos si este héroe es del tipo que estamos mejorando
+			if "name" in hero:
+				if hero.name == hero_name:
+					# Verificar que tenga el método antes de llamarlo
+					if hero.has_method("apply_upgrade"):
+						hero.apply_upgrade()
+			else:
+				# Debug opcional: Saber qué nodo falló
+				print("Advertencia: Se encontró un nodo en heroGroup sin unit_name: ", hero.name)
+
+func calculate_upgrade_cost(data: HeroData) -> int:
+	# Lógica simple: Nivel actual * 100. 
+	var current_lvl = hero_levels.get(data.name, 1)
+	return current_lvl * 30 # Ejemplo: Nivel 1 cuesta 30, Nivel 2 cuesta 60

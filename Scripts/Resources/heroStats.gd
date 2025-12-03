@@ -16,3 +16,8 @@ extends Resource
 @export var crit_chance: float = 5.0
 @export var crit_damage: float = 50.0
 @export var attack_speed: float = 100.0
+
+@export_group("Skills")
+@export var skill_1: String = "Skill 3"
+@export var skill_2: String = "Skill 3"
+@export var skill_3: String = "Skill 3"

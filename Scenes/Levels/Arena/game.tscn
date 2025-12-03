@@ -69,3 +69,17 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="DeckSelector" parent="UI" instance=ExtResource("5_hdqf5")]
+
+[node name="XP_Counter" type="TextureRect" parent="UI"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Icon" type="TextureRect" parent="UI/XP_Counter"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="UpgradeButton" type="Button" parent="UI/XP_Counter"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
