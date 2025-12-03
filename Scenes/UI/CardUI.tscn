@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://3lfv5qsd7vij" path="res://Scripts/UI/CardUI.gd" id="2_cw8tj"]
 
 [node name="CardUI" type="TextureRect"]
+custom_minimum_size = Vector2(50, 50)
 texture = ExtResource("1_7cml5")
 script = ExtResource("2_cw8tj")
 

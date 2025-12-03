@@ -61,8 +61,8 @@ func _on_deck_confirmed(selected_deck: Array[HeroData]):
 			
 			# IMPORTANTE: Asignar los datos a la carta
 			# Asumimos que CardUI tiene una variable 'card_data' y un _ready que carga el icono
-			new_card.card_data = data 
-			
+			#new_card.card_data = data 
+			new_card.setup(data)
 			# 3. Conectar señales (Igual que antes pero ahora dinámico)
 			new_card.drag_started.connect(_on_card_drag_started)
 			new_card.drag_ended.connect(_on_card_drag_ended)

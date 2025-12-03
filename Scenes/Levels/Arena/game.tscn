@@ -57,19 +57,12 @@ process_mode = 3
 layer = 4
 
 [node name="Hand" type="HBoxContainer" parent="UI"]
-offset_left = 408.0
-offset_top = 1015.0
-offset_right = 1547.0
-offset_bottom = 1077.0
+offset_left = 219.0
+offset_top = 1013.0
+offset_right = 1339.0
+offset_bottom = 1075.0
 
 [node name="DeckSelector" parent="UI" instance=ExtResource("5_hdqf5")]
 process_mode = 3
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 1919.0
-offset_bottom = 1080.0
-grow_horizontal = 1
-grow_vertical = 1
+offset_top = 0.0
+offset_bottom = 0.0
