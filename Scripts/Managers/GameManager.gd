@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var valid_spawn_area: Rect2 # Define un área donde se puede invocar (o usa un Area2D)
+@export var card_ui_scene: PackedScene
 
 var current_card: HeroData = null
 var ghost_sprite: Sprite2D # El visual transparente
@@ -32,18 +33,44 @@ func _ready():
 	ghost_sprite.modulate = Color(1, 1, 1, 0.5) # Semitransparente
 	ghost_sprite.visible = false
 	add_child(ghost_sprite)
+		
+	# 1. Buscamos el selector
+	var selector = $UI/DeckSelector
+	if selector:
+		# Conectamos su señal
+		selector.deck_confirmed.connect(_on_deck_confirmed)
+		# Pausamos el juego si quieres que no corra el tiempo mientras elige
+		get_tree().paused = true 
+	else:
+		print("Advertencia: No hay DeckSelector, esperando cartas manuales...")
+		
+func _on_deck_confirmed(selected_deck: Array[HeroData]):
+	print("Mazo confirmado con: ", selected_deck.size(), " cartas.")
 	
 	var hand_container = $UI/Hand
 	
-	if hand_container:
-		for card in hand_container.get_children():
-		# Verificamos si el hijo tiene la señal que necesitamos (para evitar errores si hay un Label decorativo, etc)
-			if card.has_signal("drag_started"):
-				card.drag_started.connect(_on_card_drag_started)
-				card.drag_ended.connect(_on_card_drag_ended)
-				print("Señales conectadas para ", hand_container.get_child_count(), " cartas.")
-			else:
-				print("ERROR FATAL: No encuentro el nodo Hand en $UI/Hand")
+	# 1. Limpiar mano por si acaso
+	for child in hand_container.get_children():
+		child.queue_free()
+	
+	# 2. Crear las cartas visuales
+	for data in selected_deck:
+		if card_ui_scene:
+			var new_card = card_ui_scene.instantiate()
+			hand_container.add_child(new_card)
+			
+			# IMPORTANTE: Asignar los datos a la carta
+			# Asumimos que CardUI tiene una variable 'card_data' y un _ready que carga el icono
+			new_card.card_data = data 
+			
+			# 3. Conectar señales (Igual que antes pero ahora dinámico)
+			new_card.drag_started.connect(_on_card_drag_started)
+			new_card.drag_ended.connect(_on_card_drag_ended)
+		else:
+			print("ERROR: No has asignado card_ui_scene en el GameManager")
+
+	# Si pausaste el juego, despausalo aquí:
+	get_tree().paused = false
 
 func _process(_delta):
 	if is_dragging and current_card:

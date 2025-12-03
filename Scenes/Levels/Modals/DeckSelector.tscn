@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://dsdu0tkmtm87g"]
+
+[ext_resource type="Texture2D" uid="uid://chl813fh6crc7" path="res://Resources/Game_Icon/icon.svg" id="1_4v777"]
+[ext_resource type="Script" uid="uid://dc2ie7fioid0" path="res://Scripts/UI/DeckSelector.gd" id="1_c82rk"]
+[ext_resource type="Script" uid="uid://fses6prrp6qw" path="res://Scripts/Resources/HeroStats.gd" id="2_susjv"]
+[ext_resource type="Resource" uid="uid://c2mffwrbagbge" path="res://Resources/Data/Heroes/BlackDragon.tres" id="3_44i3q"]
+[ext_resource type="Resource" uid="uid://5jm53d3cp8pj" path="res://Resources/Data/Heroes/MaleViking.tres" id="4_4ouvp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_44i3q"]
+bg_color = Color(0.50656515, 0.6008292, 0.78642094, 1)
+
+[node name="DeckSelector" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -7.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_44i3q")
+script = ExtResource("1_c82rk")
+all_available_cards = Array[ExtResource("2_susjv")]([ExtResource("3_44i3q"), ExtResource("4_4ouvp")])
+max_selection = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 875.0
+offset_top = 489.0
+offset_right = 1118.0
+offset_bottom = 625.0
+scale = Vector2(0.5, 0.5)
+text = "¡A BATALLAR!"
+icon = ExtResource("1_4v777")

@@ -2,14 +2,15 @@
 
 [ext_resource type="Script" uid="uid://jg0e88yfgkeh" path="res://Scripts/Managers/GameManager.gd" id="1_d4uca"]
 [ext_resource type="Texture2D" uid="uid://bmv6pr26ivn6e" path="res://Assets/Maps/Arena_v2.jpg" id="1_hlfm0"]
-[ext_resource type="PackedScene" uid="uid://bun51il4b3qtm" path="res://Scenes/Levels/colliders/colliders.tscn" id="2_d4uca"]
-[ext_resource type="PackedScene" uid="uid://djhi3hrqutyni" path="res://Scenes/Units/enemies/enemySpawner.tscn" id="3_tqpib"]
-[ext_resource type="PackedScene" uid="uid://bcaj2j5twivmq" path="res://Scenes/UI/MaleViking.tscn" id="6_d4uca"]
-[ext_resource type="PackedScene" uid="uid://b6wu8x1fcuh2e" path="res://Scenes/UI/BlackDragon.tscn" id="7_tqpib"]
+[ext_resource type="PackedScene" uid="uid://bun51il4b3qtm" path="res://Scenes/Levels/Colliders/colliders.tscn" id="2_d4uca"]
+[ext_resource type="PackedScene" uid="uid://doydumisi600q" path="res://Scenes/UI/CardUI.tscn" id="2_ik3rq"]
+[ext_resource type="PackedScene" uid="uid://djhi3hrqutyni" path="res://Scenes/Units/Enemies/enemySpawner.tscn" id="3_tqpib"]
+[ext_resource type="PackedScene" uid="uid://dsdu0tkmtm87g" path="res://Scenes/Levels/Modals/DeckSelector.tscn" id="5_hdqf5"]
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_d4uca")
+card_ui_scene = ExtResource("2_ik3rq")
 
 [node name="Background" type="Sprite2D" parent="."]
 scale = Vector2(0.9994792, 0.84375)
@@ -52,6 +53,7 @@ y_sort_enabled = true
 position = Vector2(5, 4)
 
 [node name="UI" type="CanvasLayer" parent="."]
+process_mode = 3
 layer = 4
 
 [node name="Hand" type="HBoxContainer" parent="UI"]
@@ -60,8 +62,14 @@ offset_top = 1015.0
 offset_right = 1547.0
 offset_bottom = 1077.0
 
-[node name="BlackDragon" parent="UI/Hand" instance=ExtResource("7_tqpib")]
-layout_mode = 2
-
-[node name="MaleViking" parent="UI/Hand" instance=ExtResource("6_d4uca")]
-layout_mode = 2
+[node name="DeckSelector" parent="UI" instance=ExtResource("5_hdqf5")]
+process_mode = 3
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 1919.0
+offset_bottom = 1080.0
+grow_horizontal = 1
+grow_vertical = 1
