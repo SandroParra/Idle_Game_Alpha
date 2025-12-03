@@ -12,6 +12,7 @@ var ghost_sprite: Sprite2D # El visual transparente
 var is_dragging: bool = false
 # Referencia visual a donde volarán las orbes de exp (ej. un icono en la esquina)
 @onready var xp_ui_icon = $UI/XP_Counter/Icon
+@onready var xp_label = $UI/XP_Counter/XP_Label
 # Diccionario para guardar el nivel actual de cada tipo de héroe
 # Ejemplo: { "BlackDragon": 1, "MaleViking": 2 }
 var hero_levels: Dictionary = {}
@@ -133,6 +134,7 @@ func add_experience(amount: int):
 	current_xp += amount
 	print("XP Total: ", current_xp)
 	xp_updated.emit(current_xp)
+	xp_label.text = "XP points: " + str(current_xp)
 
 func get_xp_icon_position() -> Vector2:
 	# Asegúrate que la ruta al icono sea correcta en tu escena
@@ -150,6 +152,7 @@ func upgrade_hero_type(data: HeroData):
 		current_xp -= cost
 		xp_updated.emit(current_xp)
 		print("Experiencia restante ...", current_xp)
+		xp_label.text = "XP points: " + str(current_xp)
 		# 1. Registrar subida de nivel
 		var hero_name = data.name
 		if not hero_levels.has(hero_name):

@@ -83,3 +83,9 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
+
+[node name="XP_Label" type="Label" parent="UI/XP_Counter"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "XP points: 0"
