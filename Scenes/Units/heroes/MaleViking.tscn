@@ -146,7 +146,7 @@ radius = 68.0
 height = 216.0
 
 [node name="MaleViking" type="CharacterBody2D" groups=["heroGroup", "hero_hurtbox"]]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.35, 0.35)
 script = ExtResource("1_4r6r5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -169,9 +169,9 @@ shape = SubResource("CapsuleShape2D_1b7vl")
 debug_color = Color(0.84, 0.19851997, 0.17639998, 0.41960785)
 
 [node name="Hitbox" type="Area2D" parent="."]
-position = Vector2(310, 40)
+position = Vector2(2.8571777, 2.8571472)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
-position = Vector2(-358, -32)
+position = Vector2(-42.857178, 1.5258789e-05)
 polygon = PackedVector2Array(42, -10, 90, 4, 110, 20, 126, 38, 150, 46, 232, 54, 260, 16, 276, -36, 208, -92, 148, -124, 80, -146, 16, -120, -36, -80, -8, -38)
 disabled = true
