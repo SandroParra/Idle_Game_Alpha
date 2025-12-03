@@ -31,7 +31,7 @@ func setup(data: HeroData):
 		# Si se tiene un nodo hijo para el icono, seria: $Icon.texture = card_data.icon
 		expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		custom_minimum_size = Vector2(100, 140) # AJUSTA ESTO al tamaño que quieras
+		custom_minimum_size = Vector2(0, 0) # AJUSTA ESTO al tamaño que quieras
 		# De tener labels de costo:
 		# $CostLabel.text = str(card_data.elixir_cost)
 	else:

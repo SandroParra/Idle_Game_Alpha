@@ -13,8 +13,10 @@ bg_color = Color(0.50656515, 0.6008292, 0.78642094, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -7.0
-offset_bottom = -7.0
+offset_left = 903.0
+offset_top = 312.0
+offset_right = -822.0
+offset_bottom = -337.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -36,10 +38,10 @@ mouse_filter = 2
 
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 875.0
-offset_top = 489.0
-offset_right = 1118.0
-offset_bottom = 625.0
+offset_left = 45.0
+offset_top = 354.0
+offset_right = 288.0
+offset_bottom = 490.0
 scale = Vector2(0.5, 0.5)
 text = "¡A BATALLAR!"
 icon = ExtResource("1_4v777")
