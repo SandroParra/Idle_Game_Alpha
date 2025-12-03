@@ -135,9 +135,12 @@ func add_experience(amount: int):
 	xp_updated.emit(current_xp)
 
 func get_xp_icon_position() -> Vector2:
-	if has_node("UI/XP_Counter/Icon"):
-		return $UI/XP_Counter/Icon.get_global_rect().get_center()
-	return Vector2(100, 100) # Default por si acaso
+	# Asegúrate que la ruta al icono sea correcta en tu escena
+	var icon = $UI/XP_Counter/Icon
+	if icon:
+		# get_global_rect().get_center() nos da el centro exacto del icono en pantalla
+		return icon.get_global_rect().get_center()
+	return Vector2(50, 50)
 
 # Función para subir de nivel
 func upgrade_hero_type(data: HeroData):

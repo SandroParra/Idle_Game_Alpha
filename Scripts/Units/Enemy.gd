@@ -86,7 +86,6 @@ func take_damage(amount: int) -> void:
 	if not is_dead:
 		modulate = Color(1, 1, 1)
 	
-
 func die() -> void:
 	if is_dead: return
 	is_dead = true
