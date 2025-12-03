@@ -90,7 +90,7 @@ func die() -> void:
 	if is_dead: return
 	is_dead = true
 	
-	spawn_xp()
+	call_deferred("spawn_xp")
 	#print("Enemy defeated!")
 	
 	if hitbox: hitbox.queue_free()
