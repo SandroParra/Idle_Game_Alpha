@@ -38,6 +38,7 @@ func initialize(data: HeroData, _target: CharacterBody2D):
 		
 func _physics_process(_delta):
 	if is_dead: return
+	# Valida si los ataques causan daño, sino, cambia de objetivo
 	if attack_attempting:
 		var elapsed = (Time.get_ticks_msec() / 1000.0) - attack_start_time
 		if elapsed >= 2.0:
@@ -46,7 +47,7 @@ func _physics_process(_delta):
 				var new_target = get_random_enemy()
 				if new_target:
 					target = new_target
-					try_attack(target)   # immediately commit to new target
+					try_attack(target) 
 			attack_attempting = false
 
 	if not is_instance_valid(target):
@@ -79,7 +80,6 @@ func _physics_process(_delta):
 				anim.flip_h = false
 				hitbox.scale.x = 1
 		if anim.animation != "Attack_1":
-			# start attack attempt
 			try_attack(target)
 
 
@@ -93,6 +93,7 @@ func get_closest_enemy() -> CharacterBody2D:
 			closest = enemy as CharacterBody2D
 	return closest
 
+# Busca a un enemigo al azar
 func get_random_enemy() -> CharacterBody2D:
 	var enemies = get_tree().get_nodes_in_group("enemyGroup")
 	var valid: Array = []
@@ -104,8 +105,6 @@ func get_random_enemy() -> CharacterBody2D:
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	return valid[rng.randi_range(0, valid.size() - 1)] as CharacterBody2D
-
-
 
 func take_damage(amount: int) -> bool:
 	if is_dead: 
@@ -129,16 +128,19 @@ func take_damage(amount: int) -> bool:
 func die() -> void:
 	if is_dead: return
 	is_dead = true
-	#print("Hero defeated!")
-		
-	# Limpieza de colisiones
-	if is_instance_valid(hitbox): hitbox.queue_free()
-	if is_instance_valid(hurtbox): hurtbox.queue_free()
+	if is_instance_valid(hitbox):
+		if hitbox.area_entered.is_connected(_on_hitbox_area_entered):
+			hitbox.area_entered.disconnect(_on_hitbox_area_entered)
+		hitbox.queue_free()
+
+	if is_instance_valid(hurtbox):
+		hurtbox.queue_free()
+
 	main_collision.set_deferred("disabled", true)
 	anim.play("Death")
 	await anim.animation_finished
 	queue_free()
-
+	
 func _on_hitbox_area_entered(area):
 	var is_hero = is_in_group("heroGroup")
 	var is_enemy_hurtbox = area.is_in_group("enemy_hurtbox")
@@ -182,12 +184,12 @@ func _on_frame_changed():
 							target = new_target
 							try_attack(target)
 
-
+# Intenta atacar
 func try_attack(target_enemy: CharacterBody2D):
 	target = target_enemy
 	attack_start_time = Time.get_ticks_msec() / 1000.0
 	attack_attempting = true
-	damage_dealt = false   # reset at start of attack
+	damage_dealt = false  
 	anim.play("Attack_1")
 
 
