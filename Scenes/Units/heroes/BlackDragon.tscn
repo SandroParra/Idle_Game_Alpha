@@ -1,7 +1,7 @@
 [gd_scene load_steps=22 format=3 uid="uid://bixiv0365lcn6"]
 
 [ext_resource type="Script" uid="uid://c8x3gimh43cko" path="res://Scripts/Units/Hero.gd" id="1_1b7vl"]
-[ext_resource type="Texture2D" uid="uid://5nety2tfsvs4" path="res://Assets/Models/Heroes/BlackDragon/BlackDragon.png" id="1_3xuus"]
+[ext_resource type="Texture2D" uid="uid://5nety2tfsvs4" path="res://Assets/Models/Heroes/BlackDragon/blackDragon.png" id="1_3xuus"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ojeot"]
 atlas = ExtResource("1_3xuus")
@@ -169,6 +169,8 @@ shape = SubResource("CapsuleShape2D_1b7vl")
 debug_color = Color(0.84, 0.19851997, 0.17639998, 0.41960785)
 
 [node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(3.8146973e-06, -4.7683716e-07)
+scale = Vector2(0.99999994, 0.99999994)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
 polygon = PackedVector2Array(30, 46, 0, 88, -106, 94, -94, 164, 26, 146, 136, 108, 180, 50, 226, -26, 238, -88, 152, -130, 78, -150, 72, -102, 74, -44, 66, 2)

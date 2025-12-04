@@ -13,3 +13,4 @@ extends Resource
 @export var crit_chance: float = 5.0
 @export var crit_damage: float = 50.0
 @export var attack_speed: float = 100.0
+@export var xp_gain: int = 0

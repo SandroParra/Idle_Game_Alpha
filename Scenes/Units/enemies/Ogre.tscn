@@ -153,11 +153,12 @@ stats = ExtResource("2_espuo")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["enemy_hurtbox"]]
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_edhlf")
-animation = &"Walk"
+animation = &"Death"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gqkln")
+disabled = true
 
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(-14, 12)

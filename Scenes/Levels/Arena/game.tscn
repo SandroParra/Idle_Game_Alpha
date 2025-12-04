@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://blqtjsjjgwxs"]
+[gd_scene load_steps=8 format=3 uid="uid://blqtjsjjgwxs"]
 
 [ext_resource type="Script" uid="uid://jg0e88yfgkeh" path="res://Scripts/Managers/GameManager.gd" id="1_d4uca"]
 [ext_resource type="Texture2D" uid="uid://bmv6pr26ivn6e" path="res://Assets/Maps/Arena_v2.jpg" id="1_hlfm0"]
-[ext_resource type="PackedScene" uid="uid://bun51il4b3qtm" path="res://Scenes/Levels/Colliders/colliders.tscn" id="2_d4uca"]
+[ext_resource type="PackedScene" uid="uid://bun51il4b3qtm" path="res://Scenes/Levels/colliders/colliders.tscn" id="2_d4uca"]
 [ext_resource type="PackedScene" uid="uid://doydumisi600q" path="res://Scenes/UI/CardUI.tscn" id="2_ik3rq"]
-[ext_resource type="PackedScene" uid="uid://djhi3hrqutyni" path="res://Scenes/Units/Enemies/enemySpawner.tscn" id="3_tqpib"]
+[ext_resource type="PackedScene" uid="uid://djhi3hrqutyni" path="res://Scenes/Units/enemies/enemySpawner.tscn" id="3_tqpib"]
 [ext_resource type="PackedScene" uid="uid://dsdu0tkmtm87g" path="res://Scenes/Levels/Modals/DeckSelector.tscn" id="5_hdqf5"]
+[ext_resource type="PackedScene" uid="uid://bn5ad10fvd4xq" path="res://Scenes/Units/enemies/BigTick.tscn" id="7_jbbs8"]
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
@@ -89,3 +90,6 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "XP points: 0"
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("7_jbbs8")]
+position = Vector2(415, 572)

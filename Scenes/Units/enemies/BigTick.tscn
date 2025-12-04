@@ -151,12 +151,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cjsa8"]
 size = Vector2(13, 7)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yeqex"]
-size = Vector2(12, 5.5)
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6wlcb"]
 radius = 17.44968
 height = 38.827194
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yeqex"]
+size = Vector2(12, 5.5)
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["enemyGroup", "enemy_hurtbox"]]
 script = ExtResource("1_4e8cb")
@@ -165,22 +165,14 @@ stats = ExtResource("2_5h2ho")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["enemy_hurtbox"]]
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_v5axp")
-animation = &"Death"
+animation = &"Attack_1"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2, 14)
 shape = SubResource("RectangleShape2D_cjsa8")
-debug_color = Color(0, 0.79900014, 0.94, 0.41960785)
-
-[node name="Hitbox" type="Area2D" parent="."]
-position = Vector2(-14, 12)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(3, 1.25)
-shape = SubResource("RectangleShape2D_yeqex")
 disabled = true
-debug_color = Color(0.70550007, 1, 0.06999999, 0.41960785)
+debug_color = Color(0, 0.79900014, 0.94, 0.41960785)
 
 [node name="Hurtbox" type="Area2D" parent="." groups=["enemy_hurtbox"]]
 position = Vector2(11, 3)
@@ -190,3 +182,12 @@ position = Vector2(-8.000008, -1.4305115e-06)
 rotation = 0.19024089
 shape = SubResource("CapsuleShape2D_6wlcb")
 debug_color = Color(0.7, 0, 0.12833337, 0.41960785)
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(-13.999999, 11.999999)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(2.999999, 1.000001)
+shape = SubResource("RectangleShape2D_yeqex")
+debug_color = Color(0.70550007, 1, 0.06999999, 0.41960785)

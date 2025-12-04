@@ -8,4 +8,6 @@ name = "BigTick"
 health = 50
 damage = 1
 speed = 100.0
+attack_range = 30.0
+xp_gain = 5
 metadata/_custom_type_script = "uid://7uafb3ow5j1i"
