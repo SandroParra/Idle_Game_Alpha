@@ -128,20 +128,24 @@ func take_damage(amount: int) -> bool:
 func die() -> void:
 	if is_dead: return
 	is_dead = true
+
 	if is_instance_valid(hitbox):
 		if hitbox.area_entered.is_connected(_on_hitbox_area_entered):
 			hitbox.area_entered.disconnect(_on_hitbox_area_entered)
-		hitbox.queue_free()
+		hitbox.set_deferred("disabled", true)
 
 	if is_instance_valid(hurtbox):
-		hurtbox.queue_free()
+		hurtbox.set_deferred("disabled", true)
 
 	main_collision.set_deferred("disabled", true)
 	anim.play("Death")
 	await anim.animation_finished
 	queue_free()
+
 	
 func _on_hitbox_area_entered(area):
+	if not is_instance_valid(area):
+		return
 	var is_hero = is_in_group("heroGroup")
 	var is_enemy_hurtbox = area.is_in_group("enemy_hurtbox")
 	var is_hero_hurtbox = area.is_in_group("hero_hurtbox")
@@ -169,6 +173,8 @@ func _on_frame_changed():
 		
 		# Revisa si los hitbox y hurtbox conectan
 		for area in hitbox.get_overlapping_areas():
+			if not is_instance_valid(area):
+				continue
 			if area.is_in_group("enemy_hurtbox"):
 				var victim = area.get_parent()
 				if victim and victim.has_method("take_damage"):
