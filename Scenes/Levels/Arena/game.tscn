@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://blqtjsjjgwxs"]
+[gd_scene load_steps=8 format=3 uid="uid://blqtjsjjgwxs"]
 
 [ext_resource type="Script" uid="uid://jg0e88yfgkeh" path="res://Scripts/Managers/GameManager.gd" id="1_d4uca"]
 [ext_resource type="Texture2D" uid="uid://bmv6pr26ivn6e" path="res://Assets/Maps/Arena_v2.jpg" id="1_hlfm0"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://doydumisi600q" path="res://Scenes/UI/CardUI.tscn" id="2_ik3rq"]
 [ext_resource type="PackedScene" uid="uid://djhi3hrqutyni" path="res://Scenes/Units/enemies/enemySpawner.tscn" id="3_tqpib"]
 [ext_resource type="PackedScene" uid="uid://dsdu0tkmtm87g" path="res://Scenes/Levels/Modals/DeckSelector.tscn" id="5_hdqf5"]
+[ext_resource type="PackedScene" uid="uid://bn5ad10fvd4xq" path="res://Scenes/Units/enemies/BigTick.tscn" id="7_jbbs8"]
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
@@ -89,3 +90,42 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "XP points: 0"
+
+[node name="Wave_Counter" type="TextureRect" parent="UI"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Icon" type="TextureRect" parent="UI/Wave_Counter"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="UpgradeButton" type="Button" parent="UI/Wave_Counter"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Wave_Label" type="Label" parent="UI/Wave_Counter"]
+layout_mode = 0
+offset_left = 1815.0
+offset_top = 7.0
+offset_right = 1906.0
+offset_bottom = 30.0
+text = "Wave: 1"
+
+[node name="NormalBtn" type="Button" parent="UI"]
+offset_left = 720.0
+offset_top = 551.0
+offset_right = 813.0
+offset_bottom = 585.0
+text = "Normal"
+
+[node name="EndlessBtn" type="Button" parent="UI"]
+offset_left = 720.0
+offset_top = 501.0
+offset_right = 813.0
+offset_bottom = 535.0
+text = "Endless"
+
+[node name="CharacterBody2D" parent="UI" instance=ExtResource("7_jbbs8")]
+position = Vector2(511, 631)

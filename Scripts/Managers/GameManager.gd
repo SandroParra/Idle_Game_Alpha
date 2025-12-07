@@ -13,6 +13,11 @@ var is_dragging: bool = false
 # Referencia visual a donde volarán las orbes de exp (ej. un icono en la esquina)
 @onready var xp_ui_icon = $UI/XP_Counter/Icon
 @onready var xp_label = $UI/XP_Counter/XP_Label
+@onready var wave_label = $UI/Wave_Counter/Wave_Label
+@onready var endless_btn = $UI/EndlessBtn
+@onready var normal_btn = $UI/NormalBtn
+@onready var spawner = $Enemies/enemySpawner
+
 # Diccionario para guardar el nivel actual de cada tipo de héroe
 # Ejemplo: { "BlackDragon": 1, "MaleViking": 2 }
 var hero_levels: Dictionary = {}
@@ -38,6 +43,10 @@ func get_closest_enemy(reference_position: Vector2)->CharacterBody2D:
 	return closest_enemy
 	
 func _ready():
+	
+	endless_btn.pressed.connect(_on_endless_pressed)
+	normal_btn.pressed.connect(_on_normal_pressed)
+	
 	# Crear el sprite fantasma dinámicamente
 	ghost_sprite = Sprite2D.new()
 	ghost_sprite.modulate = Color(1, 1, 1, 0.5) # Semitransparente
@@ -53,6 +62,14 @@ func _ready():
 		get_tree().paused = true 
 	else:
 		print("Advertencia: No hay DeckSelector, esperando cartas manuales...")
+	
+	if spawner:
+		spawner.wave_started.connect(_on_wave_started)
+	else:
+		print("No se encontro el spawner de enemigos")
+
+func _on_wave_started(wave: int):
+	wave_label.text = "Wave: %d" % wave
 		
 func _on_deck_confirmed(selected_deck: Array[HeroData]):
 	print("Mazo confirmado con: ", selected_deck.size(), " cartas.")
@@ -178,6 +195,22 @@ func upgrade_hero_type(data: HeroData):
 			else:
 				# Debug opcional: Saber qué nodo falló
 				print("Advertencia: Se encontró un nodo en heroGroup sin unit_name: ", hero.name)
+				
+func _on_endless_pressed():
+	if spawner:
+		spawner.require_clear_wave = false
+		print("Switched to Endless Mode")
+		
+		endless_btn.modulate = Color(0, 1, 0) 
+		normal_btn.modulate = Color(1, 1, 1)  
+
+func _on_normal_pressed():
+	if spawner:
+		spawner.require_clear_wave = true
+		print("Switched to Normal Mode")
+		
+		normal_btn.modulate = Color(0, 0.5, 1)  
+		endless_btn.modulate = Color(1, 1, 1) 
 
 func calculate_upgrade_cost(data: HeroData) -> int:
 	# Lógica simple: Nivel actual * 100. 

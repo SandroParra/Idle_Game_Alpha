@@ -8,6 +8,8 @@ signal deck_confirmed(selected_deck: Array[HeroData])
 var current_selection: Array[HeroData] = []
 @onready var grid = $GridContainer
 @onready var start_btn = $StartButton
+@onready var endless_btn = $"../EndlessBtn"
+@onready var normal_btn = $"../NormalBtn"
 
 func _ready():
 	start_btn.disabled = true
@@ -60,4 +62,8 @@ func _on_card_clicked(btn: TextureButton):
 func _on_start_pressed():
 	# Emitimos la lista de cartas elegidas y nos ocultamos
 	deck_confirmed.emit(current_selection)
+	if endless_btn:
+		endless_btn.queue_free()
+	if normal_btn:
+		normal_btn.queue_free()
 	queue_free() # Destruimos el selector
