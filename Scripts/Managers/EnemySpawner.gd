@@ -16,6 +16,8 @@ signal wave_started(wave: int)
 @export var spawn_interval: float = 1.0  
 @export var require_clear_wave: bool = true
 
+@onready var nextWave_Btn = $"../../UI/NextWaveBtn"
+
 
 var wave_timer: Timer
 var current_wave: int = 0
@@ -29,6 +31,8 @@ func _ready():
 	wave_timer.one_shot = true
 	add_child(wave_timer)
 	wave_timer.timeout.connect(start_next_wave)
+	nextWave_Btn.pressed.connect(_on_next_wave_pressed)
+
 	start_next_wave()
 
 func start_next_wave():
@@ -45,6 +49,10 @@ func start_next_wave():
 	timer.one_shot = false
 	add_child(timer)
 	timer.timeout.connect(_on_spawn_enemy.bind(timer))
+	
+func _on_next_wave_pressed():
+	nextWave_Btn.visible = false
+	start_next_wave()
 
 func generate_wave_enemies(budget: int) -> Array:
 	var result: Array = []
@@ -111,8 +119,7 @@ func _on_enemy_removed():
 	enemies_spawned -= 1
 	
 	if require_clear_wave and enemies_spawned <= 0 and enemies_to_spawn.is_empty():
-		# All enemies defeated, start next wave right away
-		start_next_wave()
+		nextWave_Btn.visible = true
 
 func get_random_point_in_rectangle() -> Vector2:
 	var shape = $CollisionShape2D.shape

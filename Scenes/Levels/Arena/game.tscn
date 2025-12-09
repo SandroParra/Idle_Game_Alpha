@@ -125,3 +125,11 @@ offset_top = 501.0
 offset_right = 813.0
 offset_bottom = 535.0
 text = "Endless"
+
+[node name="NextWaveBtn" type="Button" parent="UI"]
+visible = false
+offset_left = 914.0
+offset_top = 368.0
+offset_right = 1007.0
+offset_bottom = 402.0
+text = "Next Wave"
