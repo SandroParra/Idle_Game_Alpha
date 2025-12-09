@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcaj2j5twivmq"]
+
+[ext_resource type="Texture2D" uid="uid://bxe8aoiu35bn3" path="res://Assets/UI/MaleViking/MaleViking.png" id="1_xxd16"]
+[ext_resource type="Script" uid="uid://3lfv5qsd7vij" path="res://Scripts/UI/CardUI.gd" id="2_kafgh"]
+[ext_resource type="Resource" uid="uid://5jm53d3cp8pj" path="res://Resources/Data/Heroes/MaleViking.tres" id="3_xxd16"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bfedo"]
+font_size = 10
+font_color = Color(0.3323521, 0.8535754, 0.75096416, 1)
+shadow_size = 2
+
+[node name="MaleViking" type="TextureRect"]
+offset_right = 153.0
+offset_bottom = 153.0
+texture = ExtResource("1_xxd16")
+expand_mode = 3
+stretch_mode = 4
+script = ExtResource("2_kafgh")
+card_data = ExtResource("3_xxd16")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+label_settings = SubResource("LabelSettings_bfedo")

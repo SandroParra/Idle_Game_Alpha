@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gerpkvftp2j6"
-path="res://.godot/imported/placeholder_Arena.webp-6421d282daf49a2f6482404e4ad9736d.ctex"
+uid="uid://dxv4qvvxsj2li"
+path="res://.godot/imported/strong_ogre.png-10f7dced7823e651fa8dda6fcabc5110.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Maps/placeholder_Arena.webp"
-dest_files=["res://.godot/imported/placeholder_Arena.webp-6421d282daf49a2f6482404e4ad9736d.ctex"]
+source_file="res://Assets/Models/Enemies/strong_ogre.png"
+dest_files=["res://.godot/imported/strong_ogre.png-10f7dced7823e651fa8dda6fcabc5110.ctex"]
 
 [params]
 

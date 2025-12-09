@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gerpkvftp2j6"
-path="res://.godot/imported/placeholder_Arena.webp-6421d282daf49a2f6482404e4ad9736d.ctex"
+uid="uid://clggvwuysh85l"
+path="res://.godot/imported/Snake_death.png-71f7eaf75e19a8874517d6687dcd88c0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Maps/placeholder_Arena.webp"
-dest_files=["res://.godot/imported/placeholder_Arena.webp-6421d282daf49a2f6482404e4ad9736d.ctex"]
+source_file="res://Assets/Models/Enemies/1 Snake/Snake_death.png"
+dest_files=["res://.godot/imported/Snake_death.png-71f7eaf75e19a8874517d6687dcd88c0.ctex"]
 
 [params]
 

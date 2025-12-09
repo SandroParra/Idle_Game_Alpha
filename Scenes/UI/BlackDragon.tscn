@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6wu8x1fcuh2e"]
+
+[ext_resource type="Script" uid="uid://3lfv5qsd7vij" path="res://Scripts/UI/CardUI.gd" id="1_aa1bi"]
+[ext_resource type="Texture2D" uid="uid://dhd61qwqbctp5" path="res://Assets/UI/BlackDragon/BlackDragon.png" id="1_yetxv"]
+[ext_resource type="Resource" uid="uid://c2mffwrbagbge" path="res://Resources/Data/Heroes/BlackDragon.tres" id="2_ap2jf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bfedo"]
+font_size = 10
+font_color = Color(0.3323521, 0.8535754, 0.75096416, 1)
+shadow_size = 2
+
+[node name="BlackDragon" type="TextureRect"]
+offset_right = 153.0
+offset_bottom = 153.0
+texture = ExtResource("1_yetxv")
+expand_mode = 3
+stretch_mode = 4
+script = ExtResource("1_aa1bi")
+card_data = ExtResource("2_ap2jf")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+label_settings = SubResource("LabelSettings_bfedo")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gerpkvftp2j6"
-path="res://.godot/imported/placeholder_Arena.webp-6421d282daf49a2f6482404e4ad9736d.ctex"
+uid="uid://c84dy3e6ytxqt"
+path="res://.godot/imported/skeletonking.png-83eb380e627cab75bcf09ace638b8ffd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Maps/placeholder_Arena.webp"
-dest_files=["res://.godot/imported/placeholder_Arena.webp-6421d282daf49a2f6482404e4ad9736d.ctex"]
+source_file="res://Assets/Models/Enemies/skeletonking.png"
+dest_files=["res://.godot/imported/skeletonking.png-83eb380e627cab75bcf09ace638b8ffd.ctex"]
 
 [params]
 

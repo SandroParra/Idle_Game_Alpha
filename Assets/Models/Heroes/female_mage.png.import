@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gerpkvftp2j6"
-path="res://.godot/imported/placeholder_Arena.webp-6421d282daf49a2f6482404e4ad9736d.ctex"
+uid="uid://bfv4c2tkkkvun"
+path="res://.godot/imported/female_mage.png-fdbfcac4def5c8ca83ba7083f387e58b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Maps/placeholder_Arena.webp"
-dest_files=["res://.godot/imported/placeholder_Arena.webp-6421d282daf49a2f6482404e4ad9736d.ctex"]
+source_file="res://Assets/Models/Heroes/female_mage.png"
+dest_files=["res://.godot/imported/female_mage.png-fdbfcac4def5c8ca83ba7083f387e58b.ctex"]
 
 [params]
 

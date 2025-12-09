@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gerpkvftp2j6"
-path="res://.godot/imported/placeholder_Arena.webp-6421d282daf49a2f6482404e4ad9736d.ctex"
+uid="uid://d0laa4ri5mcc7"
+path="res://.godot/imported/male_barbarian.png-88da4facddd4c7bd8248815e4d7ab552.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Maps/placeholder_Arena.webp"
-dest_files=["res://.godot/imported/placeholder_Arena.webp-6421d282daf49a2f6482404e4ad9736d.ctex"]
+source_file="res://Assets/Models/Heroes/male_barbarian.png"
+dest_files=["res://.godot/imported/male_barbarian.png-88da4facddd4c7bd8248815e4d7ab552.ctex"]
 
 [params]
 

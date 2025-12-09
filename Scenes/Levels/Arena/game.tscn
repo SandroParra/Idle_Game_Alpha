@@ -1,0 +1,135 @@
+[gd_scene load_steps=7 format=3 uid="uid://blqtjsjjgwxs"]
+
+[ext_resource type="Script" uid="uid://jg0e88yfgkeh" path="res://Scripts/Managers/GameManager.gd" id="1_d4uca"]
+[ext_resource type="Texture2D" uid="uid://bmv6pr26ivn6e" path="res://Assets/Maps/Arena_v2.jpg" id="1_hlfm0"]
+[ext_resource type="PackedScene" uid="uid://bun51il4b3qtm" path="res://Scenes/Levels/colliders/colliders.tscn" id="2_d4uca"]
+[ext_resource type="PackedScene" uid="uid://doydumisi600q" path="res://Scenes/UI/CardUI.tscn" id="2_ik3rq"]
+[ext_resource type="PackedScene" uid="uid://djhi3hrqutyni" path="res://Scenes/Units/enemies/enemySpawner.tscn" id="3_tqpib"]
+[ext_resource type="PackedScene" uid="uid://dsdu0tkmtm87g" path="res://Scenes/Levels/Modals/DeckSelector.tscn" id="5_hdqf5"]
+
+[node name="Game" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_d4uca")
+card_ui_scene = ExtResource("2_ik3rq")
+
+[node name="Background" type="Sprite2D" parent="."]
+scale = Vector2(0.9994792, 0.84375)
+texture = ExtResource("1_hlfm0")
+centered = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="Colliders" type="Node2D" parent="."]
+position = Vector2(942, 602)
+
+[node name="ColliderUp" parent="Colliders" instance=ExtResource("2_d4uca")]
+position = Vector2(-515, -188)
+
+[node name="ColliderUp2" parent="Colliders" instance=ExtResource("2_d4uca")]
+position = Vector2(20, -186)
+
+[node name="ColliderUp3" parent="Colliders" instance=ExtResource("2_d4uca")]
+position = Vector2(552, -185)
+
+[node name="ColliderDown" parent="Colliders" instance=ExtResource("2_d4uca")]
+position = Vector2(15, 397)
+
+[node name="ColliderDown2" parent="Colliders" instance=ExtResource("2_d4uca")]
+position = Vector2(551, 398)
+
+[node name="ColliderDown3" parent="Colliders" instance=ExtResource("2_d4uca")]
+position = Vector2(-514, 396)
+
+[node name="Enemies" type="Node2D" parent="."]
+y_sort_enabled = true
+position = Vector2(3, 4)
+
+[node name="enemySpawner" parent="Enemies" instance=ExtResource("3_tqpib")]
+position = Vector2(1968, 684)
+
+[node name="Heroes" type="Node2D" parent="." groups=["heroGroup"]]
+y_sort_enabled = true
+position = Vector2(5, 4)
+
+[node name="UI" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 4
+
+[node name="Hand" type="HBoxContainer" parent="UI"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 292.0
+offset_top = -72.0
+offset_right = -1230.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="DeckSelector" parent="UI" instance=ExtResource("5_hdqf5")]
+
+[node name="XP_Counter" type="TextureRect" parent="UI"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Icon" type="TextureRect" parent="UI/XP_Counter"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="UpgradeButton" type="Button" parent="UI/XP_Counter"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="XP_Label" type="Label" parent="UI/XP_Counter"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "XP points: 0"
+
+[node name="Wave_Counter" type="TextureRect" parent="UI"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Icon" type="TextureRect" parent="UI/Wave_Counter"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="UpgradeButton" type="Button" parent="UI/Wave_Counter"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Wave_Label" type="Label" parent="UI/Wave_Counter"]
+layout_mode = 0
+offset_left = 1815.0
+offset_top = 7.0
+offset_right = 1906.0
+offset_bottom = 30.0
+text = "Wave: 1"
+
+[node name="NormalBtn" type="Button" parent="UI"]
+offset_left = 720.0
+offset_top = 551.0
+offset_right = 813.0
+offset_bottom = 585.0
+text = "Normal"
+
+[node name="EndlessBtn" type="Button" parent="UI"]
+offset_left = 720.0
+offset_top = 501.0
+offset_right = 813.0
+offset_bottom = 535.0
+text = "Endless"
+
+[node name="NextWaveBtn" type="Button" parent="UI"]
+visible = false
+offset_left = 914.0
+offset_top = 368.0
+offset_right = 1007.0
+offset_bottom = 402.0
+text = "Next Wave"

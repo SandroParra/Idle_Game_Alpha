@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gerpkvftp2j6"
-path="res://.godot/imported/placeholder_Arena.webp-6421d282daf49a2f6482404e4ad9736d.ctex"
+uid="uid://rfhyluemurg8"
+path="res://.godot/imported/Arena_v3.jpg-26a0813a025c33a650967bdca6bb3eef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Maps/placeholder_Arena.webp"
-dest_files=["res://.godot/imported/placeholder_Arena.webp-6421d282daf49a2f6482404e4ad9736d.ctex"]
+source_file="res://Assets/Maps/Arena_v3.jpg"
+dest_files=["res://.godot/imported/Arena_v3.jpg-26a0813a025c33a650967bdca6bb3eef.ctex"]
 
 [params]
 

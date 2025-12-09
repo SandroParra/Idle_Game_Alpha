@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gerpkvftp2j6"
-path="res://.godot/imported/placeholder_Arena.webp-6421d282daf49a2f6482404e4ad9736d.ctex"
+uid="uid://djvnkx7dh6gih"
+path="res://.godot/imported/Snake_attack.png-6cf279219bf63edd2dfb041aa14fc3c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Maps/placeholder_Arena.webp"
-dest_files=["res://.godot/imported/placeholder_Arena.webp-6421d282daf49a2f6482404e4ad9736d.ctex"]
+source_file="res://Assets/Models/Enemies/1 Snake/Snake_attack.png"
+dest_files=["res://.godot/imported/Snake_attack.png-6cf279219bf63edd2dfb041aa14fc3c5.ctex"]
 
 [params]
 

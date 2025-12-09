@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gerpkvftp2j6"
-path="res://.godot/imported/placeholder_Arena.webp-6421d282daf49a2f6482404e4ad9736d.ctex"
+uid="uid://c0njwo86hama"
+path="res://.godot/imported/Hyena_idle.png-ee4924787c473b501ab2773a04f92bbe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Maps/placeholder_Arena.webp"
-dest_files=["res://.godot/imported/placeholder_Arena.webp-6421d282daf49a2f6482404e4ad9736d.ctex"]
+source_file="res://Assets/Models/Enemies/2 Hyena/Hyena_idle.png"
+dest_files=["res://.godot/imported/Hyena_idle.png-ee4924787c473b501ab2773a04f92bbe.ctex"]
 
 [params]
 
