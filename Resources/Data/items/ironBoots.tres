@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="dropData" load_steps=3 format=3 uid="uid://m2xy1uo78kxn"]
+
+[ext_resource type="PackedScene" uid="uid://bhao4y5mvaysi" path="res://Scenes/Items/ironBoots.tscn" id="1_3tlxb"]
+[ext_resource type="Script" uid="uid://b38ujm477atsu" path="res://Scripts/Resources/dropData.gd" id="1_au6k5"]
+
+[resource]
+script = ExtResource("1_au6k5")
+item_scene = ExtResource("1_3tlxb")
+drop_chance = 1.0
+metadata/_custom_type_script = "uid://b38ujm477atsu"

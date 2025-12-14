@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhao4y5mvaysi"]
+
+[ext_resource type="Texture2D" uid="uid://ds2s0tkxgyden" path="res://Assets/Items/ironBoots.png" id="1_e88vl"]
+
+[node name="ironBoots" type="Node2D"]
+
+[node name="IronBoots" type="Sprite2D" parent="."]
+scale = Vector2(0.1431624, 0.1431624)
+texture = ExtResource("1_e88vl")

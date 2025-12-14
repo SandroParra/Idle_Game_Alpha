@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var hurtbox = $Hurtbox
 @onready var main_collision = get_node("CollisionShape2D")
 
+@export var possible_drops: Array[dropData] = []
 @export var stats: EnemyData
 
 var target: CharacterBody2D = null
@@ -101,15 +102,49 @@ func take_damage(amount: int) -> bool:
 func die() -> void:
 	if is_dead: return
 	is_dead = true
-	
+
 	call_deferred("spawn_xp")
-	
+	call_deferred("roll_loot")  # NEW
+
 	if hitbox: hitbox.queue_free()
 	if hurtbox: hurtbox.queue_free()
 	main_collision.set_deferred("disabled", true)
 	anim.play("Death")
 	await anim.animation_finished
 	queue_free()
+
+func roll_loot():
+	if possible_drops.is_empty():
+		return
+		
+	var parent: Node = get_tree().current_scene if get_tree().current_scene else get_tree().root
+
+	for drop_data in possible_drops:
+		if drop_data.item_scene and randf() <= drop_data.drop_chance:
+			var item: Node = drop_data.item_scene.instantiate()
+			parent.add_child(item)
+
+			var item2d := item as Node2D
+			if item2d:
+				item2d.global_position = global_position
+
+				var tween := item2d.create_tween()
+				var start_pos := item2d.global_position
+				var jump_height := -20 
+				var duration := 0.2     
+
+				tween.tween_property(
+					item2d, "global_position",
+					start_pos + Vector2(0, jump_height),
+					duration
+				).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+				tween.tween_property(
+					item2d, "global_position",
+					start_pos,
+					duration
+				).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+
 	
 func _on_death_animation_finished():
 	queue_free()
