@@ -12,18 +12,19 @@ var enemy_list = {
 }
 
 signal wave_started(wave: int)
+signal wave_completed
 @export var wave_interval: float = 5.0  
 @export var spawn_interval: float = 1.0  
 @export var require_clear_wave: bool = true
 
 @onready var nextWave_Btn = $"../../UI/NextWaveBtn"
 
-
 var wave_timer: Timer
 var current_wave: int = 0
 var wave_budget: int = 0
 var enemies_spawned: int = 0
 var enemies_to_spawn: Array = []
+var enemies_remaining: int = 0
 
 func _ready():
 	wave_timer = Timer.new()
@@ -31,11 +32,17 @@ func _ready():
 	wave_timer.one_shot = true
 	add_child(wave_timer)
 	wave_timer.timeout.connect(start_next_wave)
-	nextWave_Btn.pressed.connect(_on_next_wave_pressed)
+	
+	if nextWave_Btn:
+			nextWave_Btn.pressed.connect(_on_next_wave_pressed)
+			nextWave_Btn.visible = false # Lo ocultamos al inicio
 
 	start_next_wave()
 
 func start_next_wave():
+	if nextWave_Btn:
+		nextWave_Btn.visible = false
+		
 	emit_signal("wave_started", current_wave + 1)
 	current_wave += 1
 	wave_budget = 5 + current_wave * 2
@@ -118,8 +125,11 @@ func weighted_enemy_pick(budget: int) -> String:
 func _on_enemy_removed():
 	enemies_spawned -= 1
 	
-	if require_clear_wave and enemies_spawned <= 0 and enemies_to_spawn.is_empty():
-		nextWave_Btn.visible = true
+	if require_clear_wave:
+			# Si ya no quedan enemigos vivos Y ya no hay enemigos en cola para salir
+			if enemies_spawned <= 0 and enemies_to_spawn.is_empty():
+				print("Ola completada. Emitiendo señal...")
+				wave_completed.emit()
 
 func get_random_point_in_rectangle() -> Vector2:
 	var shape = $CollisionShape2D.shape

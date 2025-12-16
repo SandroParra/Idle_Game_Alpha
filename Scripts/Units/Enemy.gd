@@ -120,6 +120,7 @@ func roll_loot():
 	for drop_data in possible_drops:
 		if drop_data.item_scene and randf() <= drop_data.drop_chance:
 			var item: Node = drop_data.item_scene.instantiate()
+			item.add_to_group("dropped_items") 
 			parent.add_child(item)
 
 			var item2d := item as Node2D
@@ -142,7 +143,10 @@ func roll_loot():
 					start_pos,
 					duration
 				).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
-
+				
+			var game = get_node("/root/Game") # Ajusta ruta si es necesario
+			if game and game.has_method("register_drop"):
+				game.register_drop(drop_data)
 	
 func _on_death_animation_finished():
 	queue_free()
@@ -184,6 +188,7 @@ func get_xp_reward() -> int:
 #Agregada instancia de xp dinamico dependiendo de nuevo campo "xp_gain" en las stats del enemigo
 func spawn_xp():
 	var drop = xp_drop_scene.instantiate()
+	drop.add_to_group("dropped_items")
 	# Lo añadimos a la raíz del juego para que no se mueva con el enemigo muerto
 	get_tree().root.add_child(drop) 
 	

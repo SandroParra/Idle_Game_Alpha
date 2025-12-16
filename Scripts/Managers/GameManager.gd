@@ -2,6 +2,7 @@ extends Node2D
 
 @export var valid_spawn_area: Rect2 # Define un área donde se puede invocar (o usa un Area2D)
 @export var card_ui_scene: PackedScene
+@export var reward_ui_scene: PackedScene # <--- ARRASTRA AQUÍ WaveRewardUI.tscn EN EL INSPECTOR
 
 signal xp_updated(new_amount: int)
 signal hero_level_changed(hero_name: String, new_level: int)
@@ -10,6 +11,9 @@ var current_xp: int = 0
 var current_card: HeroData = null
 var ghost_sprite: Sprite2D # El visual transparente
 var is_dragging: bool = false
+var current_wave_loot: Array[dropData] = []
+var is_normal_mode: bool = true # Para saber si mostramos la ventana o no
+
 # Referencia visual a donde volarán las orbes de exp (ej. un icono en la esquina)
 @onready var xp_ui_icon = $UI/XP_Counter/Icon
 @onready var xp_label = $UI/XP_Counter/XP_Label
@@ -65,6 +69,8 @@ func _ready():
 	
 	if spawner:
 		spawner.wave_started.connect(_on_wave_started)
+		if spawner.has_signal("wave_completed"):
+			spawner.wave_completed.connect(_on_wave_completed)
 	else:
 		print("No se encontro el spawner de enemigos")
 
@@ -203,7 +209,8 @@ func _on_endless_pressed():
 		
 		endless_btn.modulate = Color(0, 1, 0) 
 		normal_btn.modulate = Color(1, 1, 1)  
-
+	is_normal_mode = false
+	
 func _on_normal_pressed():
 	if spawner:
 		spawner.require_clear_wave = true
@@ -211,8 +218,54 @@ func _on_normal_pressed():
 		
 		normal_btn.modulate = Color(0, 0.5, 1)  
 		endless_btn.modulate = Color(1, 1, 1) 
-
+	is_normal_mode = true
+	
 func calculate_upgrade_cost(data: HeroData) -> int:
 	# Lógica simple: Nivel actual * 100. 
 	var current_lvl = hero_levels.get(data.name, 1)
 	return current_lvl * 30 # Ejemplo: Nivel 1 cuesta 30, Nivel 2 cuesta 60
+
+func register_drop(data: dropData):
+	print("Item recolectado: ", data.item_name)
+	current_wave_loot.append(data)
+
+func _on_wave_completed():
+	# Solo mostramos resumen si estamos en modo Normal
+	if is_normal_mode:
+		show_wave_summary()
+	else:
+		# En endless quizas sigue directo
+		if spawner and spawner.has_method("start_next_wave"):
+			spawner.start_next_wave()
+
+func show_wave_summary():
+	if reward_ui_scene:
+		var window = reward_ui_scene.instantiate()
+		$UI.add_child(window) # O add_child(window) directo
+		
+		# Pasamos los datos
+		window.set_loot_data(current_wave_loot)
+		
+		# Conectamos el botón de continuar para iniciar la siguiente ola
+		window.continue_pressed.connect(_on_summary_closed)
+	else:
+		print("ERROR: No has asignado reward_ui_scene en GameManager")
+		_on_summary_closed()
+
+func _on_summary_closed():
+	# 1. Limpiamos la lista para la nueva ola
+	current_wave_loot.clear()
+	clean_arena_items()
+	
+	# 2. Decimos al spawner que arranque la siguiente
+	if spawner and spawner.has_method("start_next_wave"):
+		spawner.start_next_wave()
+	
+func clean_arena_items():
+	# Buscamos todos los nodos que metimos en el grupo "dropped_items"
+	var visual_items = get_tree().get_nodes_in_group("dropped_items")
+	
+	for item in visual_items:
+		item.queue_free()
+	
+	print("Arena limpiada: ", visual_items.size(), " items eliminados.")
