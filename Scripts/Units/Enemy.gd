@@ -97,8 +97,6 @@ func take_damage(amount: int) -> bool:
 	
 	return damage > 0   # true if damage was applied
 
-
-	
 func die() -> void:
 	if is_dead: return
 	is_dead = true
@@ -179,9 +177,6 @@ func _on_frame_changed():
 					var victim = area.get_parent()
 					if victim and victim.has_method("take_damage"):
 						victim.take_damage(stats.damage)
-
-
-
 
 func get_xp_reward() -> int:
 	return stats.xp_gain
