@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://jg0e88yfgkeh" path="res://Scripts/Managers/GameManager.gd" id="1_d4uca"]
 [ext_resource type="Texture2D" uid="uid://bmv6pr26ivn6e" path="res://Assets/Maps/Arena_v2.jpg" id="1_hlfm0"]
-[ext_resource type="PackedScene" uid="uid://bun51il4b3qtm" path="res://Scenes/Levels/Colliders/colliders.tscn" id="2_d4uca"]
+[ext_resource type="PackedScene" uid="uid://bun51il4b3qtm" path="res://Scenes/Levels/colliders/colliders.tscn" id="2_d4uca"]
 [ext_resource type="PackedScene" uid="uid://doydumisi600q" path="res://Scenes/UI/CardUI.tscn" id="2_ik3rq"]
 [ext_resource type="PackedScene" uid="uid://dve1ba77dnbh2" path="res://Scenes/Levels/Modals/WaveRewardUI.tscn" id="3_jbbs8"]
-[ext_resource type="PackedScene" uid="uid://djhi3hrqutyni" path="res://Scenes/Units/Enemies/enemySpawner.tscn" id="3_tqpib"]
+[ext_resource type="PackedScene" uid="uid://djhi3hrqutyni" path="res://Scenes/Units/enemies/enemySpawner.tscn" id="3_tqpib"]
 [ext_resource type="PackedScene" uid="uid://dsdu0tkmtm87g" path="res://Scenes/Levels/Modals/DeckSelector.tscn" id="5_hdqf5"]
 
 [node name="Game" type="Node2D"]
