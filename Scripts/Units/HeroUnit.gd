@@ -111,7 +111,7 @@ func take_damage(amount: int) -> bool:
 	if is_dead: 
 		return false
 	
-	var damage = max(amount - stats.defense, 1)
+	var damage = max(amount - stats.physical_defense, 1)
 	stats.health -= damage
 	
 	# Feedback visual

@@ -12,7 +12,7 @@ var current_xp: int = 0
 var current_card: HeroData = null
 var ghost_sprite: Sprite2D # El visual transparente
 var is_dragging: bool = false
-var current_wave_loot: Array[dropData] = []
+var current_wave_loot: Array[DropData] = []
 var is_normal_mode: bool = true # Para saber si mostramos la ventana o no
 
 # Referencia visual a donde volarán las orbes de exp (ej. un icono en la esquina)
@@ -270,7 +270,7 @@ func calculate_upgrade_cost(data: HeroData) -> int:
 	var current_lvl = hero_levels.get(data.name, 1)
 	return current_lvl * 30 # Ejemplo: Nivel 1 cuesta 30, Nivel 2 cuesta 60
 
-func register_drop(data: dropData):
+func register_drop(data: DropData):
 	print("Item recolectado: ", data.item_data.name)
 	current_wave_loot.append(data)
 

@@ -7,8 +7,7 @@
 script = ExtResource("1_fvddv")
 name = "IronBoots"
 icon = ExtResource("1_sowl5")
-type = "Normal"
 slot_type = "boots"
-defense = 50
+physical_defense = 50
 health = 100
 metadata/_custom_type_script = "uid://b3n3gygtty6ko"

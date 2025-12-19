@@ -74,7 +74,7 @@ func add_item_to_bag(item: ItemData):
 func equip_item_from_bag(hero_id, slot, item):
 	# Validaciones básicas
 	var item_real = item
-	if item is dropData: item_real = item.item_data
+	if item is DropData: item_real = item.item_data
 	if item_real == null: return
 	
 	# 1. Lógica en RAM (Intercambio visual)

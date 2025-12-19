@@ -1,23 +1,19 @@
-[gd_resource type="Resource" script_class="dropData" load_steps=6 format=3 uid="uid://m2xy1uo78kxn"]
+[gd_resource type="Resource" script_class="DropData" load_steps=6 format=3 uid="uid://m2xy1uo78kxn"]
 
 [ext_resource type="Texture2D" uid="uid://ds2s0tkxgyden" path="res://Assets/Items/ironBoots.png" id="1_f14nf"]
 [ext_resource type="Script" uid="uid://b3n3gygtty6ko" path="res://Scripts/Resources/ItemData.gd" id="2_ok658"]
 [ext_resource type="PackedScene" uid="uid://bhao4y5mvaysi" path="res://Scenes/Items/ironBoots.tscn" id="3_rlx5o"]
-[ext_resource type="Script" uid="uid://b38ujm477atsu" path="res://Scripts/Resources/DropData.gd" id="4_a72ex"]
+[ext_resource type="Script" uid="uid://dm7738q8rigxc" path="res://Scripts/Resources/DropData.gd" id="4_a72ex"]
 
 [sub_resource type="Resource" id="Resource_5yxq3"]
 script = ExtResource("2_ok658")
 name = "Iron Boots"
 icon = ExtResource("1_f14nf")
-type = "Normal"
 slot_type = "boots"
-defense = 50
 health = 100
 metadata/_custom_type_script = "uid://b3n3gygtty6ko"
 
 [resource]
 script = ExtResource("4_a72ex")
 item_scene = ExtResource("3_rlx5o")
-slot_type = "boots"
 item_data = SubResource("Resource_5yxq3")
-metadata/_custom_type_script = "uid://b38ujm477atsu"

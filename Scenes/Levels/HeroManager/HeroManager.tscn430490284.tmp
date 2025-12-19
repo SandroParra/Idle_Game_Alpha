@@ -10,15 +10,11 @@ font_color = Color(0.36015666, 0.75987715, 0.6738751, 1)
 shadow_size = 3
 shadow_color = Color(0.47382104, 0.75753784, 0.41767618, 0)
 
-[node name="HeroManager" type="Control" node_paths=PackedStringArray("hero_name_label", "facet_buttons", "inventory_slots_ui", "btn_prev", "btn_next", "modal_panel", "modal_grid", "modal_title", "modal_close_btn")]
+[node name="HeroManager" type="Control" node_paths=PackedStringArray("hero_name_label", "modal_panel", "modal_grid", "modal_title", "modal_close_btn")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_uw58c")
 hero_name_label = NodePath("MainArea/HeroName")
-facet_buttons = [NodePath("MainArea/Facets/Facet1"), NodePath("MainArea/Facets/Facet2"), NodePath("MainArea/Facets/Facet3")]
-inventory_slots_ui = [NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Helmet"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Amulet"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Chest"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Gloves"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Bracelet"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_LeftRing"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_RightRing"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Belt"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Pants"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Boots"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_LeftWeapon"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_RightWeapon")]
-btn_prev = NodePath("TopBar/Prev")
-btn_next = NodePath("TopBar/Next")
 modal_panel = NodePath("ModalSelector")
 modal_grid = NodePath("ModalSelector/VBoxContainer/ScrollContainer/GridContainer")
 modal_title = NodePath("ModalSelector/VBoxContainer/TitleLabel")
@@ -180,7 +176,6 @@ offset_right = 323.0
 offset_bottom = 319.0
 
 [node name="ModalSelector" type="Panel" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 1051.0
 offset_top = 148.0

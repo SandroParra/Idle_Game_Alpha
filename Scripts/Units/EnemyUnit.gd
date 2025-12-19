@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var hurtbox = $Hurtbox
 @onready var main_collision = get_node("CollisionShape2D")
 
-@export var possible_drops: Array[dropData] = []
+@export var possible_drops: Array[DropData] = []
 @export var stats: EnemyData
 
 var target: CharacterBody2D = null
@@ -25,7 +25,7 @@ func _ready():
 		
 	hitbox.area_entered.connect(_on_hitbox_area_entered)
 	anim.frame_changed.connect(_on_frame_changed)
-	# animation_finished ya no es necesario para hacer daño, solo para cleanup
+
 
 func _physics_process(_delta: float) -> void:
 	if is_dead: return
@@ -121,7 +121,7 @@ func roll_loot():
 		if drop_data == null: continue
 		# 2. DETECTOR DE IMPOSTORES (Uso estricto de tipos)
 		# Verificamos si este recurso es realmente de la clase 'dropData'
-		if not (drop_data is dropData):
+		if not (drop_data is DropData):
 			print("---------------------------------------------------")
 			print("¡ALERTA! Se encontró un recurso inválido en la lista de drops.")
 			print("El archivo culpable es: ", drop_data.resource_path)
@@ -132,34 +132,52 @@ func roll_loot():
 		
 		# 3. Si llegamos aquí, es un dropData legítimo y seguro
 		if drop_data.item_scene and randf() <= drop_data.drop_chance:
-			var item: Node = drop_data.item_scene.instantiate()
-			item.add_to_group("dropped_items") 
-			parent.add_child(item)
+			var node = drop_data.item_scene.instantiate()
+			parent.add_child(node)
+			node.add_to_group("dropped_items")
 
-			var item2d := item as Node2D
+			var item2d := node as Node2D
+			var tween = item2d.create_tween()
+			var start_pos := item2d.global_position
+				
 			if item2d:
 				item2d.global_position = global_position
 
-				var tween := item2d.create_tween()
-				var start_pos := item2d.global_position
-				var jump_height := -20 
-				var duration := 0.2     
+				# Drop hop
+				#var tween := item2d.create_tween()
+				#var start_pos := item2d.global_position
+				tween.tween_property(item2d, "global_position", start_pos + Vector2(0, -20), 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+				tween.tween_property(item2d, "global_position", start_pos, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
-				tween.tween_property(
-					item2d, "global_position",
-					start_pos + Vector2(0, jump_height),
-					duration
-				).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-
+			# Generate ItemData and assign
+			var rarity = roll_rarity()
+			var item_data = ItemData.new().generate_item(rarity)
+			item_data.name = node.name
+			
+			var pickup: DropData
+			if pickup:
+				pickup.item_data = item_data
+				
 				tween.tween_property(
 					item2d, "global_position",
 					start_pos,
-					duration
+					0.2
 				).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 				
 			var game = get_node("/root/Game") 
+
 			if game and game.has_method("register_drop"):
 				game.register_drop(drop_data)
+
+func roll_rarity() -> String:
+	randomize() # call once at game start ideally
+	var r = randf()
+	if r < 0.6: return "Common"
+	elif r < 0.85: return "Uncommon"
+	elif r < 0.95: return "Rare"
+	else: return "Epic"
+
+
 	
 func _on_death_animation_finished():
 	queue_free()

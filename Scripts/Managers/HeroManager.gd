@@ -82,7 +82,7 @@ func update_ui():
 			var item = inv_data.get(slot_name)
 			
 			# Si por error hay un dropData (la caja) en vez del ItemData, lo extraemos.
-			if item is dropData:
+			if item is DropData:
 				if item.item_data:
 					item = item.item_data
 				else:
@@ -167,7 +167,7 @@ func _on_slot_clicked(slot_name: String):
 		var real_item = raw_item
 		
 		# Si por error guardamos un DropData, extraemos el ItemData de adentro
-		if raw_item is dropData: # Nota: asegura que la clase se llame dropData o DropData según tu script
+		if raw_item is DropData: # Nota: asegura que la clase se llame dropData o DropData según tu script
 			if raw_item.item_data:
 				real_item = raw_item.item_data
 			else:
