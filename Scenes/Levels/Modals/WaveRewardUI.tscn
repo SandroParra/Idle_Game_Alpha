@@ -36,4 +36,8 @@ columns = 5
 
 [node name="ContinueButton" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
-text = "Siguiente Ola"
+text = "Siguiente!"
+
+[node name="ExitButton" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Salir"

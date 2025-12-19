@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="dropData" load_steps=4 format=3 uid="uid://ck8qya0bitopb"]
+
+[ext_resource type="Script" uid="uid://b38ujm477atsu" path="res://Scripts/Resources/DropData.gd" id="1_aw5fc"]
+[ext_resource type="Resource" uid="uid://bmucbnh4phiue" path="res://Resources/Data/items/IronBoots.tres" id="1_v8my6"]
+[ext_resource type="PackedScene" uid="uid://bb8donf702nb6" path="res://Scenes/Levels/Drop/ItemDrop.tscn" id="2_jpbsv"]
+
+[resource]
+script = ExtResource("1_aw5fc")
+item_scene = ExtResource("2_jpbsv")
+item_data = ExtResource("1_v8my6")
+metadata/_custom_type_script = "uid://b38ujm477atsu"

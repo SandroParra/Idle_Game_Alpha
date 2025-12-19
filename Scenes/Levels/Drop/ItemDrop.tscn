@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bb8donf702nb6"]
+
+[ext_resource type="Script" uid="uid://b7ds5suk61e8g" path="res://Scripts/Managers/XPDrop.gd" id="1_w55v4"]
+[ext_resource type="Texture2D" uid="uid://qdogr2aifuy7" path="res://Assets/Items/LootBox.png" id="2_w55v4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycdjs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r8oin"]
+
+[node name="ItemDrop" type="Area2D"]
+script = ExtResource("1_w55v4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ycdjs")
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_w55v4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_r8oin")
+disabled = true

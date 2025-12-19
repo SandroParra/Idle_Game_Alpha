@@ -1,12 +1,33 @@
-[gd_resource type="Resource" script_class="HeroData" load_steps=4 format=3 uid="uid://5jm53d3cp8pj"]
+[gd_resource type="Resource" script_class="HeroData" load_steps=7 format=3 uid="uid://5jm53d3cp8pj"]
 
 [ext_resource type="Texture2D" uid="uid://bxe8aoiu35bn3" path="res://Assets/UI/MaleViking/MaleViking.png" id="1_6o2xi"]
-[ext_resource type="Script" uid="uid://fses6prrp6qw" path="res://Scripts/Resources/HeroStats.gd" id="2_usan0"]
+[ext_resource type="Script" uid="uid://bcb7hhbr4hl4p" path="res://Scripts/Resources/FacetData.gd" id="1_guml2"]
+[ext_resource type="Texture2D" uid="uid://dv3w8ogl7uwvd" path="res://Assets/Skills/skill icon 1.png" id="2_xfj7r"]
 [ext_resource type="PackedScene" uid="uid://dukonx2421ru8" path="res://Scenes/Units/Heroes/MaleViking.tscn" id="3_gxeki"]
+[ext_resource type="Script" uid="uid://fses6prrp6qw" path="res://Scripts/Resources/HeroData.gd" id="4_ayoty"]
+
+[sub_resource type="Resource" id="Resource_xnkdl"]
+script = ExtResource("1_guml2")
+name = "Shield"
+description = "Makes your hero buffier with defense and health but reduces his attack and speed considerably"
+icon = ExtResource("2_xfj7r")
+modifiers = {
+"mod_attack": -0.3,
+"mod_attack_range": 0.0,
+"mod_attack_speed": -0.25,
+"mod_crit_damage": 0.0,
+"mod_crit_rate": 0.0,
+"mod_defense": 0.3,
+"mod_health": 0.25,
+"mod_speed": -0.25,
+"mod_xp": 0.0
+}
+metadata/_custom_type_script = "uid://bcb7hhbr4hl4p"
 
 [resource]
-script = ExtResource("2_usan0")
-name = "Viking"
+script = ExtResource("4_ayoty")
+name = "Male Viking"
 icon = ExtResource("1_6o2xi")
 unit_scene = ExtResource("3_gxeki")
+available_facets = Array[ExtResource("1_guml2")]([SubResource("Resource_xnkdl")])
 metadata/_custom_type_script = "uid://fses6prrp6qw"

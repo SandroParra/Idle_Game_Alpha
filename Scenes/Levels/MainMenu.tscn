@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmywxu2b6qxjt"]
+
+[ext_resource type="Script" uid="uid://b21c7g71rarrx" path="res://Scripts/Managers/MainMenu.gd" id="1_mke16"]
+[ext_resource type="Texture2D" uid="uid://e1i6qt8v3rht" path="res://Assets/Backgrounds/Main.png" id="2_koonp"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_mke16")
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(0.83505076, 0.83505076, 0.83505076, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1919.0
+offset_bottom = 1078.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_koonp")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 1176.0
+offset_top = 177.0
+offset_right = 1378.0
+offset_bottom = 786.0
+alignment = 1
+
+[node name="HeroManager" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Hero Manager"
+
+[node name="Fight" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "FIGHT!"
+
+[connection signal="pressed" from="VBoxContainer/HeroManager" to="." method="_on_hero_manager_pressed"]
+[connection signal="pressed" from="VBoxContainer/Fight" to="." method="_on_fight_pressed"]

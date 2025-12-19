@@ -2,7 +2,8 @@ extends Node2D
 
 @export var valid_spawn_area: Rect2 # Define un área donde se puede invocar (o usa un Area2D)
 @export var card_ui_scene: PackedScene
-@export var reward_ui_scene: PackedScene # <--- ARRASTRA AQUÍ WaveRewardUI.tscn EN EL INSPECTOR
+@export var reward_ui_scene: PackedScene
+@export var warning_time_threshold: float = 10.0 # Segundos para que se ponga rojo (X tiempo)
 
 signal xp_updated(new_amount: int)
 signal hero_level_changed(hero_name: String, new_level: int)
@@ -17,11 +18,14 @@ var is_normal_mode: bool = true # Para saber si mostramos la ventana o no
 # Referencia visual a donde volarán las orbes de exp (ej. un icono en la esquina)
 @onready var xp_ui_icon = $UI/XP_Counter/Icon
 @onready var xp_label = $UI/XP_Counter/XP_Label
-@onready var wave_label = $UI/Wave_Counter/Wave_Label
+#@onready var wave_label = $UI/Wave_Counter/Wave_Label
 @onready var endless_btn = $UI/EndlessBtn
 @onready var normal_btn = $UI/NormalBtn
 @onready var spawner = $Enemies/enemySpawner
 
+@onready var hud_timer_panel = $UI/HUD_Timer
+@onready var wave_label = $UI/HUD_Timer/VBoxContainer/Wave_Label
+@onready var wave_time = $UI/HUD_Timer/VBoxContainer/Wave_Time
 # Diccionario para guardar el nivel actual de cada tipo de héroe
 # Ejemplo: { "BlackDragon": 1, "MaleViking": 2 }
 var hero_levels: Dictionary = {}
@@ -71,11 +75,20 @@ func _ready():
 		spawner.wave_started.connect(_on_wave_started)
 		if spawner.has_signal("wave_completed"):
 			spawner.wave_completed.connect(_on_wave_completed)
+		if spawner.has_signal("level_time_finished"):
+			spawner.level_time_finished.connect(_on_level_time_finished)
 	else:
 		print("No se encontro el spawner de enemigos")
+		
+	if hud_timer_panel:
+		var style = hud_timer_panel.get_theme_stylebox("panel")
+		if style:
+			hud_timer_panel.add_theme_stylebox_override("panel", style.duplicate())
 
-func _on_wave_started(wave: int):
-	wave_label.text = "Wave: %d" % wave
+func _on_wave_started(wave: int):	
+	# Actualizar el nuevo label del HUD central
+	if wave_label:
+		wave_label.text = "Wave " + str(wave)
 		
 func _on_deck_confirmed(selected_deck: Array[HeroData]):
 	print("Mazo confirmado con: ", selected_deck.size(), " cartas.")
@@ -109,13 +122,45 @@ func _process(_delta):
 	if is_dragging and current_card:
 		# El fantasma sigue al mouse
 		ghost_sprite.global_position = get_global_mouse_position()
-		
+				
 		# Feedback visual: ¿Es zona válida? (Simple chequeo de Y)
 		if is_valid_drop_zone(ghost_sprite.global_position):	
 			ghost_sprite.modulate = Color(0, 1, 0, 0.5) # Verde
 		else:
 			ghost_sprite.modulate = Color(1, 0, 0, 0.5) # Rojo
+		pass
+	update_timer_display()
 
+func update_timer_display():
+	# Si no estamos en modo normal o no hay spawner, ocultamos el panel
+	if not is_normal_mode or not spawner or not spawner.level_timer:
+		if hud_timer_panel: hud_timer_panel.hide()
+		return
+	
+	hud_timer_panel.show()
+	
+	# 1. Obtener tiempo restante del Spawner
+	# Asegúrate de que el Timer no esté detenido para no mostrar 0 cuando no toca
+	var time_left = spawner.level_timer.time_left
+	
+	# Solo mostramos tiempo si el timer está corriendo
+	if spawner.level_timer.is_stopped() and spawner.current_wave > 0:
+		# Opcional: Mostrar 0 o el último valor
+		wave_time.text = "Time left: --"
+	else:
+		wave_time.text = "Time left: %d s" % int(time_left)
+	
+	# 2. Lógica del Borde Rojo
+	var style = hud_timer_panel.get_theme_stylebox("panel") as StyleBoxFlat
+	if style:
+		if time_left <= warning_time_threshold and time_left > 0:
+			style.border_color = Color.RED
+			# Opcional: Hacerlo pulsar o más grueso
+			style.set_border_width_all(4)
+		else:
+			style.border_color = Color.TRANSPARENT # O blanco si prefieres
+			style.set_border_width_all(2)
+			
 func _on_card_drag_started(data: HeroData):
 	print("Drag iniciado recibido en Manager")
 	if data == null:
@@ -187,7 +232,7 @@ func upgrade_hero_type(data: HeroData):
 		# 2. Mejorar la CARTA ORIGINAL (para futuros spawns)
 		# Aumentamos stats base un 20% por ejemplo
 		data.health = int(data.health * 1.2)
-		data.damage = int(data.damage * 1.2)
+		data.attack = int(data.attack * 1.2)
 		
 		# 3. Mejorar las UNIDADES YA VIVAS en el mapa
 		var heroes = get_tree().get_nodes_in_group("heroGroup")
@@ -226,38 +271,45 @@ func calculate_upgrade_cost(data: HeroData) -> int:
 	return current_lvl * 30 # Ejemplo: Nivel 1 cuesta 30, Nivel 2 cuesta 60
 
 func register_drop(data: dropData):
-	print("Item recolectado: ", data.item_name)
+	print("Item recolectado: ", data.item_data.name)
 	current_wave_loot.append(data)
 
 func _on_wave_completed():
-	# Solo mostramos resumen si estamos en modo Normal
 	if is_normal_mode:
-		show_wave_summary()
+		show_wave_summary(false) # false = NO es el final, muestra "Continuar"
 	else:
-		# En endless quizas sigue directo
 		if spawner and spawner.has_method("start_next_wave"):
 			spawner.start_next_wave()
 
-func show_wave_summary():
+func _on_level_time_finished():
+	if is_normal_mode:
+		show_wave_summary(true) # true = SI es el final, muestra "Salir"
+
+func show_wave_summary(is_final_game: bool = false):
 	if reward_ui_scene:
 		var window = reward_ui_scene.instantiate()
 		$UI.add_child(window) # O add_child(window) directo
 		
 		# Pasamos los datos
 		window.set_loot_data(current_wave_loot)
+		window.set_mode(is_final_game)
 		
 		# Conectamos el botón de continuar para iniciar la siguiente ola
 		window.continue_pressed.connect(_on_summary_closed)
+		window.exit_with_loot_requested.connect(_on_game_exit_requested)
 	else:
 		print("ERROR: No has asignado reward_ui_scene en GameManager")
 		_on_summary_closed()
 
 func _on_summary_closed():
-	# 1. Limpiamos la lista para la nueva ola
+	# 1. GUARDAR LOOT EN INVENTARIO GLOBAL
+	print("Guardando ", current_wave_loot.size(), " items en el inventario...")
+	process_current_loot()
+	# 2. Limpiamos la lista para la nueva ola
 	current_wave_loot.clear()
 	clean_arena_items()
 	
-	# 2. Decimos al spawner que arranque la siguiente
+	# 3. Decimos al spawner que arranque la siguiente
 	if spawner and spawner.has_method("start_next_wave"):
 		spawner.start_next_wave()
 	
@@ -269,3 +321,19 @@ func clean_arena_items():
 		item.queue_free()
 	
 	print("Arena limpiada: ", visual_items.size(), " items eliminados.")
+
+
+func process_current_loot():
+	print("Procesando loot antes de salir/continuar...")
+	for drop in current_wave_loot:
+		if drop.item_data:
+			PlayerData.add_item_to_bag(drop.item_data)
+			print("Guardado item real: ", drop.item_data.name)
+	# Guardamos inmediatamente en disco para no perder nada
+	PlayerData.save_game()
+	
+func _on_game_exit_requested():
+	# 1. Guardamos los items de ESTA ola
+	process_current_loot()
+	
+	get_tree().change_scene_to_file("res://Scenes/Levels/MainMenu.tscn")

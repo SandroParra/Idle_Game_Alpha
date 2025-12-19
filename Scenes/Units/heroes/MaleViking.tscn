@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://dukonx2421ru8"]
 
-[ext_resource type="Script" uid="uid://c8x3gimh43cko" path="res://Scripts/Units/Hero.gd" id="1_4r6r5"]
+[ext_resource type="Script" uid="uid://c8x3gimh43cko" path="res://Scripts/Units/HeroUnit.gd" id="1_4r6r5"]
 [ext_resource type="Texture2D" uid="uid://clsou8x7r4e2r" path="res://Assets/Models/Heroes/MaleViking/MaleViking.png" id="2_4r6r5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wcs1h"]

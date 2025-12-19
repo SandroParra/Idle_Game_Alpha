@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dsdu0tkmtm87g"]
+[gd_scene load_steps=9 format=3 uid="uid://dsdu0tkmtm87g"]
 
 [ext_resource type="Texture2D" uid="uid://chl813fh6crc7" path="res://Resources/Game_Icon/icon.svg" id="1_4v777"]
 [ext_resource type="Script" uid="uid://dc2ie7fioid0" path="res://Scripts/UI/DeckSelector.gd" id="1_c82rk"]
-[ext_resource type="Script" uid="uid://fses6prrp6qw" path="res://Scripts/Resources/HeroStats.gd" id="2_susjv"]
+[ext_resource type="Script" uid="uid://fses6prrp6qw" path="res://Scripts/Resources/HeroData.gd" id="2_susjv"]
 [ext_resource type="Resource" uid="uid://c2mffwrbagbge" path="res://Resources/Data/Heroes/BlackDragon.tres" id="3_44i3q"]
 [ext_resource type="Resource" uid="uid://5jm53d3cp8pj" path="res://Resources/Data/Heroes/MaleViking.tres" id="4_4ouvp"]
+[ext_resource type="Resource" uid="uid://b8eiuy2ardfig" path="res://Resources/Data/Heroes/MaleKnight.tres" id="5_4ouvp"]
 
 [sub_resource type="Theme" id="Theme_44i3q"]
 
@@ -25,8 +26,7 @@ mouse_filter = 2
 theme = SubResource("Theme_44i3q")
 theme_override_styles/panel = SubResource("StyleBoxFlat_44i3q")
 script = ExtResource("1_c82rk")
-all_available_cards = Array[ExtResource("2_susjv")]([ExtResource("3_44i3q"), ExtResource("4_4ouvp")])
-max_selection = 2
+all_available_cards = Array[ExtResource("2_susjv")]([ExtResource("3_44i3q"), ExtResource("4_4ouvp"), ExtResource("5_4ouvp")])
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0

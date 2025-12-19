@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="HeroData" load_steps=7 format=3 uid="uid://b8eiuy2ardfig"]
+
+[ext_resource type="Script" uid="uid://bcb7hhbr4hl4p" path="res://Scripts/Resources/FacetData.gd" id="1_qss7m"]
+[ext_resource type="Texture2D" uid="uid://w3evkrx831dq" path="res://Assets/Skills/skill icon 79.png" id="2_qss7m"]
+[ext_resource type="Texture2D" uid="uid://bnp4bw0b8dmf6" path="res://Assets/UI/MaleKnight/MaleKnight.png" id="3_qss7m"]
+[ext_resource type="Script" uid="uid://fses6prrp6qw" path="res://Scripts/Resources/HeroData.gd" id="4_p5ybc"]
+[ext_resource type="PackedScene" uid="uid://bfl57530v6vqi" path="res://Scenes/Units/Heroes/MaleKnight.tscn" id="5_rlgbn"]
+
+[sub_resource type="Resource" id="Resource_xnkdl"]
+script = ExtResource("1_qss7m")
+name = "Heroic Heal"
+description = "Makes your hero heal himself little by little constantly"
+icon = ExtResource("2_qss7m")
+modifiers = {
+"mod_attack": 0.0,
+"mod_attack_range": 0.0,
+"mod_attack_speed": 0.0,
+"mod_crit_damage": 0.0,
+"mod_crit_rate": 0.0,
+"mod_defense": 0.0,
+"mod_health": 0.0,
+"mod_regeneration": 0.1,
+"mod_speed": 0.0,
+"mod_xp": 0.0
+}
+metadata/_custom_type_script = "uid://bcb7hhbr4hl4p"
+
+[resource]
+script = ExtResource("4_p5ybc")
+name = "Male Knight"
+icon = ExtResource("3_qss7m")
+unit_scene = ExtResource("5_rlgbn")
+health = 50
+attack = 10
+defense = 25.0
+crit_damage = 100.0
+attack_speed = 75.0
+xp = 0.0
+available_facets = Array[ExtResource("1_qss7m")]([SubResource("Resource_xnkdl")])
+metadata/_custom_type_script = "uid://fses6prrp6qw"

@@ -1,10 +1,11 @@
 [gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3 uid="uid://ckknx3dg5d34r"]
 
-[ext_resource type="Script" uid="uid://7uafb3ow5j1i" path="res://Scripts/Resources/EnemyStats.gd" id="1_mjyx6"]
+[ext_resource type="Script" uid="uid://7uafb3ow5j1i" path="res://Scripts/Resources/EnemyData.gd" id="1_mjyx6"]
 
 [resource]
 script = ExtResource("1_mjyx6")
 name = "Ogre"
+damage = 25
 speed = 25.0
 attack_speed = 50.0
 xp_gain = 10

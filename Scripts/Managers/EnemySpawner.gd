@@ -13,12 +13,16 @@ var enemy_list = {
 
 signal wave_started(wave: int)
 signal wave_completed
+signal level_time_finished
+
 @export var wave_interval: float = 5.0  
 @export var spawn_interval: float = 1.0  
 @export var require_clear_wave: bool = true
+@export var level_time_limit: float = 30.0 # 30 segundos por defecto
 
 @onready var nextWave_Btn = $"../../UI/NextWaveBtn"
 
+var level_timer: Timer
 var wave_timer: Timer
 var current_wave: int = 0
 var wave_budget: int = 0
@@ -32,6 +36,13 @@ func _ready():
 	wave_timer.one_shot = true
 	add_child(wave_timer)
 	wave_timer.timeout.connect(start_next_wave)
+	
+	# --- CONFIGURAR EL TIMER DE NIVEL ---
+	level_timer = Timer.new()
+	level_timer.wait_time = level_time_limit
+	level_timer.one_shot = true
+	add_child(level_timer)
+	level_timer.timeout.connect(_on_level_time_reached)
 	
 	if nextWave_Btn:
 			nextWave_Btn.pressed.connect(_on_next_wave_pressed)
@@ -50,6 +61,15 @@ func start_next_wave():
 
 	enemies_to_spawn = generate_wave_enemies(wave_budget)
 
+	# --- INICIAR EL CONTADOR DE FINAL DE JUEGO ---
+	# Solo reiniciamos el timer si estamos en Modo Normal (require_clear_wave)
+	# Para 30s por OLA, descomenta la línea de abajo.
+	# Para 30s TOTALES de juego, ponlo en el _ready.
+	if require_clear_wave: 
+		level_timer.start(level_time_limit) 
+		print("Timer de nivel iniciado: ", level_time_limit, " segundos.")
+	# ---------------------------------------------
+
 	var timer = Timer.new()
 	timer.wait_time = spawn_interval
 	timer.autostart = true
@@ -60,6 +80,18 @@ func start_next_wave():
 func _on_next_wave_pressed():
 	nextWave_Btn.visible = false
 	start_next_wave()
+
+func _on_level_time_reached():
+	print("¡TIEMPO AGOTADO! Finalizando nivel...")
+	
+	# Opcional: Matar a todos los enemigos restantes para limpiar la pantalla
+	get_tree().call_group("enemyGroup", "die") 
+	
+	# Detener spawns futuros
+	enemies_to_spawn.clear()
+	
+	# Emitir señal especial de finalización por tiempo
+	level_time_finished.emit()
 
 func generate_wave_enemies(budget: int) -> Array:
 	var result: Array = []

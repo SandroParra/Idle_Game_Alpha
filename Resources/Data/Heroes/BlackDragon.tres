@@ -1,13 +1,34 @@
-[gd_resource type="Resource" script_class="HeroData" load_steps=4 format=3 uid="uid://c2mffwrbagbge"]
+[gd_resource type="Resource" script_class="HeroData" load_steps=7 format=3 uid="uid://c2mffwrbagbge"]
 
+[ext_resource type="Script" uid="uid://bcb7hhbr4hl4p" path="res://Scripts/Resources/FacetData.gd" id="1_pfl3v"]
 [ext_resource type="Texture2D" uid="uid://dhd61qwqbctp5" path="res://Assets/UI/BlackDragon/BlackDragon.png" id="1_uk10f"]
-[ext_resource type="Script" uid="uid://fses6prrp6qw" path="res://Scripts/Resources/HeroStats.gd" id="2_mus3t"]
+[ext_resource type="Texture2D" uid="uid://qs7vmcsv6ein" path="res://Assets/Skills/skill icon 94.png" id="2_tihm3"]
 [ext_resource type="PackedScene" uid="uid://bixiv0365lcn6" path="res://Scenes/Units/Heroes/BlackDragon.tscn" id="3_sk0s7"]
+[ext_resource type="Script" uid="uid://fses6prrp6qw" path="res://Scripts/Resources/HeroData.gd" id="4_csfcr"]
+
+[sub_resource type="Resource" id="Resource_6ra7j"]
+script = ExtResource("1_pfl3v")
+name = "Elder Dragon"
+description = "Your hero has stronger defense and attack, but also a little slower while moving and attacking."
+icon = ExtResource("2_tihm3")
+modifiers = {
+"mod_attack": 0.5,
+"mod_attack_range": 0.0,
+"mod_attack_speed": -0.5,
+"mod_crit_damage": 0.0,
+"mod_crit_rate": 0.0,
+"mod_defense": 0.5,
+"mod_health": 0.5,
+"mod_speed": -0.5,
+"mod_xp": 0.0
+}
+metadata/_custom_type_script = "uid://bcb7hhbr4hl4p"
 
 [resource]
-script = ExtResource("2_mus3t")
+script = ExtResource("4_csfcr")
 name = "Black Dragon"
 icon = ExtResource("1_uk10f")
 unit_scene = ExtResource("3_sk0s7")
 health = 500
+available_facets = Array[ExtResource("1_pfl3v")]([SubResource("Resource_6ra7j")])
 metadata/_custom_type_script = "uid://fses6prrp6qw"

@@ -1,8 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://cqesnfnt1lfr1"]
+[gd_scene load_steps=25 format=3 uid="uid://cqesnfnt1lfr1"]
 
-[ext_resource type="Script" uid="uid://dwrdhcvslj56q" path="res://Scripts/Units/Enemy.gd" id="1_gqkln"]
+[ext_resource type="Script" uid="uid://dwrdhcvslj56q" path="res://Scripts/Units/EnemyUnit.gd" id="1_gqkln"]
 [ext_resource type="Resource" uid="uid://ckknx3dg5d34r" path="res://Resources/Data/Enemies/OgreStats.tres" id="2_espuo"]
+[ext_resource type="Script" uid="uid://b38ujm477atsu" path="res://Scripts/Resources/DropData.gd" id="2_ofgm4"]
 [ext_resource type="Texture2D" uid="uid://mhnpcmy5xbu" path="res://Assets/Models/Enemies/cyclops.png" id="3_0nv6k"]
+[ext_resource type="Resource" uid="uid://ck8qya0bitopb" path="res://Resources/Data/items/Drop_IronBoots.tres" id="3_ofgm4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ux1ep"]
 atlas = ExtResource("3_0nv6k")
@@ -148,6 +150,7 @@ height = 89.816086
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["enemyGroup", "enemy_hurtbox"]]
 script = ExtResource("1_gqkln")
+possible_drops = Array[ExtResource("2_ofgm4")]([ExtResource("3_ofgm4")])
 stats = ExtResource("2_espuo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["enemy_hurtbox"]]

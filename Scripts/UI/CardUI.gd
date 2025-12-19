@@ -81,5 +81,3 @@ func _on_hero_level_changed(hero_name: String, new_level: int):
 		var tween = create_tween()
 		tween.tween_property(lvl_label, "scale", Vector2(1.5, 1.5), 0.2)
 		tween.tween_property(lvl_label, "scale", Vector2(1.0, 1.0), 0.2)
-
-#

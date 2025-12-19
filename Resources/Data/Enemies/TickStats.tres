@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3 uid="uid://ro4871i5q7wt"]
 
-[ext_resource type="Script" uid="uid://7uafb3ow5j1i" path="res://Scripts/Resources/EnemyStats.gd" id="1_0dvyd"]
+[ext_resource type="Script" uid="uid://7uafb3ow5j1i" path="res://Scripts/Resources/EnemyData.gd" id="1_0dvyd"]
 
 [resource]
 script = ExtResource("1_0dvyd")
 name = "BigTick"
 health = 50
-damage = 1
+damage = 5
 speed = 100.0
 attack_range = 30.0
-xp_gain = 5
+xp_gain = 30
 metadata/_custom_type_script = "uid://7uafb3ow5j1i"
