@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://von3ed1iy7wt" path="res://Assets/Models/Enemies/bigtick.png" id="1_cjsa8"]
 [ext_resource type="Resource" uid="uid://ro4871i5q7wt" path="res://Resources/Data/Enemies/TickStats.tres" id="2_5h2ho"]
 [ext_resource type="Resource" uid="uid://ck8qya0bitopb" path="res://Resources/Data/items/Drop_IronBoots.tres" id="3_a5gmt"]
-[ext_resource type="Script" uid="uid://b38ujm477atsu" path="res://Scripts/Resources/DropData.gd" id="4_28f86"]
+[ext_resource type="Script" uid="uid://dm7738q8rigxc" path="res://Scripts/Resources/DropData.gd" id="4_28f86"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5okmp"]
 atlas = ExtResource("1_cjsa8")

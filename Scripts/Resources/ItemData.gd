@@ -40,16 +40,11 @@ func generate_item(rarity: String) -> ItemData:
 
 	var stats_count: int = 1
 	match rarity:
-		"Common":
-			stats_count = 1
-		"Uncommon":
-			stats_count = 2
-		"Rare":
-			stats_count = 3
-		"Epic":
-			stats_count = 4
-		_:
-			stats_count = 1
+		"Common": stats_count = 1
+		"Uncommon": stats_count = 2
+		"Rare": stats_count = 3
+		"Epic": stats_count = 4
+		_: stats_count = 1
 
 	for i in range(stats_count):
 		var stat: String = possible_stats[i]
@@ -59,9 +54,9 @@ func generate_item(rarity: String) -> ItemData:
 				value = randi_range(10, 50)
 			"attack":
 				value = randi_range(1, 10)
-			"defense":
+			"physical_defense":
 				value = randi_range(1, 5)
-			"magic_defense":
+			"magical_defense":
 				value = randi_range(1, 5)
 			_:
 				value = 0

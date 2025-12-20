@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://bb8donf702nb6"]
+[gd_scene load_steps=4 format=3 uid="uid://bb8donf702nb6"]
 
-[ext_resource type="Script" uid="uid://dm7738q8rigxc" path="res://Scripts/Resources/DropData.gd" id="1_w55v4"]
 [ext_resource type="Texture2D" uid="uid://qdogr2aifuy7" path="res://Assets/Items/LootBox.png" id="2_w55v4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ycdjs"]
@@ -8,8 +7,6 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_r8oin"]
 
 [node name="ItemDrop" type="Area2D"]
-script = ExtResource("1_w55v4")
-item_scene = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ycdjs")

@@ -5,9 +5,7 @@ class_name DropData
 @export var drop_chance: float = 0.5
 @export var item_data: ItemData # drop name y drop icon movidos a ItemData
 
-
 @export var item_name: String = "Default Item"
-
 
 func _ready():
 	if item_data:

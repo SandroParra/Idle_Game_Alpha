@@ -215,13 +215,13 @@ func apply_upgrade():
 	
 	print(unit_name, " ha subido de nivel en pleno combate!")
 
-func apply_facet_stats():
+#func apply_facet_stats():
 	# Obtenemos la faceta elegida desde el Singleton
 	# Necesitamos acceso al recurso original del héroe para ver la data de la faceta
-	var my_resource = load("res://resources/heroes/HeroKnight.tres") 
-	var active_facet = PlayerData.get_current_facet_modifiers(my_resource)
+	#var my_resource = load("res://resources/heroes/HeroKnight.tres") 
+	#var active_facet = PlayerData.get_current_facet_modifiers(my_resource)
 	
-	if active_facet:
-		var mods = active_facet.modifiers
+	#if active_facet:
+	#	var mods = active_facet.modifiers
 		
 		# Aplicar lógica según el diccionario
