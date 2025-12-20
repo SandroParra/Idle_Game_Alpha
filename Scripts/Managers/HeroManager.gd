@@ -6,6 +6,7 @@ extends Control
 var hero_ids = ["BlackDragon", "MaleViking", "MaleKnight"]
 var current_hero_index = 0
 var active_slot_name = "" # Variable para recordar qué slot clickeamos
+var item_pending_equip: ItemData = null
 
 # --- REFERENCIAS UI PRINCIPAL ---
 @export var hero_name_label: Label
@@ -24,6 +25,24 @@ var active_slot_name = "" # Variable para recordar qué slot clickeamos
 @export var modal_grid: Container       # Donde van los botones de items (GridContainer)
 @export var modal_title: Label          # Título "Selecciona Casco..."
 @export var modal_close_btn: Button
+
+# --- REFERENCIAS PARA COMPARACIÓN (Arrastra los nodos aquí en el Inspector) ---
+@export_group("Comparison UI")
+@export var comparison_modal: Control
+@export var comp_equip_btn: Button
+@export var comp_cancel_btn: Button
+
+# Lado Izquierdo (Actual)
+@export var left_icon: TextureRect
+@export var left_name: Label
+@export var left_stats: RichTextLabel 
+@export var left_rarity: Label
+
+# Lado Derecho (Nuevo)
+@export var right_icon: TextureRect
+@export var right_name: Label
+@export var right_stats: RichTextLabel
+@export var right_rarity: Label
 
 # Se debe cargar los Recursos (Resources) saber nombres/iconos
 var hero_resources = {
@@ -62,7 +81,14 @@ func _ready():
 		back_btn.pressed.connect(_on_back_pressed)
 	else:
 		print("Error: No se encontró el nodo BackButton en la escena")
-
+	
+	# Conexiones nuevas
+	if comp_equip_btn: comp_equip_btn.pressed.connect(_on_confirm_equip)
+	if comp_cancel_btn: comp_cancel_btn.pressed.connect(_on_cancel_comparison)
+	
+	# Asegurar que el modal esté oculto al inicio
+	if comparison_modal: comparison_modal.hide()
+	
 func update_ui():
 	var current_id = hero_ids[current_hero_index]
 	var current_data = PlayerData.heroes_data[current_id]
@@ -162,26 +188,19 @@ func _on_slot_clicked(slot_name: String):
 	
 	# Buscar items en mochila global
 	var items_found = false
-	for raw_item in PlayerData.global_inventory:
-		# 1. NORMALIZACIÓN DE DATOS
-		var real_item = raw_item
-		
-		# Si por error guardamos un DropData, extraemos el ItemData de adentro
-		if raw_item is DropData: # Nota: asegura que la clase se llame dropData o DropData según tu script
-			if raw_item.item_data:
-				real_item = raw_item.item_data
-			else:
-				continue # Si la caja está vacía, saltamos
-		
-		# 2. Verificación de Seguridad
-		if real_item == null or not "slot_type" in real_item:
-			continue
+	for item in PlayerData.global_inventory:
+		# 1. Verificación de Seguridad Básica
+		if item == null: continue
+		# Nota: Como ahora es Array[ItemData], Godot sabe que 'item' tiene .slot_type
+		# Pero por seguridad en caso de migración, podemos chequear:
+		if not "slot_type" in item: continue
 
-		# 3. AHORA SÍ COMPARAMOS (Usando real_item)
-		print("Revisando: ", real_item.name, " | Tipo: ", real_item.slot_type)
+		# 2. COMPARAMOS DIRECTAMENTE
+		# (Opcional) Debug para ver qué está pasando si algo falla
+		# print("Revisando: ", item.name, " | Tipo: ", item.slot_type)
 		
-		if real_item.slot_type.to_lower() == slot_name.to_lower():
-			create_modal_button(real_item)
+		if item.slot_type.to_lower() == slot_name.to_lower():
+			create_modal_button(item)
 			items_found = true
 			
 	if not items_found:
@@ -218,15 +237,137 @@ func create_modal_button(item_res):
 	modal_grid.add_child(btn)
 
 # 2. Al seleccionar un item del modal
-func _on_item_selected_from_modal(item):
+func _on_item_selected_from_modal(item: ItemData):
+	# En lugar de equipar directamente, guardamos la referencia y mostramos comparación
+	item_pending_equip = item
+	show_comparison_modal(item)
+
+func show_comparison_modal(new_item: ItemData):
+	var current_hero_id = hero_ids[current_hero_index]
+	
+	# 1. Obtener el item actualmente equipado en ese slot
+	var current_inv = PlayerData.heroes_data[current_hero_id]["inventory"]
+	# active_slot_name es la variable que guardamos cuando abriste el inventario (ej: "helmet")
+	var equipped_item = current_inv.get(active_slot_name)
+	
+	# 2. Llenar UI Izquierda (Equipado)
+	if equipped_item != null:
+		left_name.text = equipped_item.name
+		left_icon.texture = equipped_item.icon
+		left_rarity.text = equipped_item.rarity
+		left_stats.text = generate_stat_text(equipped_item) # Texto simple
+		
+		# Color de rareza (Opcional)
+		left_rarity.modulate = get_rarity_color(equipped_item.rarity)
+	else:
+		left_name.text = "Vacio"
+		left_icon.texture = null # O una textura de 'Empty Slot'
+		left_rarity.text = ""
+		left_stats.text = "No hay item equipado"
+
+	# 3. Llenar UI Derecha (Nuevo) y COMPARAR
+	if new_item != null:
+		right_name.text = new_item.name
+		right_icon.texture = new_item.icon
+		right_rarity.text = new_item.rarity
+		right_rarity.modulate = get_rarity_color(new_item.rarity)
+		
+		# Aquí generamos el texto comparativo
+		right_stats.text = generate_comparison_text(equipped_item, new_item)
+		
+	# 4. Mostrar el panel
+	comparison_modal.show()
+	# Ocultamos el grid de inventario para que se vea limpio (opcional)
+	modal_panel.hide()
+
+func _on_confirm_equip():
+	if item_pending_equip == null: return
+	
 	var current_id = hero_ids[current_hero_index]
 	
-	# Llamamos al Singleton para hacer el intercambio lógico de datos
-	PlayerData.equip_item_from_bag(current_id, active_slot_name, item)
+	# Lógica original de equipamiento
+	PlayerData.equip_item_from_bag(current_id, active_slot_name, item_pending_equip)
 	
-	modal_panel.hide()
-	update_ui() # Refrescamos para ver el nuevo item equipado
+	# Actualizar UI y cerrar modales
+	update_ui()
 	PlayerData.save_game()
+	
+	comparison_modal.hide()
+	modal_panel.hide() # Cerrar también el selector
+	item_pending_equip = null
+
+func _on_cancel_comparison():
+	comparison_modal.hide()
+	modal_panel.show() # Volver a mostrar la lista de items por si quiere elegir otro
+	item_pending_equip = null
+
+func generate_stat_text(item: ItemData) -> String:
+	var text = ""
+	if item.health > 0: text += "HP: %d\n" % item.health
+	if item.attack > 0: text += "ATK: %d\n" % item.attack
+	if item.physical_defense > 0: text += "DEF Fís: %d\n" % item.physical_defense
+	if item.magical_defense > 0: text += "DEF Mág: %d\n" % item.magical_defense
+	if item.critical_rate > 0: text += "Crit: %.1f%%\n" % item.critical_rate
+	return text
+
+func generate_comparison_text(old_item: ItemData, new_item: ItemData) -> String:
+	var text = ""
+	
+	# Diccionario: "nombre_variable": "Nombre a Mostrar"
+	var attributes = {
+		"health": "HP",
+		"attack": "ATK",
+		"physical_defense": "DEF Fís",
+		"magical_defense": "DEF Mág",
+		"critical_rate": "Crit %",
+		"critical_damage": "Crit Dmg"
+	}
+	
+	for attr in attributes:
+		# Obtenemos valores de forma segura (0 si es nulo)
+		var new_val = new_item.get(attr) if new_item else 0
+		var old_val = old_item.get(attr) if old_item else 0
+		
+		# Si ambos son 0, saltamos este atributo (no interesa mostrar "ATK: 0")
+		if new_val == 0 and old_val == 0:
+			continue
+			
+		var label = attributes[attr]
+		var diff = new_val - old_val
+		var diff_str = ""
+		var color_code = "white" # Color por defecto para el valor base
+		
+		# Determinar colores y signo de la diferencia
+		if diff > 0:
+			diff_str = "(+%s)" % str(diff) # Usamos str() para que sirva con int y float
+			# Verde para ganancia
+			diff_str = "[color=#00ff00]" + diff_str + "[/color]" 
+		elif diff < 0:
+			diff_str = "(%s)" % str(diff)
+			# Rojo para pérdida
+			diff_str = "[color=#ff0000]" + diff_str + "[/color]"
+		else:
+			diff_str = "(=)"
+			diff_str = "[color=#888888]" + diff_str + "[/color]" # Gris
+		
+		# Formatear la línea final
+		# Ejemplo visual: HP: 150 (+20)
+		# Usamos str(new_val) para evitar errores con decimales
+		text += "%s: %s %s\n" % [label, str(new_val), diff_str]
+			
+	if text == "":
+		text = "Sin atributos especiales"
+		
+	return text
+
+func get_rarity_color(rarity: String) -> Color:
+	match rarity:
+		"Common": return Color.GRAY
+		"Uncommon": return Color.GREEN
+		"Rare": return Color.CYAN
+		"Epic": return Color.PURPLE
+		"Legendary": return Color.ORANGE
+	return Color.WHITE
 	
 # 3. Al desequipar
 func _on_unequip_item():

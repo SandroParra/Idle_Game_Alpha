@@ -61,70 +61,67 @@ func display_loot():
 		return
 
 	# 2. Agrupar items (Lógica de conteo)
-	var item_counts = {}   # Diccionario { ItemData : Cantidad }
-	var unique_items = []  # Lista para mantener el orden en que aparecieron
+	var groups = {} # Diccionario: { "NombreItem": { "count": 0, "item_ref": Resource } }
 	
 	for drop in loot_list:
-		# Determinamos qué objeto usar como clave (el ItemData real o el drop antiguo)
-		var key = drop.item_data if ("item_data" in drop and drop.item_data) else drop
+		# Extraemos el ItemData real (desempaquetando el DropData si es necesario)
+		var item = drop
+		if "item_data" in drop and drop.item_data:
+			item = drop.item_data
+			
+		if item == null: continue
 		
-		if not item_counts.has(key):
-			item_counts[key] = 1
-			unique_items.append(key)
+		# Usamos el NOMBRE como clave.
+		# Así, dos botas distintas con stats distintos se agruparán si se llaman igual.
+		var key_name = item.name 
+		
+		if not groups.has(key_name):
+			groups[key_name] = {
+				"count": 1,
+				"item_ref": item # Guardamos una referencia para sacar el icono luego
+			}
 		else:
-			item_counts[key] += 1
+			groups[key_name]["count"] += 1
 
 	# 3. Dibujar los items agrupados
-	for item in unique_items:
-		var count = item_counts[item]
+	for key_name in groups:
+		var data = groups[key_name]
+		var count = data["count"]
+		var item_ref = data["item_ref"] # Usamos el primero que encontramos para la foto
 		
-		# Slot vertical (Icono arriba, Nombre abajo)
+		# --- A partir de aquí es tu código visual de siempre ---
 		var slot = VBoxContainer.new()
 		slot.alignment = BoxContainer.ALIGNMENT_CENTER
 		
-		# --- Contenedor para el icono (permite superponer el texto x4) ---
 		var icon_container = Control.new()
-		icon_container.custom_minimum_size = Vector2(64, 64) # Tamaño fijo para el icono
+		icon_container.custom_minimum_size = Vector2(64, 64)
 		
-		# El Icono
 		var icon_rect = TextureRect.new()
-		if item.icon:
-			icon_rect.texture = item.icon
+		if item_ref.icon:
+			icon_rect.texture = item_ref.icon
 		icon_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		icon_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		# Hacer que el icono llene el contenedor
 		icon_rect.set_anchors_preset(Control.PRESET_FULL_RECT) 
 		icon_container.add_child(icon_rect)
 		
-		# --- El Indicador de Multiplicador (SOLO SI HAY MÁS DE 1) ---
+		# Indicador de Multiplicador
 		if count > 1:
 			var count_lbl = Label.new()
 			count_lbl.text = " x " + str(count)
-			
-			# Posicionar abajo a la derecha
 			count_lbl.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
-			count_lbl.position = Vector2(-4, -4) # Un pequeño margen desde la esquina
+			count_lbl.position = Vector2(-4, -4)
 			count_lbl.grow_horizontal = Control.GROW_DIRECTION_BEGIN
 			count_lbl.grow_vertical = Control.GROW_DIRECTION_BEGIN
-			
-			# Estilo para que resalte (Texto amarillo con borde negro)
-			count_lbl.modulate = Color(1, 1, 0) # Amarillo
+			count_lbl.modulate = Color(1, 1, 0)
 			count_lbl.add_theme_color_override("font_outline_color", Color.BLACK)
 			count_lbl.add_theme_constant_override("outline_size", 6)
-			count_lbl.add_theme_font_size_override("font_size", 20) # Ajusta el tamaño a tu gusto
-			
+			count_lbl.add_theme_font_size_override("font_size", 20)
 			icon_container.add_child(count_lbl)
-		# -------------------------------------------------------------
 		
-		# Nombre del item
 		var name_lbl = Label.new()
-		if "name" in item:
-			name_lbl.text = item.name
-		else:
-			name_lbl.text = "Item"
+		name_lbl.text = item_ref.name
 		name_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		
-		# Añadir todo al slot y luego a la grilla
 		slot.add_child(icon_container)
 		slot.add_child(name_lbl)
 		grid.add_child(slot)

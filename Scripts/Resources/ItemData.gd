@@ -29,44 +29,31 @@ class_name ItemData
 @export var block_rate: float = 0.0
 #@export var durability: int = 0
 
-@warning_ignore("shadowed_variable")
-func generate_item(rarity: String) -> ItemData:
-	var item: ItemData = ItemData.new()
-	item.rarity = rarity
+func create_instance(rarity_level: String) -> ItemData:
+	# 1. Duplicamos ESTE recurso (self). 
+	# Esto copia el Icono, Nombre, SlotType y valores base.
+	var new_item = self.duplicate()
+	
+	new_item.rarity = rarity_level
+	
+	# 2. Modificamos los stats en la COPIA
+	var multiplier = 1.0
+	match rarity_level:
+		"Common": multiplier = 1.0
+		"Uncommon": multiplier = 1.2
+		"Rare": multiplier = 1.5
+		"Epic": multiplier = 2.0
+		"Legendary": multiplier = 3.0
+	
+	# Ejemplo de lógica aleatoria
+	if new_item.attack > 0:
+		new_item.attack = int(new_item.attack * randf_range(0.9, 1.1) * multiplier) + randi_range(0, 2)
+		
+	if new_item.health > 0:
+		new_item.health = int(new_item.health * randf_range(0.9, 1.1) * multiplier) + randi_range(5, 20)
+		
+	# Agregar lógica para añadir stats extra que eran 0
+	if rarity_level == "Epic" or rarity_level == "Legendary":
+		new_item.critical_rate += randf_range(1.0, 5.0)
 
-	# Explicitly type the array as strings
-	var possible_stats: Array[String] = ["health", "attack", "physical_defense", "magical_defense"]
-	possible_stats.shuffle()
-
-	var stats_count: int = 1
-	match rarity:
-		"Common": stats_count = 1
-		"Uncommon": stats_count = 2
-		"Rare": stats_count = 3
-		"Epic": stats_count = 4
-		_: stats_count = 1
-
-	for i in range(stats_count):
-		var stat: String = possible_stats[i]
-		var value: int = 0
-		match stat:
-			"health":
-				value = randi_range(10, 50)
-			"attack":
-				value = randi_range(1, 10)
-			"physical_defense":
-				value = randi_range(1, 5)
-			"magical_defense":
-				value = randi_range(1, 5)
-			_:
-				value = 0
-		item.set(stat, value)
-
-	print("Generated item:", item.name, " Rarity:", item.rarity,
-		" Stats → Health:", item.health,
-		" Attack:", item.attack,
-		" PhysicalDef:", item.physical_defense,
-		" MagicDef:", item.magical_defense
-		)
-
-	return item
+	return new_item

@@ -10,7 +10,7 @@ font_color = Color(0.36015666, 0.75987715, 0.6738751, 1)
 shadow_size = 3
 shadow_color = Color(0.47382104, 0.75753784, 0.41767618, 0)
 
-[node name="HeroManager" type="Control" node_paths=PackedStringArray("hero_name_label", "facet_buttons", "inventory_slots_ui", "btn_prev", "btn_next", "modal_panel", "modal_grid", "modal_title", "modal_close_btn")]
+[node name="HeroManager" type="Control" node_paths=PackedStringArray("hero_name_label", "facet_buttons", "inventory_slots_ui", "btn_prev", "btn_next", "modal_panel", "modal_grid", "modal_title", "modal_close_btn", "comparison_modal", "comp_equip_btn", "comp_cancel_btn", "left_icon", "left_name", "left_stats", "left_rarity", "right_icon", "right_name", "right_stats", "right_rarity")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_uw58c")
@@ -23,6 +23,17 @@ modal_panel = NodePath("ModalSelector")
 modal_grid = NodePath("ModalSelector/VBoxContainer/ScrollContainer/GridContainer")
 modal_title = NodePath("ModalSelector/VBoxContainer/TitleLabel")
 modal_close_btn = NodePath("ModalSelector/VBoxContainer/CloseButton")
+comparison_modal = NodePath("ComparisonModal")
+comp_equip_btn = NodePath("ComparisonModal/ActionButtons/EquipBtn")
+comp_cancel_btn = NodePath("ComparisonModal/ActionButtons/CancelBtn")
+left_icon = NodePath("ComparisonModal/HBoxContainer/LeftPanel/EqItemIcon")
+left_name = NodePath("ComparisonModal/HBoxContainer/LeftPanel/EqItemName")
+left_stats = NodePath("ComparisonModal/HBoxContainer/LeftPanel/EqItemStats")
+left_rarity = NodePath("ComparisonModal/HBoxContainer/LeftPanel/Label")
+right_icon = NodePath("ComparisonModal/HBoxContainer/RightPanel/NewItemIcon")
+right_name = NodePath("ComparisonModal/HBoxContainer/RightPanel/NewItemName")
+right_stats = NodePath("ComparisonModal/HBoxContainer/RightPanel/NewItemStats")
+right_rarity = NodePath("ComparisonModal/HBoxContainer/RightPanel/Label")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 0
@@ -221,6 +232,100 @@ offset_top = 1016.0
 offset_right = 281.0
 offset_bottom = 1047.0
 text = "Back to Main Menu"
+
+[node name="ComparisonModal" type="Panel" parent="."]
+layout_mode = 1
+offset_left = 516.0
+offset_top = 143.0
+offset_right = 1403.0
+offset_bottom = 942.0
+
+[node name="Title" type="Label" parent="ComparisonModal"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.039
+anchor_right = 1.0
+anchor_bottom = 0.041
+offset_top = -14.161001
+offset_bottom = 7.2409973
+grow_horizontal = 2
+grow_vertical = 2
+text = "Equipment comparison"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ComparisonModal"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -332.5
+offset_bottom = 237.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftPanel" type="VBoxContainer" parent="ComparisonModal/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Label" type="Label" parent="ComparisonModal/HBoxContainer/LeftPanel"]
+layout_mode = 2
+text = "Equiped"
+
+[node name="EqItemIcon" type="TextureRect" parent="ComparisonModal/HBoxContainer/LeftPanel"]
+layout_mode = 2
+
+[node name="EqItemName" type="Label" parent="ComparisonModal/HBoxContainer/LeftPanel"]
+layout_mode = 2
+
+[node name="EqItemStats" type="RichTextLabel" parent="ComparisonModal/HBoxContainer/LeftPanel"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+
+[node name="VSeparator" type="VSeparator" parent="ComparisonModal/HBoxContainer"]
+layout_mode = 2
+
+[node name="RightPanel" type="VBoxContainer" parent="ComparisonModal/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Label" type="Label" parent="ComparisonModal/HBoxContainer/RightPanel"]
+layout_mode = 2
+text = "New"
+
+[node name="NewItemIcon" type="TextureRect" parent="ComparisonModal/HBoxContainer/RightPanel"]
+layout_mode = 2
+
+[node name="NewItemName" type="Label" parent="ComparisonModal/HBoxContainer/RightPanel"]
+layout_mode = 2
+
+[node name="NewItemStats" type="RichTextLabel" parent="ComparisonModal/HBoxContainer/RightPanel"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+
+[node name="ActionButtons" type="HBoxContainer" parent="ComparisonModal"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = 368.5
+offset_right = -4.0
+offset_bottom = 399.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="CancelBtn" type="Button" parent="ComparisonModal/ActionButtons"]
+layout_mode = 2
+text = "X"
+
+[node name="EquipBtn" type="Button" parent="ComparisonModal/ActionButtons"]
+layout_mode = 2
+text = "✓"
 
 [connection signal="pressed" from="TopBar/Prev" to="." method="_on_prev_hero_pressed"]
 [connection signal="pressed" from="TopBar/Next" to="." method="_on_next_hero_pressed"]

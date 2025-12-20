@@ -112,24 +112,24 @@ func die() -> void:
 	queue_free()
 
 func roll_loot():
-	if possible_drops.is_empty():	return
-		
+	if possible_drops.is_empty(): return
 	var parent: Node = get_tree().current_scene if get_tree().current_scene else get_tree().root
 
 	for drop_data in possible_drops:
 		# 1. Chequeamos que el recurso no sea nulo
-		if drop_data == null: continue
-
-		if not (drop_data is DropData):		continue # Saltamos este item para que el juego no se rompa
+		if not drop_data or not (drop_data is DropData): continue # Saltamos este item para que el juego no se rompa
 		
 		# 2. Si llegamos aquí, es un dropData legítimo y seguro
-		if drop_data.item_scene and randf() <= drop_data.drop_chance:
+		if randf() > drop_data.drop_chance: continue
+		
+		# 1. Instanciar el objeto físico en el suelo
+		if drop_data.item_scene:
 			var node = drop_data.item_scene.instantiate()
 			parent.add_child(node)
+			node.global_position = global_position
 			node.add_to_group("dropped_items")
 
 			var item2d = node as Node2D
-				
 			if item2d:
 				item2d.global_position = global_position
 				var tween = item2d.create_tween()
@@ -137,24 +137,27 @@ func roll_loot():
 				tween.tween_property(item2d, "global_position", start_pos + Vector2(0, -20), 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 				tween.tween_property(item2d, "global_position", start_pos, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 			
-			# Generate ItemData and assign
+			# 2. GENERAR LA DATA ÚNICA
 			var rarity = roll_rarity()
 			
-			# Creamos un NUEVO ItemData único con stats generados
-			var generated_item_data = ItemData.new().generate_item(rarity)
-			generated_item_data.name = node.name # O el nombre que quieras
-			
-			if "item_data" in node:
-				node.item_data = generated_item_data
-			# Opción B: Si se llama "data" (como en tu código antiguo)
-			elif "data" in node:
-				node.data = generated_item_data
+			# OJO: Usamos el item_data QUE VIENE en el DropData como plantilla
+			if drop_data.item_data:
+				# Creamos la copia única con stats
+				var unique_item = drop_data.item_data.create_instance(rarity)
 				
-			var game = get_node("/root/Game") 
-			if game and game.has_method("register_drop"):
-				# Pasamos el 'drop_data' original para saber qué cayó, 
-				# pero OJO: el item real que tiene el jugador ahora es 'generated_item_data'
-				game.register_drop(drop_data)
+				# Asignamos al nodo físico
+				if "item_data" in node:
+					node.item_data = unique_item
+				
+				# Registrar en GameManager (para mostrar UI al final)
+				var game = get_node("/root/Game") 
+				if game:
+					# IMPORTANTE: Creamos un "falso" DropData contenedor para pasar la data
+					# o modificamos register_drop para aceptar ItemData directamente.
+					# Para mantener compatibilidad rápida:
+					var drop_wrapper = DropData.new()
+					drop_wrapper.item_data = unique_item
+					game.register_drop(drop_wrapper)
 
 func roll_rarity() -> String:
 	randomize() # call once at game start ideally

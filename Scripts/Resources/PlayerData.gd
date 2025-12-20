@@ -1,12 +1,10 @@
 # PlayerData.gd (Autoload)
 extends Node
 
-const DB_NAME = "res://User_Data/inventory.db" # Ruta en editor
-const DB_PATH = "user://inventory.db"          # Ruta en PC del usuario
+const SAVE_PATH = "user://savegame.tres"
 
-var db: SQLite = null
-var global_inventory: Array[Resource] = []
-var heroes_data = {}
+# Referencia a los datos en memoria (Instancia de SaveGame)
+var saved_data: SaveGame
 
 const SLOTS = [
 	"helmet", "amulet", "chest", "gloves", 
@@ -14,153 +12,98 @@ const SLOTS = [
 	"belt", "pants", "boots","left_weapon", "right_weapon"
 ]
 
-func _ready():
-	# 1. Configurar Base de Datos
-	db = SQLite.new()
-	db.path = DB_PATH
+# Acceso rápido para compatibilidad con tu código UI existente
+var global_inventory: Array[ItemData]:
+	get: return saved_data.global_inventory
 	
-	# Mover la BD de la carpeta res:// a user:// si es la primera vez
-	# (godot-sqlite suele requerir esto para escribir)
-	# Nota: Si el plugin no lo hace auto, simplemente creamos una nueva.
-	
-	db.open_db()
-	
-	# 2. Crear Tablas si no existen (Magia de SQL)
-	var table_inv = {
-		"id": {"data_type": "int", "primary_key": true, "auto_increment": true},
-		"item_id": {"data_type": "text"} # Aquí guardamos "iron_sword"
-	}
-	db.create_table("global_inventory", table_inv)
-	
-	var table_hero = {
-		"id": {"data_type": "int", "primary_key": true, "auto_increment": true},
-		"hero_id": {"data_type": "text"}, # "BlackDragon"
-		"slot": {"data_type": "text"},    # "helmet"
-		"item_id": {"data_type": "text"}  # "iron_helmet"
-	}
-	db.create_table("hero_equipment", table_hero)
-	
-	# 3. Inicializar memoria
-	initialize_heroes_memory()
-	
-	# 4. Cargar datos
-	load_data_from_db()
+var heroes_data: Dictionary:
+	get: return saved_data.hero_equipment
 
-func initialize_heroes_memory():
-	# Estructura en RAM para que el juego funcione rápido
+func _ready():
+	load_game()
+
+func save_game():
+	# ResourceSaver escribe el archivo .tres binario con toda la data
+	var error = ResourceSaver.save(saved_data, SAVE_PATH)
+	if error != OK:
+		print("Error al guardar la partida: ", error)
+	else:
+		print("Partida guardada exitosamente.")
+
+func load_game():
+	if FileAccess.file_exists(SAVE_PATH):
+		# Cargamos el recurso existente
+		saved_data = ResourceLoader.load(SAVE_PATH)
+		if saved_data == null:
+			# Si falla la carga (archivo corrupto), creamos uno nuevo
+			create_new_save()
+	else:
+		create_new_save()
+	
+	verify_data_integrity()
+
+func create_new_save():
+	saved_data = SaveGame.new()
+	# Inicializar estructura de héroes
+	saved_data.hero_equipment = {
+		"BlackDragon": {"inventory": {}},
+		"MaleViking": {"inventory": {}},
+		"MaleKnight": {"inventory": {}}
+	}
+	# Inicializar inventarios vacíos para evitar null pointers
+	for h_id in saved_data.hero_equipment:
+		saved_data.hero_equipment[h_id]["inventory"] = {}
+		for slot in SLOTS:
+			saved_data.hero_equipment[h_id]["inventory"][slot] = null
+
+func verify_data_integrity():
+	# Asegura que si agregaste nuevos héroes en una actualización, existan en el save viejo
 	var ids = ["BlackDragon", "MaleViking", "MaleKnight"]
 	for h_id in ids:
-		heroes_data[h_id] = {"inventory": {}}
-		for slot in SLOTS:
-			heroes_data[h_id]["inventory"][slot] = null
+		if not saved_data.hero_equipment.has(h_id):
+			saved_data.hero_equipment[h_id] = {"inventory": {}}
 
-# --- LÓGICA DE GUARDADO INSTANTÁNEO (SQL) ---
+# --- GESTIÓN DE INVENTARIO ---
 
 func add_item_to_bag(item: ItemData):
 	if item == null: return
 	
-	# 1. Añadir a RAM
-	global_inventory.append(item)
-	
-	# 2. Añadir a SQL (INSERT)
-	var text_id = ItemDatabase.get_id_by_item(item)
-	if text_id != "":
-		var row = {"item_id": text_id}
-		db.insert_row("global_inventory", row)
-		print("Guardado en BD: ", text_id)
-	else:
-		print("ERROR: El item ", item.name, " no está registrado en ItemDatabase.gd")
+	# Simplemente agregamos el recurso al Array. 
+	# Al guardar el Resource SaveGame, este item se serializará dentro.
+	saved_data.global_inventory.append(item)
+	save_game()
+	print("Item añadido y guardado: ", item.name)
 
-func equip_item_from_bag(hero_id, slot, item):
-	# Validaciones básicas
-	var item_real = item
-	if item is DropData: item_real = item.item_data
-	if item_real == null: return
+func equip_item_from_bag(hero_id, slot, item: ItemData):
+	if item == null: return
 	
-	# 1. Lógica en RAM (Intercambio visual)
-	var current_item = heroes_data[hero_id]["inventory"].get(slot)
+	# Referencia al inventario del héroe
+	var hero_inv = saved_data.hero_equipment[hero_id].get("inventory", {})
+	var current_equipped = hero_inv.get(slot)
 	
-	# Sacar item actual (si existe) -> A la bolsa
-	if current_item:
-		add_item_to_bag(current_item) # Esto ya guarda en SQL el item viejo
+	# 1. Si hay algo equipado, lo devolvemos a la bolsa
+	if current_equipped:
+		saved_data.global_inventory.append(current_equipped)
 		
-	# Poner item nuevo -> Al héroe
-	heroes_data[hero_id]["inventory"][slot] = item_real
+	# 2. Equipamos el nuevo
+	hero_inv[slot] = item
 	
-	# Quitar item nuevo de la bolsa global
-	remove_item_from_bag_memory(item_real)
+	# 3. Quitamos el nuevo de la bolsa
+	# NOTA: erase() borra la primera coincidencia exacta del objeto memoria
+	saved_data.global_inventory.erase(item)
 	
-	# 2. GUARDAR EQUIPAMIENTO EN SQL (Upsert/Replace)
-	var item_text_id = ItemDatabase.get_id_by_item(item_real)
-	
-	# Borrar lo que había en ese slot en la BD para ese héroe
-	var query = "DELETE FROM hero_equipment WHERE hero_id='" + hero_id + "' AND slot='" + slot + "';"
-	db.query(query)
-	
-	# Insertar lo nuevo
-	var row = {
-		"hero_id": hero_id,
-		"slot": slot,
-		"item_id": item_text_id
-	}
-	db.insert_row("hero_equipment", row)
+	saved_data.hero_equipment[hero_id]["inventory"] = hero_inv
+	save_game()
 
 func unequip_item(hero_id, slot):
-	var item = heroes_data[hero_id]["inventory"].get(slot)
+	var hero_inv = saved_data.hero_equipment[hero_id].get("inventory", {})
+	var item = hero_inv.get(slot)
+	
 	if item:
-		# 1. Mover a la bolsa (SQL Insert automático)
-		add_item_to_bag(item)
-		
-		# 2. Quitar del héroe en RAM
-		heroes_data[hero_id]["inventory"][slot] = null
-		
-		# 3. Quitar del héroe en SQL
-		var query = "DELETE FROM hero_equipment WHERE hero_id='" + hero_id + "' AND slot='" + slot + "';"
-		db.query(query)
+		saved_data.global_inventory.append(item)
+		hero_inv[slot] = null
+		save_game()
 
-# Función auxiliar para borrar de la bolsa SOLO en SQL y RAM (sin añadir nada)
-func remove_item_from_bag_memory(item: ItemData):
-	if item in global_inventory:
-		global_inventory.erase(item)
-	
-	var text_id = ItemDatabase.get_id_by_item(item)
-	# Borramos SOLO UNO (LIMIT 1) para no borrar todos los items iguales si tienes 2 espadas
-	# SQLite en Godot a veces requiere trucos para borrar con LIMIT, 
-	# pero lo más seguro es borrar por rowid si lo tuviéramos. 
-	# Para simplificar, borramos el primero que coincida:
-	
-	var query = "DELETE FROM global_inventory WHERE id = (SELECT id FROM global_inventory WHERE item_id = '" + text_id + "' LIMIT 1);"
-	db.query(query)
-
-# --- CARGAR DATOS (SELECT) ---
-
-func load_data_from_db():
-	global_inventory.clear()
-	
-	# 1. Cargar Inventario Global
-	db.query("SELECT * FROM global_inventory;")
-	for row in db.query_result:
-		var text_id = row["item_id"]
-		var item_res = ItemDatabase.get_item_by_id(text_id)
-		if item_res:
-			global_inventory.append(item_res)
-	
-	# 2. Cargar Héroes
-	db.query("SELECT * FROM hero_equipment;")
-	for row in db.query_result:
-		var h_id = row["hero_id"]
-		var slot = row["slot"]
-		var text_id = row["item_id"]
-		
-		var item_res = ItemDatabase.get_item_by_id(text_id)
-		
-		if heroes_data.has(h_id) and item_res:
-			heroes_data[h_id]["inventory"][slot] = item_res
-
-	print("Datos cargados desde SQLite exitosamente.")
-
-func save_game():
-	pass
 	
 # Stats Calculator (Igual que antes)
 func calculate_hero_stats(hero_id: String, base_resource: Resource) -> Dictionary:
@@ -188,8 +131,8 @@ func calculate_hero_stats(hero_id: String, base_resource: Resource) -> Dictionar
 		"bonus_evasion": 0,
 		"bonus_block_rate": 0		
 	}
-	if heroes_data.has(hero_id):
-		var hero_inv = heroes_data[hero_id]["inventory"]
+	if saved_data.hero_equipment.has(hero_id):
+		var hero_inv = saved_data.hero_equipment[hero_id]["inventory"]
 		for slot in hero_inv:
 			var item = hero_inv[slot]
 			if item is ItemData:
