@@ -14,6 +14,7 @@ var ghost_sprite: Sprite2D # El visual transparente
 var is_dragging: bool = false
 var current_wave_loot: Array[DropData] = []
 var is_normal_mode: bool = true # Para saber si mostramos la ventana o no
+var is_game_over_processing: bool = false
 
 # Referencia visual a donde volarán las orbes de exp (ej. un icono en la esquina)
 @onready var xp_ui_icon = $UI/XP_Counter/Icon
@@ -85,7 +86,8 @@ func _ready():
 		if style:
 			hud_timer_panel.add_theme_stylebox_override("panel", style.duplicate())
 
-func _on_wave_started(wave: int):	
+func _on_wave_started(wave: int):
+	is_game_over_processing = false
 	# Actualizar el nuevo label del HUD central
 	if wave_label:
 		wave_label.text = "Wave " + str(wave)
@@ -199,6 +201,9 @@ func spawn_unit(data: HeroData, pos: Vector2, target: CharacterBody2D):
 		print("ERROR: El recurso .tres no tiene asignada una Escena (Unit Scene)")
 
 func add_experience(amount: int):
+	# Si el juego está terminando, ignoramos la experiencia que llegue volando
+	if is_game_over_processing: return
+		
 	current_xp += amount
 	print("XP Total: ", current_xp)
 	xp_updated.emit(current_xp)
@@ -282,8 +287,15 @@ func _on_wave_completed():
 			spawner.start_next_wave()
 
 func _on_level_time_finished():
+	is_game_over_processing = true # <--- ACTIVAMOS EL BLOQUEO
+	# Llamamos a limpiar enemigos (la función que hicimos antes)
+	if has_method("clear_living_enemies"):
+		call("clear_living_enemies")
+	
+	clean_arena_items()
+	
 	if is_normal_mode:
-		show_wave_summary(true) # true = SI es el final, muestra "Salir"
+		show_wave_summary(true)
 
 func show_wave_summary(is_final_game: bool = false):
 	if reward_ui_scene:
@@ -337,3 +349,15 @@ func _on_game_exit_requested():
 	process_current_loot()
 	
 	get_tree().change_scene_to_file("res://Scenes/Levels/MainMenu.tscn")
+
+func clear_living_enemies():
+	# Obtenemos todos los nodos del grupo "enemyGroup" definido en EnemyUnit [cite: 3]
+	var active_enemies = get_tree().get_nodes_in_group("enemyGroup")
+	
+	for enemy in active_enemies:
+		# Verificamos si tienen el nuevo método para borrarlos limpiamente
+		if enemy.has_method("despawn_without_reward"):
+			enemy.despawn_without_reward()
+		else:
+			# Fallback por seguridad
+			enemy.queue_free()

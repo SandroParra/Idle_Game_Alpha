@@ -7,14 +7,17 @@ class_name FacetData
 
 # Modificadores (clave-valor)
 @export var modifiers: Dictionary = {
-	"mod_attack": 0.0,
-	"mod_attack_range": 0.0,
-	"mod_defense": 0.0,
-	"mod_speed": 0.0,
-	"mod_attack_speed": 0.0,
-	"mod_xp": 0.0,
-	"mod_health": 0.0,
-	"mod_crit_rate": 0.0,
-	"mod_crit_damage": 0.0,
-	"mod_regeneration":0.0
+	"attack_mod": 0.0,
+	"physical_attack": 0.0,
+	"magical_attack": 0.0,
+	"physical_defense": 0.0,
+	"magical_defense": 0.0,
+	"defense_mod": 0.0,
+	"defense_penetration": 0.0,
+	"speed": 0.0,
+	"attack_speed": 0.0,
+	"xp": 0.0,
+	"health": 0.0,
+	"crit_rate": 0.0,
+	"crit_damage": 0.0
 	}

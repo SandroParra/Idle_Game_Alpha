@@ -303,11 +303,22 @@ func _on_cancel_comparison():
 
 func generate_stat_text(item: ItemData) -> String:
 	var text = ""
+	
+	# --- STATS ENTEROS (%d) ---
+	if item.physical_attack > 0: text += "Physical ATK: %d\n" % item.physical_attack
+	if item.magical_attack > 0: text += "Magical ATK: %d\n" % item.magical_attack
 	if item.health > 0: text += "HP: %d\n" % item.health
-	if item.attack > 0: text += "ATK: %d\n" % item.attack
-	if item.physical_defense > 0: text += "DEF Fís: %d\n" % item.physical_defense
-	if item.magical_defense > 0: text += "DEF Mág: %d\n" % item.magical_defense
-	if item.critical_rate > 0: text += "Crit: %.1f%%\n" % item.critical_rate
+	if item.physical_defense > 0: text += "Physical DEF: %d\n" % item.physical_defense
+	if item.magical_defense > 0: text += "Magical DEF: %d\n" % item.magical_defense
+	if item.critical_damage > 0: text += "Crit Dmg: %d%%\n" % item.critical_damage
+
+	# --- STATS DECIMALES (%.1f) ---
+	if item.attack_mod > 0: text += "%% ATK: %.1f%%\n" % item.attack_mod
+	if item.critical_rate > 0: text += "%% Crit: %.1f%%\n" % item.critical_rate
+	if item.health_mod > 0: text += "%% HP: %.1f%%\n" % item.health_mod
+	if item.defense_mod > 0: text += "%% DEF: %.1f%%\n" % item.defense_mod
+	if item.defense_penetration > 0: text += "DEF Pen: %.1f%%\n" % item.defense_penetration
+
 	return text
 
 func generate_comparison_text(old_item: ItemData, new_item: ItemData) -> String:
@@ -315,45 +326,79 @@ func generate_comparison_text(old_item: ItemData, new_item: ItemData) -> String:
 	
 	# Diccionario: "nombre_variable": "Nombre a Mostrar"
 	var attributes = {
+		"physical_attack": "Physical ATK",
+		"magical_attack": "Magical ATK",
+		"attack_mod": "% ATK",
+		"critical_rate": "% Crit",
+		"critical_damage": "Crit Dmg", # Es INT pero lleva %
 		"health": "HP",
-		"attack": "ATK",
-		"physical_defense": "DEF Fís",
-		"magical_defense": "DEF Mág",
-		"critical_rate": "Crit %",
-		"critical_damage": "Crit Dmg"
+		"health_mod": "% HP",
+		"physical_defense": "Physical DEF",
+		"magical_defense": "Magical DEF",
+		"defense_mod": "% DEF",
+		"defense_penetration": "DEF Pen"		
 	}
 	
+	# Lista de atributos que deben llevar el símbolo "%" al final
+	var percentage_keys = [
+		"attack_mod", 
+		"critical_rate", 
+		"critical_damage", 
+		"health_mod", 
+		"defense_mod", 
+		"defense_penetration"
+	]
+	
 	for attr in attributes:
-		# Obtenemos valores de forma segura (0 si es nulo)
+		# Obtenemos valores de forma segura
 		var new_val = new_item.get(attr) if new_item else 0
 		var old_val = old_item.get(attr) if old_item else 0
 		
-		# Si ambos son 0, saltamos este atributo (no interesa mostrar "ATK: 0")
+		# Si ambos son 0, saltamos
 		if new_val == 0 and old_val == 0:
 			continue
 			
 		var label = attributes[attr]
 		var diff = new_val - old_val
-		var diff_str = ""
-		var color_code = "white" # Color por defecto para el valor base
 		
-		# Determinar colores y signo de la diferencia
-		if diff > 0:
-			diff_str = "(+%s)" % str(diff) # Usamos str() para que sirva con int y float
-			# Verde para ganancia
-			diff_str = "[color=#00ff00]" + diff_str + "[/color]" 
-		elif diff < 0:
-			diff_str = "(%s)" % str(diff)
-			# Rojo para pérdida
-			diff_str = "[color=#ff0000]" + diff_str + "[/color]"
+		# Determinar si lleva símbolo de porcentaje
+		var suffix = ""
+		if attr in percentage_keys:
+			suffix = "%"
+		
+		# --- DETECCIÓN DE TIPO ---
+		var sample_val = new_val if new_val != 0 else old_val
+		var is_float = (typeof(sample_val) == TYPE_FLOAT)
+		
+		# 1. Formatear el VALOR NUEVO (Columna central)
+		var val_str = ""
+		if is_float:
+			val_str = "%.1f%s" % [new_val, suffix] # Ej: "5.5%"
 		else:
-			diff_str = "(=)"
-			diff_str = "[color=#888888]" + diff_str + "[/color]" # Gris
+			val_str = "%d%s" % [new_val, suffix]   # Ej: "50%" (Crit Dmg) o "150" (HP)
+			
+		# 2. Formatear la DIFERENCIA (Columna derecha)
+		var diff_str = ""
 		
-		# Formatear la línea final
-		# Ejemplo visual: HP: 150 (+20)
-		# Usamos str(new_val) para evitar errores con decimales
-		text += "%s: %s %s\n" % [label, str(new_val), diff_str]
+		if diff == 0:
+			diff_str = "[color=#888888](=)[/color]"
+		else:
+			var diff_num_str = ""
+			# Formateamos el número absoluto de la diferencia y le pegamos el sufijo también
+			if is_float:
+				diff_num_str = "%.1f%s" % [abs(diff), suffix] 
+			else:
+				diff_num_str = "%d%s" % [abs(diff), suffix]
+			
+			if diff > 0:
+				# Verde con signo +
+				diff_str = "[color=#00ff00](+%s)[/color]" % diff_num_str
+			else:
+				# Rojo con signo -
+				diff_str = "[color=#ff0000](-%s)[/color]" % diff_num_str
+		
+		# Construir línea final
+		text += "%s: %s %s\n" % [label, val_str, diff_str]
 			
 	if text == "":
 		text = "Sin atributos especiales"

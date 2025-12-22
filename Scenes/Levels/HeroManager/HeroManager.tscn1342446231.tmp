@@ -235,10 +235,10 @@ text = "Back to Main Menu"
 
 [node name="ComparisonModal" type="Panel" parent="."]
 layout_mode = 1
-offset_left = 1101.0
-offset_top = 198.0
-offset_right = 1701.0
-offset_bottom = 798.0
+offset_left = 516.0
+offset_top = 143.0
+offset_right = 1403.0
+offset_bottom = 942.0
 
 [node name="Title" type="Label" parent="ComparisonModal"]
 layout_mode = 1
@@ -259,38 +259,26 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 1.0
-offset_top = -252.0
-offset_right = 1.0
-offset_bottom = 293.0
+offset_top = -332.5
+offset_bottom = 237.5
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LeftPanel" type="VBoxContainer" parent="ComparisonModal/HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 
 [node name="Label" type="Label" parent="ComparisonModal/HBoxContainer/LeftPanel"]
 layout_mode = 2
 text = "Equiped"
-horizontal_alignment = 1
+
+[node name="EqItemIcon" type="TextureRect" parent="ComparisonModal/HBoxContainer/LeftPanel"]
+layout_mode = 2
 
 [node name="EqItemName" type="Label" parent="ComparisonModal/HBoxContainer/LeftPanel"]
 layout_mode = 2
-horizontal_alignment = 1
-
-[node name="EqItemIcon" type="TextureRect" parent="ComparisonModal/HBoxContainer/LeftPanel"]
-custom_minimum_size = Vector2(125, 125)
-layout_mode = 2
-expand_mode = 1
-stretch_mode = 4
-
-[node name="HSeparator" type="HSeparator" parent="ComparisonModal/HBoxContainer/LeftPanel"]
-layout_mode = 2
 
 [node name="EqItemStats" type="RichTextLabel" parent="ComparisonModal/HBoxContainer/LeftPanel"]
-custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 bbcode_enabled = true
 fit_content = true
@@ -299,30 +287,20 @@ fit_content = true
 layout_mode = 2
 
 [node name="RightPanel" type="VBoxContainer" parent="ComparisonModal/HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 
 [node name="Label" type="Label" parent="ComparisonModal/HBoxContainer/RightPanel"]
 layout_mode = 2
 text = "New"
-horizontal_alignment = 1
+
+[node name="NewItemIcon" type="TextureRect" parent="ComparisonModal/HBoxContainer/RightPanel"]
+layout_mode = 2
 
 [node name="NewItemName" type="Label" parent="ComparisonModal/HBoxContainer/RightPanel"]
 layout_mode = 2
-horizontal_alignment = 1
-
-[node name="NewItemIcon" type="TextureRect" parent="ComparisonModal/HBoxContainer/RightPanel"]
-custom_minimum_size = Vector2(125, 125)
-layout_mode = 2
-expand_mode = 1
-stretch_mode = 4
-
-[node name="HSeparator" type="HSeparator" parent="ComparisonModal/HBoxContainer/RightPanel"]
-layout_mode = 2
 
 [node name="NewItemStats" type="RichTextLabel" parent="ComparisonModal/HBoxContainer/RightPanel"]
-custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 bbcode_enabled = true
 fit_content = true
@@ -333,10 +311,10 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 2.0
-offset_top = 304.0
-offset_right = 2.0
-offset_bottom = 335.0
+offset_left = -4.0
+offset_top = 368.5
+offset_right = -4.0
+offset_bottom = 399.5
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
