@@ -5,11 +5,19 @@ extends Node2D
 @export var reward_ui_scene: PackedScene
 @export var warning_time_threshold: float = 10.0 # Segundos para que se ponga rojo (X tiempo)
 
+@export_group("Energy System")
+@export var max_energy: int = 30
+@export var energy_regen_rate: float = 2.0 # Segundos para ganar 1 punto
+@export var starting_energy: int = 5 # Energía inicial al empezar la partida
+
 signal xp_updated(new_amount: int)
 signal hero_level_changed(hero_name: String, new_level: int)
+signal energy_updated(current: int, max_amount: int)
 
 var current_xp: int = 0
 var current_card: HeroData = null
+var current_energy: int = 0
+var energy_timer: float = 0.0
 var ghost_sprite: Sprite2D # El visual transparente
 var is_dragging: bool = false
 var current_wave_loot: Array[DropData] = []
@@ -27,6 +35,9 @@ var is_game_over_processing: bool = false
 @onready var hud_timer_panel = $UI/HUD_Timer
 @onready var wave_label = $UI/HUD_Timer/VBoxContainer/Wave_Label
 @onready var wave_time = $UI/HUD_Timer/VBoxContainer/Wave_Time
+@onready var energy_ui = $UI/EnergyBar
+
+
 # Diccionario para guardar el nivel actual de cada tipo de héroe
 # Ejemplo: { "BlackDragon": 1, "MaleViking": 2 }
 var hero_levels: Dictionary = {}
@@ -52,6 +63,16 @@ func get_closest_enemy(reference_position: Vector2)->CharacterBody2D:
 	return closest_enemy
 	
 func _ready():
+	current_energy = starting_energy
+	
+	if energy_ui and energy_ui.has_method("update_bar"):
+		# Conectamos nuestra señal lógica a la función visual
+		energy_updated.connect(energy_ui.update_bar)
+	else:
+		print("ERROR: No se encontró EnergyBar o le falta el script")
+		
+	# Emitir señal inicial para que la UI empiece correcta
+	energy_updated.emit(current_energy, max_energy)
 	
 	endless_btn.pressed.connect(_on_endless_pressed)
 	normal_btn.pressed.connect(_on_normal_pressed)
@@ -121,16 +142,29 @@ func _on_deck_confirmed(selected_deck: Array[HeroData]):
 	get_tree().paused = false
 
 func _process(_delta):
+	if current_energy < max_energy:
+		energy_timer += _delta
+		if energy_timer >= energy_regen_rate:
+			energy_timer = 0.0
+			current_energy += 1
+			# Emitimos señal para que la UI se entere
+			energy_updated.emit(current_energy, max_energy)
+			print("Energía regenerada: ", current_energy) # Debug
+	
 	if is_dragging and current_card:
-		# El fantasma sigue al mouse
 		ghost_sprite.global_position = get_global_mouse_position()
-				
-		# Feedback visual: ¿Es zona válida? (Simple chequeo de Y)
-		if is_valid_drop_zone(ghost_sprite.global_position):	
-			ghost_sprite.modulate = Color(0, 1, 0, 0.5) # Verde
+		
+		# Validamos zona Y TAMBIÉN si tenemos energía suficiente
+		var can_afford = current_energy >= current_card.cost
+		var valid_zone = is_valid_drop_zone(ghost_sprite.global_position)
+		
+		if valid_zone and can_afford:
+			ghost_sprite.modulate = Color(0, 1, 0, 0.5) # Verde: Todo OK
+		elif not can_afford:
+			ghost_sprite.modulate = Color(0, 0, 1, 0.5) # Azul/Gris: Zona válida pero falta energía
 		else:
-			ghost_sprite.modulate = Color(1, 0, 0, 0.5) # Rojo
-		pass
+			ghost_sprite.modulate = Color(1, 0, 0, 0.5) # Rojo: Zona inválida
+			
 	update_timer_display()
 
 func update_timer_display():
@@ -182,9 +216,21 @@ func _on_card_drag_ended(data: HeroData):
 	var drop_pos = get_global_mouse_position()
 	var enemy = get_closest_enemy(drop_pos)
 	print("closest enemy is ... ", enemy)
-	if is_valid_drop_zone(drop_pos) && enemy != null:
-		print("Data es ",data," posicion es ",drop_pos," el enemigo es ", enemy)
-		spawn_unit(data, drop_pos, enemy)
+
+	if is_valid_drop_zone(drop_pos) and enemy != null:
+		if current_energy >= data.cost:
+			# A. Restamos la energía
+			current_energy -= data.cost
+			energy_updated.emit(current_energy, max_energy)
+			
+			# B. Invocamos
+			spawn_unit(data, drop_pos, enemy)
+			print("Unidad invocada. Energía restante: ", current_energy)
+		else:
+			print("No tienes suficiente energía. Costo: ", data.cost, " / Actual: ", current_energy)
+			# Aquí podrías poner un sonido de error o un "shake" en la UI
+	else:
+		print("Zona inválida o no hay enemigos cerca")
 		
 func is_valid_drop_zone(pos: Vector2) -> bool:
 	# Solo se puede invocar en la mitad inferior de la pantalla

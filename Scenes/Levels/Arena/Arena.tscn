@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://blqtjsjjgwxs"]
+[gd_scene load_steps=10 format=3 uid="uid://blqtjsjjgwxs"]
 
 [ext_resource type="Script" uid="uid://jg0e88yfgkeh" path="res://Scripts/Managers/GameManager.gd" id="1_d4uca"]
 [ext_resource type="Texture2D" uid="uid://bmv6pr26ivn6e" path="res://Assets/Maps/Arena_v2.jpg" id="1_hlfm0"]
-[ext_resource type="PackedScene" uid="uid://bun51il4b3qtm" path="res://Scenes/Levels/colliders/colliders.tscn" id="2_d4uca"]
+[ext_resource type="PackedScene" uid="uid://bun51il4b3qtm" path="res://Scenes/Levels/Colliders/colliders.tscn" id="2_d4uca"]
 [ext_resource type="PackedScene" uid="uid://doydumisi600q" path="res://Scenes/UI/CardUI.tscn" id="2_ik3rq"]
 [ext_resource type="PackedScene" uid="uid://dve1ba77dnbh2" path="res://Scenes/Levels/Modals/WaveRewardUI.tscn" id="3_jbbs8"]
-[ext_resource type="PackedScene" uid="uid://djhi3hrqutyni" path="res://Scenes/Units/enemies/enemySpawner.tscn" id="3_tqpib"]
+[ext_resource type="PackedScene" uid="uid://djhi3hrqutyni" path="res://Scenes/Units/Enemies/enemySpawner.tscn" id="3_tqpib"]
 [ext_resource type="PackedScene" uid="uid://dsdu0tkmtm87g" path="res://Scenes/Levels/Modals/DeckSelector.tscn" id="5_hdqf5"]
+[ext_resource type="Script" uid="uid://vy0fky3xmvb2" path="res://Scripts/UI/EnergyBar.gd" id="8_a0dhi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qdov3"]
 bg_color = Color(0.1987254, 0.1987254, 0.1987254, 1)
@@ -43,20 +44,21 @@ position = Vector2(20, -186)
 position = Vector2(552, -185)
 
 [node name="ColliderDown" parent="Colliders" instance=ExtResource("2_d4uca")]
-position = Vector2(15, 397)
+position = Vector2(5, 420)
 
 [node name="ColliderDown2" parent="Colliders" instance=ExtResource("2_d4uca")]
-position = Vector2(551, 398)
+position = Vector2(537, 421)
 
 [node name="ColliderDown3" parent="Colliders" instance=ExtResource("2_d4uca")]
-position = Vector2(-514, 396)
+position = Vector2(-530, 421)
 
 [node name="Enemies" type="Node2D" parent="."]
 y_sort_enabled = true
 position = Vector2(3, 4)
 
 [node name="enemySpawner" parent="Enemies" instance=ExtResource("3_tqpib")]
-position = Vector2(1968, 684)
+position = Vector2(1869, 699)
+scale = Vector2(1, 2)
 
 [node name="Heroes" type="Node2D" parent="." groups=["heroGroup"]]
 y_sort_enabled = true
@@ -71,14 +73,19 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 292.0
-offset_top = -72.0
-offset_right = -1230.0
-offset_bottom = -2.0
+offset_left = 769.0
+offset_top = -68.0
+offset_right = -753.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 0
+alignment = 1
 
 [node name="DeckSelector" parent="UI" instance=ExtResource("5_hdqf5")]
+offset_left = 530.0
+offset_top = 403.0
+offset_right = -536.0
+offset_bottom = -246.0
 
 [node name="XP_Counter" type="TextureRect" parent="UI"]
 offset_right = 40.0
@@ -115,17 +122,17 @@ offset_right = 8.0
 offset_bottom = 8.0
 
 [node name="NormalBtn" type="Button" parent="UI"]
-offset_left = 720.0
-offset_top = 551.0
-offset_right = 813.0
-offset_bottom = 585.0
+offset_left = 1027.0
+offset_top = 350.0
+offset_right = 1120.0
+offset_bottom = 384.0
 text = "Normal"
 
 [node name="EndlessBtn" type="Button" parent="UI"]
-offset_left = 720.0
-offset_top = 501.0
-offset_right = 813.0
-offset_bottom = 535.0
+offset_left = 792.0
+offset_top = 349.0
+offset_right = 885.0
+offset_bottom = 383.0
 text = "Endless"
 
 [node name="NextWaveBtn" type="Button" parent="UI"]
@@ -158,3 +165,16 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "Time Left: 30 s"
 horizontal_alignment = 1
+
+[node name="EnergyBar" type="TextureProgressBar" parent="UI"]
+offset_left = 46.0
+offset_top = 1011.0
+offset_right = 455.0
+offset_bottom = 1078.0
+max_value = 30.0
+script = ExtResource("8_a0dhi")
+
+[node name="EnergyLabel" type="Label" parent="UI/EnergyBar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
