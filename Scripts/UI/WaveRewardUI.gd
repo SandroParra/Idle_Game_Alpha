@@ -5,14 +5,14 @@ signal continue_pressed
 
 
 @export var grid: Container 
-@onready var continue_btn = $Panel/VBoxContainer/ContinueButton
-@onready var exit_btn = $Panel/VBoxContainer/ExitButton
+@onready var continue_btn = $Panel/ContinueButton
+@onready var exit_btn = $Panel/ExitButton
 
 var loot_list: Array = []
 
 func _ready():
 	if not continue_btn:
-		printerr("ERROR CRÍTICO: No se encuentra 'ContinueButton' en WaveRewardUI inside Panel/VBoxContainer")
+		printerr("ERROR CRÍTICO: No se encuentra 'ContinueButton' en WaveRewardUI inside Panel/")
 	if not exit_btn:
 		printerr("ERROR CRÍTICO: No se encuentra 'ExitButton' en WaveRewardUI.")
 		
