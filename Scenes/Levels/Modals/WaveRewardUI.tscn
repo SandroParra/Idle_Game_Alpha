@@ -80,18 +80,18 @@ text = "Recompensas obtenidas:"
 
 [node name="ItemGrid" type="GridContainer" parent="Panel"]
 layout_mode = 0
-offset_left = 663.0
-offset_top = 573.0
-offset_right = 1325.0
-offset_bottom = 573.0
+offset_left = 673.0
+offset_top = 510.0
+offset_right = 1326.0
+offset_bottom = 518.0
 columns = 5
 
 [node name="ContinueButton" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 949.0
-offset_top = 547.0
-offset_right = 1030.0
-offset_bottom = 591.0
+offset_left = 951.0
+offset_top = 630.0
+offset_right = 1032.0
+offset_bottom = 674.0
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.0093103545, 0.0093103545, 0.0093103545, 1)
 theme_override_fonts/font = ExtResource("2_th7dq")
@@ -103,10 +103,10 @@ text = "Siguiente!"
 
 [node name="ExitButton" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 946.0
-offset_top = 599.0
-offset_right = 1032.0
-offset_bottom = 622.0
+offset_left = 949.0
+offset_top = 694.0
+offset_right = 1035.0
+offset_bottom = 717.0
 size_flags_horizontal = 4
 size_flags_stretch_ratio = 0.0
 theme_override_colors/font_color = Color(0.012617188, 0.008484342, 0.0062698973, 1)
