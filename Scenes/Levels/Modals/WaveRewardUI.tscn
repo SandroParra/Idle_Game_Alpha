@@ -1,10 +1,42 @@
-[gd_scene load_steps=2 format=3 uid="uid://dve1ba77dnbh2"]
+[gd_scene load_steps=12 format=3 uid="uid://dve1ba77dnbh2"]
 
 [ext_resource type="Script" uid="uid://dyv2vsf286mdq" path="res://Scripts/UI/WaveRewardUI.gd" id="1_16u2t"]
+[ext_resource type="FontFile" uid="uid://dim8n0o7xn7t7" path="res://Assets/Fonts/Handron-Filled.otf" id="2_th7dq"]
+[ext_resource type="Texture2D" uid="uid://bk4qpobc7afpl" path="res://Assets/Buttons/BtnBlue.png" id="3_5qu4q"]
+[ext_resource type="Texture2D" uid="uid://oo7ycocbpp7l" path="res://Assets/Buttons/BtnSmallGreen.png" id="4_ml83b"]
+[ext_resource type="Texture2D" uid="uid://c4b7211m5hxpg" path="res://Assets/Buttons/BtnSmallOrange.png" id="5_ixwne"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ml83b"]
+texture = ExtResource("3_5qu4q")
+expand_margin_left = 21.0
+expand_margin_right = 21.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ambu8"]
+texture = ExtResource("4_ml83b")
+expand_margin_left = 15.0
+expand_margin_top = 3.0
+expand_margin_right = 15.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ixwne"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lbyk1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ambu8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_emneg"]
+texture = ExtResource("5_ixwne")
+expand_margin_left = 10.0
+expand_margin_top = 3.0
+expand_margin_right = 10.0
+expand_margin_bottom = 3.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
 
 [node name="WaveRewardUI" type="CanvasLayer" node_paths=PackedStringArray("grid")]
 script = ExtResource("1_16u2t")
-grid = NodePath("Panel/VBoxContainer/ItemGrid")
+grid = NodePath("Panel/ItemGrid")
 
 [node name="Panel" type="Panel" parent="."]
 anchors_preset = 15
@@ -14,30 +46,70 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_direction = 1
 layout_mode = 0
-offset_left = 660.0
-offset_top = 196.0
-offset_right = 1322.0
-offset_bottom = 890.0
+offset_left = 663.0
+offset_top = 204.0
+offset_right = 1325.0
+offset_bottom = 898.0
 alignment = 1
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer"]
-layout_mode = 2
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 869.0
+offset_top = 407.0
+offset_right = 1112.0
+offset_bottom = 468.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_th7dq")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxTexture_ml83b")
 text = "¡Ola completada!
 "
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
 
-[node name="Label2" type="Label" parent="Panel/VBoxContainer"]
-layout_mode = 2
+[node name="Label2" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 667.0
+offset_top = 476.0
+offset_right = 1329.0
+offset_bottom = 499.0
 text = "Recompensas obtenidas:"
 
-[node name="ItemGrid" type="GridContainer" parent="Panel/VBoxContainer"]
-layout_mode = 2
+[node name="ItemGrid" type="GridContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 663.0
+offset_top = 573.0
+offset_right = 1325.0
+offset_bottom = 573.0
 columns = 5
 
-[node name="ContinueButton" type="Button" parent="Panel/VBoxContainer"]
-layout_mode = 2
+[node name="ContinueButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 949.0
+offset_top = 547.0
+offset_right = 1030.0
+offset_bottom = 591.0
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0093103545, 0.0093103545, 0.0093103545, 1)
+theme_override_fonts/font = ExtResource("2_th7dq")
+theme_override_styles/normal = SubResource("StyleBoxTexture_ambu8")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ixwne")
+theme_override_styles/hover = SubResource("StyleBoxTexture_lbyk1")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ambu8")
 text = "Siguiente!"
 
-[node name="ExitButton" type="Button" parent="Panel/VBoxContainer"]
-layout_mode = 2
+[node name="ExitButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 946.0
+offset_top = 599.0
+offset_right = 1032.0
+offset_bottom = 622.0
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 0.0
+theme_override_colors/font_color = Color(0.012617188, 0.008484342, 0.0062698973, 1)
+theme_override_fonts/font = ExtResource("2_th7dq")
+theme_override_styles/normal = SubResource("StyleBoxTexture_emneg")
 text = "Salir"

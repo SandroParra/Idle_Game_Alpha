@@ -1,7 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmywxu2b6qxjt"]
+[gd_scene load_steps=11 format=3 uid="uid://cmywxu2b6qxjt"]
 
 [ext_resource type="Script" uid="uid://b21c7g71rarrx" path="res://Scripts/Managers/MainMenu.gd" id="1_mke16"]
 [ext_resource type="Texture2D" uid="uid://e1i6qt8v3rht" path="res://Assets/Backgrounds/Main.png" id="2_koonp"]
+[ext_resource type="Texture2D" uid="uid://bk4qpobc7afpl" path="res://Assets/Buttons/BtnBlue.png" id="3_0t1wx"]
+[ext_resource type="Texture2D" uid="uid://b47m0ewi26op3" path="res://Assets/Buttons/BtnDarkGray.png" id="3_d2tbo"]
+[ext_resource type="FontFile" uid="uid://dim8n0o7xn7t7" path="res://Assets/Fonts/Handron-Filled.otf" id="4_cwjnk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0t1wx"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0t1wx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cwjnk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8dgdn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iruej"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -25,19 +38,55 @@ stretch_mode = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 1176.0
-offset_top = 177.0
-offset_right = 1378.0
-offset_bottom = 786.0
+offset_left = 682.0
+offset_top = 517.0
+offset_right = 1131.0
+offset_bottom = 1112.0
 alignment = 1
 
 [node name="HeroManager" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Hero Manager"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0t1wx")
+theme_override_styles/hover = SubResource("StyleBoxTexture_0t1wx")
+icon = ExtResource("3_0t1wx")
+
+[node name="Label" type="Label" parent="VBoxContainer/HeroManager"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.067
+anchor_bottom = 0.10300001
+offset_left = 43.0
+offset_top = 21.0
+offset_right = 376.917
+offset_bottom = 183.031
+theme_override_fonts/font = ExtResource("4_cwjnk")
+theme_override_font_sizes/font_size = 77
+text = "    Hero 
+ Manager"
 
 [node name="Fight" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "FIGHT!"
+theme_override_constants/h_separation = 0
+theme_override_constants/icon_max_width = 0
+theme_override_constants/align_to_largest_stylebox = 0
+theme_override_constants/line_spacing = 0
+theme_override_icons/icon = ExtResource("3_d2tbo")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cwjnk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8dgdn")
+
+[node name="Label" type="Label" parent="VBoxContainer/Fight"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.067
+anchor_bottom = 0.10300001
+offset_left = 86.0
+offset_top = 53.0
+offset_right = 348.917
+offset_bottom = 153.031
+theme_override_fonts/font = ExtResource("4_cwjnk")
+theme_override_font_sizes/font_size = 112
+theme_override_styles/focus = SubResource("StyleBoxEmpty_iruej")
+text = "FIGHT"
 
 [connection signal="pressed" from="VBoxContainer/HeroManager" to="." method="_on_hero_manager_pressed"]
 [connection signal="pressed" from="VBoxContainer/Fight" to="." method="_on_fight_pressed"]
