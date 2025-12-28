@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://cy0nsmue0chcc"]
+
+[ext_resource type="Texture2D" uid="uid://brchd5q1wwip" path="res://Assets/Items/Dragonic Set/DragonicHelmet.png" id="1_qti57"]
+[ext_resource type="Script" uid="uid://b3n3gygtty6ko" path="res://Scripts/Resources/ItemData.gd" id="2_8emyo"]
+
+[resource]
+script = ExtResource("2_8emyo")
+name = "Draconic Helmet"
+icon = ExtResource("1_qti57")
+physical_defense = 50
+health = 100
+metadata/_custom_type_script = "uid://b3n3gygtty6ko"

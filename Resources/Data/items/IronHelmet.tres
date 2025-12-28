@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://dpt6f7wc7pu1"]
+
+[ext_resource type="Texture2D" uid="uid://o30yef21f8ug" path="res://Assets/Items/Iron Set/IronHelmet.png" id="1_d5oug"]
+[ext_resource type="Script" uid="uid://b3n3gygtty6ko" path="res://Scripts/Resources/ItemData.gd" id="2_yjslp"]
+
+[resource]
+script = ExtResource("2_yjslp")
+name = "Iron Helmet"
+icon = ExtResource("1_d5oug")
+physical_defense = 50
+health = 100
+metadata/_custom_type_script = "uid://b3n3gygtty6ko"

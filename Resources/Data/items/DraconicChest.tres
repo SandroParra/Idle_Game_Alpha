@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bu73ysfngwo4u"]
+
+[ext_resource type="Texture2D" uid="uid://bls8vuryqwa2t" path="res://Assets/Items/Dragonic Set/DragonicChest.png" id="1_kakld"]
+[ext_resource type="Script" uid="uid://b3n3gygtty6ko" path="res://Scripts/Resources/ItemData.gd" id="2_ttvkq"]
+
+[resource]
+script = ExtResource("2_ttvkq")
+name = "Draconic Chest"
+icon = ExtResource("1_kakld")
+slot_type = "chestplate"
+physical_defense = 50
+health = 100
+metadata/_custom_type_script = "uid://b3n3gygtty6ko"

@@ -1,12 +1,12 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bmucbnh4phiue"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://dvt55apjym3e5"]
 
+[ext_resource type="Texture2D" uid="uid://b8wl7gximdukf" path="res://Assets/Items/Iron Set/IronBoots.png" id="1_a08fl"]
 [ext_resource type="Script" uid="uid://b3n3gygtty6ko" path="res://Scripts/Resources/ItemData.gd" id="1_fvddv"]
-[ext_resource type="Texture2D" uid="uid://ds2s0tkxgyden" path="res://Assets/Items/ironBoots.png" id="1_sowl5"]
 
 [resource]
 script = ExtResource("1_fvddv")
-name = "IronBoots"
-icon = ExtResource("1_sowl5")
+name = "Iron Boots"
+icon = ExtResource("1_a08fl")
 slot_type = "boots"
 physical_defense = 50
 health = 100

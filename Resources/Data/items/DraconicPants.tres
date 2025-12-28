@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://dhrjhfmolm3lj"]
+
+[ext_resource type="Texture2D" uid="uid://dmy3no33ipb66" path="res://Assets/Items/Dragonic Set/DragonicPants.png" id="1_q5us0"]
+[ext_resource type="Script" uid="uid://b3n3gygtty6ko" path="res://Scripts/Resources/ItemData.gd" id="2_fl2gt"]
+
+[resource]
+script = ExtResource("2_fl2gt")
+name = "Draconic Pants"
+icon = ExtResource("1_q5us0")
+slot_type = "pants"
+physical_defense = 50
+health = 100
+metadata/_custom_type_script = "uid://b3n3gygtty6ko"

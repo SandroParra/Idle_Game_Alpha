@@ -10,7 +10,7 @@ font_color = Color(0.36015666, 0.75987715, 0.6738751, 1)
 shadow_size = 3
 shadow_color = Color(0.47382104, 0.75753784, 0.41767618, 0)
 
-[node name="HeroManager" type="Control" node_paths=PackedStringArray("hero_name_label", "facet_buttons", "inventory_slots_ui", "btn_prev", "btn_next", "modal_panel", "modal_grid", "modal_title", "modal_close_btn", "comparison_modal", "comp_equip_btn", "comp_cancel_btn", "left_icon", "left_name", "left_stats", "left_rarity", "right_icon", "right_name", "right_stats", "right_rarity")]
+[node name="HeroManager" type="Control" node_paths=PackedStringArray("hero_name_label", "facet_buttons", "inventory_slots_ui", "btn_prev", "btn_next", "inv_panel", "inv_grid", "inv_title", "btn_clear_filter", "btn_unequip_fixed", "comparison_modal", "comp_equip_btn", "comp_cancel_btn", "left_icon", "left_name", "left_stats", "left_rarity", "right_icon", "right_name", "right_stats", "right_rarity")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_uw58c")
@@ -19,10 +19,11 @@ facet_buttons = [NodePath("MainArea/Facets/Facet1"), NodePath("MainArea/Facets/F
 inventory_slots_ui = [NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Helmet"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Amulet"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Chest"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Gloves"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Bracelet"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_LeftRing"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_RightRing"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Belt"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Pants"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Boots"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_LeftWeapon"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_RightWeapon")]
 btn_prev = NodePath("TopBar/Prev")
 btn_next = NodePath("TopBar/Next")
-modal_panel = NodePath("ModalSelector")
-modal_grid = NodePath("ModalSelector/VBoxContainer/ScrollContainer/GridContainer")
-modal_title = NodePath("ModalSelector/VBoxContainer/TitleLabel")
-modal_close_btn = NodePath("ModalSelector/VBoxContainer/CloseButton")
+inv_panel = NodePath("InventoryPanel")
+inv_grid = NodePath("InventoryPanel/VBoxContainer/ScrollContainer/GridContainer")
+inv_title = NodePath("InventoryPanel/VBoxContainer/TitleLabel")
+btn_clear_filter = NodePath("InventoryPanel/VBoxContainer/ClearFilterButton")
+btn_unequip_fixed = NodePath("InventoryPanel/VBoxContainer/UnequipButton")
 comparison_modal = NodePath("ComparisonModal")
 comp_equip_btn = NodePath("ComparisonModal/ActionButtons/EquipBtn")
 comp_cancel_btn = NodePath("ComparisonModal/ActionButtons/CancelBtn")
@@ -59,18 +60,125 @@ text = "<< Prev"
 layout_mode = 2
 text = "Next >>"
 
-[node name="MainArea" type="HBoxContainer" parent="."]
+[node name="MainArea" type="VBoxContainer" parent="."]
 layout_mode = 1
 offset_left = 101.0
 offset_top = 101.0
-offset_right = 1838.0
+offset_right = 938.0
 offset_bottom = 857.0
 
 [node name="HeroName" type="Label" parent="MainArea"]
 layout_mode = 2
 text = "Name"
+horizontal_alignment = 1
 
-[node name="Facets" type="VBoxContainer" parent="MainArea"]
+[node name="PaperDoll" type="CenterContainer" parent="MainArea"]
+custom_minimum_size = Vector2(600, 700)
+layout_mode = 2
+
+[node name="EquipmentLayout" type="Control" parent="MainArea/PaperDoll"]
+layout_mode = 2
+
+[node name="Background" type="TextureRect" parent="MainArea/PaperDoll/EquipmentLayout"]
+layout_mode = 0
+offset_left = -322.0
+offset_top = -350.0
+offset_right = 317.0
+offset_bottom = 343.0
+texture = ExtResource("3_7rcuf")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Slot_Helmet" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
+layout_mode = 0
+offset_left = -142.0
+offset_top = -152.0
+offset_right = -96.0
+offset_bottom = -107.0
+tooltip_text = "Helmet"
+
+[node name="Slot_Amulet" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
+layout_mode = 0
+offset_left = -139.0
+offset_top = -110.0
+offset_right = -99.0
+offset_bottom = -70.0
+tooltip_text = "Amulet"
+
+[node name="Slot_Chest" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
+layout_mode = 0
+offset_left = -137.0
+offset_top = -76.0
+offset_right = -97.0
+offset_bottom = -36.0
+tooltip_text = "Chest"
+
+[node name="Slot_Gloves" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
+layout_mode = 0
+offset_left = -211.0
+offset_top = 18.0
+offset_right = -171.0
+offset_bottom = 58.0
+tooltip_text = "Gloves"
+
+[node name="Slot_Bracelet" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
+layout_mode = 0
+offset_left = -87.0
+offset_top = -25.0
+offset_right = -47.0
+offset_bottom = 15.0
+
+[node name="Slot_LeftRing" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
+layout_mode = 0
+offset_left = -73.0
+offset_top = 52.0
+offset_right = -33.0
+offset_bottom = 92.0
+
+[node name="Slot_RightRing" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
+layout_mode = 0
+offset_left = -214.0
+offset_top = 59.0
+offset_right = -174.0
+offset_bottom = 99.0
+
+[node name="Slot_Belt" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
+layout_mode = 0
+offset_left = -137.0
+offset_top = 2.0
+offset_right = -97.0
+offset_bottom = 42.0
+
+[node name="Slot_Pants" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
+layout_mode = 0
+offset_left = -139.0
+offset_top = 56.0
+offset_right = -99.0
+offset_bottom = 96.0
+
+[node name="Slot_Boots" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
+layout_mode = 1
+offset_left = -106.0
+offset_top = 152.0
+offset_right = -66.0
+offset_bottom = 192.0
+stretch_mode = 3
+
+[node name="Slot_LeftWeapon" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 63.0
+offset_right = 43.0
+offset_bottom = 103.0
+
+[node name="Slot_RightWeapon" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
+layout_mode = 0
+offset_left = -285.0
+offset_top = 65.0
+offset_right = -245.0
+offset_bottom = 105.0
+
+[node name="Facets" type="HBoxContainer" parent="MainArea"]
 layout_mode = 2
 
 [node name="Innate Facets" type="Label" parent="MainArea/Facets"]
@@ -89,141 +197,48 @@ text = "Facet 2"
 layout_mode = 2
 text = "Facet 3"
 
-[node name="PaperDoll" type="CenterContainer" parent="MainArea"]
-layout_mode = 2
-
-[node name="EquipmentLayout" type="Control" parent="MainArea/PaperDoll"]
-layout_mode = 2
-
-[node name="Background" type="TextureRect" parent="MainArea/PaperDoll/EquipmentLayout"]
-layout_mode = 0
-offset_left = 77.0
-offset_top = -310.0
-offset_right = 700.0
-offset_bottom = 360.0
-texture = ExtResource("3_7rcuf")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="Slot_Helmet" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
-layout_mode = 0
-offset_left = 112.0
-offset_top = -93.0
-offset_right = 152.0
-offset_bottom = -53.0
-
-[node name="Slot_Amulet" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
-layout_mode = 0
-offset_left = 390.0
-offset_top = -93.0
-offset_right = 430.0
-offset_bottom = -53.0
-
-[node name="Slot_Chest" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
-layout_mode = 0
-offset_left = 113.0
-offset_top = 92.0
-offset_right = 153.0
-offset_bottom = 132.0
-
-[node name="Slot_Gloves" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
-layout_mode = 0
-offset_left = 112.0
-offset_top = 218.0
-offset_right = 152.0
-offset_bottom = 258.0
-
-[node name="Slot_Bracelet" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
-layout_mode = 0
-offset_left = 112.0
-offset_top = 153.0
-offset_right = 152.0
-offset_bottom = 193.0
-
-[node name="Slot_LeftRing" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
-layout_mode = 0
-offset_left = 388.0
-offset_top = 155.0
-offset_right = 428.0
-offset_bottom = 195.0
-
-[node name="Slot_RightRing" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
-layout_mode = 0
-offset_left = 391.0
-offset_top = 215.0
-offset_right = 431.0
-offset_bottom = 255.0
-
-[node name="Slot_Belt" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
-layout_mode = 0
-offset_left = 389.0
-offset_top = -32.0
-offset_right = 429.0
-offset_bottom = 8.0
-
-[node name="Slot_Pants" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
-layout_mode = 0
-offset_left = 389.0
-offset_top = 30.0
-offset_right = 429.0
-offset_bottom = 70.0
-
-[node name="Slot_Boots" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
-layout_mode = 1
-offset_left = 390.0
-offset_top = 92.0
-offset_right = 430.0
-offset_bottom = 132.0
-stretch_mode = 3
-
-[node name="Slot_LeftWeapon" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
-layout_mode = 0
-offset_left = 222.0
-offset_top = 279.0
-offset_right = 262.0
-offset_bottom = 319.0
-
-[node name="Slot_RightWeapon" type="TextureButton" parent="MainArea/PaperDoll/EquipmentLayout"]
-layout_mode = 0
-offset_left = 283.0
-offset_top = 279.0
-offset_right = 323.0
-offset_bottom = 319.0
-
-[node name="ModalSelector" type="Panel" parent="."]
-visible = false
+[node name="InventoryPanel" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 1051.0
 offset_top = 148.0
 offset_right = 1751.0
 offset_bottom = 848.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ModalSelector"]
+[node name="VBoxContainer" type="VBoxContainer" parent="InventoryPanel"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="TitleLabel" type="Label" parent="ModalSelector/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="InventoryPanel/VBoxContainer"]
 layout_mode = 2
 text = "INVENTORY"
 label_settings = SubResource("LabelSettings_7rcuf")
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ModalSelector/VBoxContainer"]
+[node name="ClearFilterButton" type="Button" parent="InventoryPanel/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Show All Items"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="InventoryPanel/VBoxContainer"]
 custom_minimum_size = Vector2(700, 670)
 layout_direction = 1
 layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="GridContainer" type="GridContainer" parent="ModalSelector/VBoxContainer/ScrollContainer"]
+[node name="GridContainer" type="GridContainer" parent="InventoryPanel/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 columns = 8
 
-[node name="CloseButton" type="Button" parent="ModalSelector/VBoxContainer"]
+[node name="CloseButton" type="Button" parent="InventoryPanel/VBoxContainer"]
 layout_mode = 2
 text = "Close"
+
+[node name="UnequipButton" type="Button" parent="InventoryPanel/VBoxContainer"]
+visible = false
+layout_mode = 2
 
 [node name="BackButton" type="Button" parent="."]
 layout_mode = 0
@@ -234,6 +249,7 @@ offset_bottom = 1047.0
 text = "Back to Main Menu"
 
 [node name="ComparisonModal" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 offset_left = 1101.0
 offset_top = 198.0

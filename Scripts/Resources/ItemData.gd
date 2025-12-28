@@ -9,7 +9,7 @@ class_name ItemData
 
 @export_group("System")
 # Tipos: boots, chestplate, gloves, helmet, weapon, ring, amulet
-@export_enum("helmet", "chestplate", "gloves", "boots", "weapon", "ring", "amulet") var slot_type: String = "helmet"
+@export_enum("helmet", "chestplate", "gloves", "pants", "boots", "weapon", "ring", "amulet") var slot_type: String = "helmet"
 
 @export_group("Generated Stats")
 # Attack modifyers

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://hphn6wy6cgdx"]
+
+[ext_resource type="Texture2D" uid="uid://drcbpy7fr22r8" path="res://Assets/Items/Iron Set/IronChest.png" id="1_2n1pb"]
+[ext_resource type="Script" uid="uid://b3n3gygtty6ko" path="res://Scripts/Resources/ItemData.gd" id="2_lbhjp"]
+
+[resource]
+script = ExtResource("2_lbhjp")
+name = "Iron Chest"
+icon = ExtResource("1_2n1pb")
+slot_type = "chestplate"
+physical_defense = 50
+health = 100
+metadata/_custom_type_script = "uid://b3n3gygtty6ko"

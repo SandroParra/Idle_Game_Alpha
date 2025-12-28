@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DropData" load_steps=4 format=3 uid="uid://r3itrck7ypwo"]
+
+[ext_resource type="Resource" uid="uid://dpt6f7wc7pu1" path="res://Resources/Data/items/IronHelmet.tres" id="1_wvo84"]
+[ext_resource type="PackedScene" uid="uid://bb8donf702nb6" path="res://Scenes/Levels/Drop/ItemDrop.tscn" id="2_vkeqb"]
+[ext_resource type="Script" uid="uid://dm7738q8rigxc" path="res://Scripts/Resources/DropData.gd" id="3_pavav"]
+
+[resource]
+script = ExtResource("3_pavav")
+item_scene = ExtResource("2_vkeqb")
+drop_chance = 0.15
+item_data = ExtResource("1_wvo84")

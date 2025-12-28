@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://c76mybrwhpsyq"]
+
+[ext_resource type="Texture2D" uid="uid://b3avt4qgde71b" path="res://Assets/Items/Dragonic Set/DragonicBoots.png" id="1_pioeu"]
+[ext_resource type="Script" uid="uid://b3n3gygtty6ko" path="res://Scripts/Resources/ItemData.gd" id="2_66oxe"]
+
+[resource]
+script = ExtResource("2_66oxe")
+name = "Draconic Boots"
+icon = ExtResource("1_pioeu")
+slot_type = "boots"
+physical_defense = 50
+health = 100
+metadata/_custom_type_script = "uid://b3n3gygtty6ko"

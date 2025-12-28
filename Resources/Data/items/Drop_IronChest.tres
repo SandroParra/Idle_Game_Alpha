@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DropData" load_steps=4 format=3 uid="uid://bobo0yyqb0if0"]
+
+[ext_resource type="Resource" uid="uid://hphn6wy6cgdx" path="res://Resources/Data/items/IronChest.tres" id="1_7cjdc"]
+[ext_resource type="PackedScene" uid="uid://bb8donf702nb6" path="res://Scenes/Levels/Drop/ItemDrop.tscn" id="2_vv6r1"]
+[ext_resource type="Script" uid="uid://dm7738q8rigxc" path="res://Scripts/Resources/DropData.gd" id="3_v5n32"]
+
+[resource]
+script = ExtResource("3_v5n32")
+item_scene = ExtResource("2_vv6r1")
+drop_chance = 0.2
+item_data = ExtResource("1_7cjdc")
