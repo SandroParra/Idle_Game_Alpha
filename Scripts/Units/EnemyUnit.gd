@@ -1,4 +1,14 @@
 extends CharacterBody2D
+
+enum EnemyType {
+	TRASH_MOB,
+	ELITE,
+	BOSS
+}
+
+@export_group("Drop System")
+@export var enemy_type: EnemyType = EnemyType.TRASH_MOB
+
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var anim = $AnimatedSprite2D # Usaremos esto en el paso de animación
 @onready var hitbox = $Hitbox # Referencia al área de ataque
@@ -110,45 +120,98 @@ func die() -> void:
 	queue_free()
 
 func roll_loot():
+	print("El enemigo ", stats.name, " ha dropeado...")
 	if possible_drops.is_empty(): return
+	
+	match enemy_type:
+		EnemyType.TRASH_MOB:
+			# Regla: 1 solo item (RNG)
+			# Elegimos uno al azar de la lista y probamos su suerte
+			var random_drop = possible_drops.pick_random()
+			attempt_drop_rng(random_drop)
+			
+		EnemyType.ELITE:
+			# Regla: 1 item GARANTIZADO
+			var random_drop = possible_drops.pick_random()
+			force_drop_guaranteed(random_drop)
+			
+		EnemyType.BOSS:
+			# Regla: 1 GARANTIZADO + 2 RNG
+			# 1. El Garantizado
+			var guaranteed = possible_drops.pick_random()
+			force_drop_guaranteed(guaranteed)
+			
+			# 2. Los dos intentos RNG (pueden repetirse o ser distintos)
+			for i in range(2):
+				var rng_drop = possible_drops.pick_random()
+				attempt_drop_rng(rng_drop)
+
+func attempt_drop_rng(drop_data: DropData):
+	if not drop_data: return
+	# Verificamos el porcentaje de drop definido en el recurso (ej. 0.1 para 10%)
+	if randf() <= drop_data.drop_chance:
+		spawn_drop_instance(drop_data)
+		print(drop_data.item_data.name)
+
+func force_drop_guaranteed(drop_data: DropData):
+	if not drop_data: return
+	# Ignoramos el drop_chance y lo invocamos directamente
+	spawn_drop_instance(drop_data)
+	print(drop_data.item_data.name)
+
+func spawn_drop_instance(drop_data: DropData):
+	# Obtenemos referencias
 	var parent: Node = get_tree().current_scene if get_tree().current_scene else get_tree().root
-
-	for drop_data in possible_drops:
-		if not drop_data or not (drop_data is DropData): continue
+	var game_manager = get_tree().get_first_node_in_group("gamemanager")
+	
+	# 1. Instanciar visual (La escena del item, ej: una bolsita o cofre)
+	if drop_data.item_scene:
+		var node = drop_data.item_scene.instantiate()
+		parent.add_child(node)
+		node.global_position = global_position
+		node.add_to_group("dropped_items")
 		
-		# 1. Chance de Drop (El primer filtro: ¿Cae algo?)
-		if randf() > drop_data.drop_chance: continue
+		# Animación de salto ("Pop")
+		var item2d = node as Node2D
+		if item2d:
+			var tween = item2d.create_tween()
+			var start_pos = item2d.global_position
+			tween.tween_property(item2d, "global_position", start_pos + Vector2(0, -20), 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+			tween.tween_property(item2d, "global_position", start_pos, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		
+		# 2. GENERAR DATA (Con lógica de Oleadas del paso anterior)
+		# Determinar Rareza (Usando GameManager o Fallback)
+		var rarity_name = "Common"
+		if game_manager and game_manager.has_method("get_current_wave_rarity"):
+			rarity_name = game_manager.get_current_wave_rarity()
+		elif drop_data.has_method("resolve_rarity"):
+			# Fallback a tu lógica antigua si algo falla
+			var result = drop_data.resolve_rarity()
+			if result is String:
+			# Si ya es texto ("Rare"), lo usamos directamente
+				rarity_name = result
+			elif result is int:
+			# Si es número (2), lo convertimos usando el mapa
+				var map = ["Common", "Uncommon", "Rare", "Epic", "Legendary"]
+				if result >= 0 and result < map.size():
+					rarity_name = map[result]
 
-		# 2. Instanciar visual
-		if drop_data.item_scene:
-			var node = drop_data.item_scene.instantiate()
-			parent.add_child(node)
-			node.global_position = global_position
-			node.add_to_group("dropped_items")
+		# Crear el ItemData único
+		if drop_data.item_data:
+			var unique_item = drop_data.item_data.create_instance(rarity_name)
 			
-			# Animación visual (Tween)
-			var item2d = node as Node2D
-			if item2d:
-				var tween = item2d.create_tween()
-				var start_pos = item2d.global_position
-				tween.tween_property(item2d, "global_position", start_pos + Vector2(0, -20), 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-				tween.tween_property(item2d, "global_position", start_pos, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+			# Asignar al nodo físico
+			if "item_data" in node:
+				node.item_data = unique_item
 			
-			# 3. GENERAR DATA (Lógica Nueva)
-			# A) Resolvemos la rareza usando las reglas del Drop específico
-			var rarity = drop_data.resolve_rarity()
-			# B) Creamos el item único usando las reglas de stats del ItemData
-			if drop_data.item_data:
-				var unique_item = drop_data.item_data.create_instance(rarity)
-				# Asignar al nodo físico
-				if "item_data" in node:
-					node.item_data = unique_item
-				# Registrar (Wrapper para compatibilidad)
-				var game = get_node("/root/Game") 
-				if game:
-					var drop_wrapper = DropData.new()
-					drop_wrapper.item_data = unique_item
-					game.register_drop(drop_wrapper)
+			# Registrar en GameManager para el resumen final
+			if game_manager:
+				# Creamos un wrapper temporal si register_drop espera DropData
+				# Ojo: Si tu register_drop guarda DropData, necesitamos enviarle uno.
+				# Como estamos creando una instancia única, lo ideal es pasar el wrapper.
+				var drop_wrapper = drop_data.duplicate()
+				drop_wrapper.item_data = unique_item
+				game_manager.register_drop(drop_wrapper)
 	
 func _on_death_animation_finished():
 	queue_free()
@@ -189,7 +252,7 @@ func get_xp_reward() -> int:
 
 #Agregada instancia de xp dinamico dependiendo de nuevo campo "xp_gain" en las stats del enemigo
 func spawn_xp():
-	var game = get_node("/root/Game")
+	var game = get_tree().get_first_node_in_group("gamemanager")
 	# Si no existe el juego o el juego dice que ya terminó, ABORTAMOS
 	if not game or (game.get("is_game_over_processing") == true):	return
 	

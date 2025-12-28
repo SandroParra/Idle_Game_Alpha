@@ -63,6 +63,7 @@ func get_closest_enemy(reference_position: Vector2)->CharacterBody2D:
 	return closest_enemy
 	
 func _ready():
+	add_to_group("gamemanager")
 	current_energy = starting_energy
 	
 	if energy_ui and energy_ui.has_method("update_bar"):
@@ -322,7 +323,7 @@ func calculate_upgrade_cost(data: HeroData) -> int:
 	return current_lvl * 30 # Ejemplo: Nivel 1 cuesta 30, Nivel 2 cuesta 60
 
 func register_drop(data: DropData):
-	print("Item recolectado: ", data.item_data.name)
+	#print("Item recolectado: ", data.item_data.name)
 	current_wave_loot.append(data)
 
 func _on_wave_completed():
@@ -407,3 +408,48 @@ func clear_living_enemies():
 		else:
 			# Fallback por seguridad
 			enemy.queue_free()
+
+func roll_rarity_from_weights(weights: Array) -> int:
+	var roll = randi() % 100 + 1 # 1 a 100
+	var cumulative = 0
+	
+	# Iteramos para ver en qué rango cayó
+	# Asumimos que el orden es: 0:Common, 1:Uncommon, 2:Rare, 3:Epic, 4:Legendary
+	for i in range(weights.size()):
+		cumulative += weights[i]
+		if roll <= cumulative:
+			return i
+			
+	return 0 # Fallback a Common
+	
+func get_current_wave_rarity() -> String:
+	# 1. Definimos los nombres EXACTOS que espera tu ItemData
+	var rarity_names = ["Common", "Uncommon", "Rare", "Epic", "Legendary"]
+	# Obtenemos la ola actual. Si no hay spawner, asumimos ola 1
+	var wave = 1
+	if spawner and "current_wave" in spawner:
+		wave = spawner.current_wave
+	
+	# Definimos los porcentajes según la tabla [Common, Uncommon, Rare, Epic, Legendary]
+	var weights = []
+	
+	if wave <= 15:
+		weights = [70, 30, 0, 0, 0]
+	elif wave <= 30:
+		weights = [60, 35, 5, 0, 0]
+	elif wave <= 45:
+		weights = [50, 40, 10, 0, 0]
+	elif wave <= 60:
+		weights = [40, 40, 17, 3, 0]
+	elif wave <= 75:
+		weights = [30, 45, 21, 3, 1]
+	elif wave <= 85:
+		weights = [20, 35, 35, 8, 2]
+	else: # Oleada 86+ (tope)
+		weights = [10, 30, 40, 18, 2]
+		
+# 4. Obtenemos el índice numérico (0, 1, 2...)
+	var rarity_index = roll_rarity_from_weights(weights)
+	
+	# 5. Devolvemos el NOMBRE correspondiente (ej. "Rare")
+	return rarity_names[rarity_index]

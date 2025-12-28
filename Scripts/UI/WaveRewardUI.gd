@@ -3,10 +3,18 @@ extends CanvasLayer
 signal exit_with_loot_requested
 signal continue_pressed
 
-
 @export var grid: Container 
 @onready var continue_btn = $Panel/ContinueButton
 @onready var exit_btn = $Panel/ExitButton
+
+# Diccionario de colores para el texto
+const RARITY_COLORS = {
+	"Common": Color("#b0b0b0"),    # Gris
+	"Uncommon": Color("#44bd32"),  # Verde
+	"Rare": Color("#00a8ff"),      # Azul
+	"Epic": Color("#8c7ae6"),      # Morado
+	"Legendary": Color("#f1c40f")  # Dorado
+}
 
 var loot_list: Array = []
 
@@ -61,40 +69,46 @@ func display_loot():
 		return
 
 	# 2. Agrupar items (Lógica de conteo)
-	var groups = {} # Diccionario: { "NombreItem": { "count": 0, "item_ref": Resource } }
+	var groups = {} 
 	
 	for drop in loot_list:
-		# Extraemos el ItemData real (desempaquetando el DropData si es necesario)
 		var item = drop
 		if "item_data" in drop and drop.item_data:
 			item = drop.item_data
 			
 		if item == null: continue
 		
-		# Usamos el NOMBRE como clave.
-		# Así, dos botas distintas con stats distintos se agruparán si se llaman igual.
-		var key_name = item.name 
+		# Usamos un valor por defecto "Common" si no tiene rareza definida
+		var rarity_val = "Common"
+		if "rarity" in item: rarity_val = item.rarity
 		
-		if not groups.has(key_name):
-			groups[key_name] = {
+		var key_unique = rarity_val + "_" + item.name 
+		
+		if not groups.has(key_unique):
+			groups[key_unique] = {
 				"count": 1,
-				"item_ref": item # Guardamos una referencia para sacar el icono luego
+				"item_ref": item,
+				"rarity": rarity_val # Guardamos la rareza para usarla fácil luego
 			}
 		else:
-			groups[key_name]["count"] += 1
+			groups[key_unique]["count"] += 1
 
 	# 3. Dibujar los items agrupados
-	for key_name in groups:
-		var data = groups[key_name]
+	for key in groups:
+		var data = groups[key]
 		var count = data["count"]
-		var item_ref = data["item_ref"] # Usamos el primero que encontramos para la foto
+		var item_ref = data["item_ref"]
+		var rarity_str = data["rarity"]
 		
-		# --- A partir de aquí es tu código visual de siempre ---
 		var slot = VBoxContainer.new()
 		slot.alignment = BoxContainer.ALIGNMENT_CENTER
+		# Un poco de separación entre slots si es necesario
+		slot.add_theme_constant_override("separation", 5)
 		
+		# --- ICONO ---
 		var icon_container = Control.new()
-		icon_container.custom_minimum_size = Vector2(64, 64)
+		icon_container.custom_minimum_size = Vector2(40, 40)
+		icon_container.size_flags_horizontal = Control.SIZE_SHRINK_CENTER # Centrar icono
 		
 		var icon_rect = TextureRect.new()
 		if item_ref.icon:
@@ -104,23 +118,24 @@ func display_loot():
 		icon_rect.set_anchors_preset(Control.PRESET_FULL_RECT) 
 		icon_container.add_child(icon_rect)
 		
-		# Indicador de Multiplicador
-		if count > 1:
-			var count_lbl = Label.new()
-			count_lbl.text = " x " + str(count)
-			count_lbl.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
-			count_lbl.position = Vector2(-4, -4)
-			count_lbl.grow_horizontal = Control.GROW_DIRECTION_BEGIN
-			count_lbl.grow_vertical = Control.GROW_DIRECTION_BEGIN
-			count_lbl.modulate = Color(1, 1, 0)
-			count_lbl.add_theme_color_override("font_outline_color", Color.BLACK)
-			count_lbl.add_theme_constant_override("outline_size", 6)
-			count_lbl.add_theme_font_size_override("font_size", 20)
-			icon_container.add_child(count_lbl)
+		# (Opcional) He quitado el contador superpuesto en el icono 
+		# porque ahora lo pediste explícitamente en el texto de abajo.
 		
+		# --- ETIQUETA DE TEXTO ---
 		var name_lbl = Label.new()
-		name_lbl.text = item_ref.name
+		
+		# 1. Formato: "Common IronBoots x 4"
+		name_lbl.text = "%s\nx%d" % [item_ref.name, count]
+		
+		# 2. Alineación
 		name_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		
+		# 3. Color según rareza
+		var text_color = RARITY_COLORS.get(rarity_str, Color.WHITE)
+		name_lbl.add_theme_color_override("font_color", text_color)
+		
+		# Opcional: Hacer la fuente un poco más pequeña si el texto es muy largo
+		# name_lbl.add_theme_font_size_override("font_size", 14)
 		
 		slot.add_child(icon_container)
 		slot.add_child(name_lbl)

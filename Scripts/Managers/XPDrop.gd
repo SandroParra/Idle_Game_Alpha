@@ -36,7 +36,7 @@ func initialize(start_pos: Vector2, ui_target: Vector2, xp: int):
 
 func _on_reached_target():
 	# Llamamos al GameManager para sumar la XP
-	var game_manager = get_node("/root/Game")
+	var game_manager = get_tree().get_first_node_in_group("gamemanager")
 	if game_manager and game_manager.has_method("add_experience"):
 		game_manager.add_experience(xp_amount)
 	else:
