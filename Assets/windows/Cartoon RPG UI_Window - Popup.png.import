@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5nety2tfsvs4"
-path="res://.godot/imported/blackDragon.png-dfa3389f0dd5f97267e0d6cb92aaef01.ctex"
+uid="uid://c71cs3ak71crk"
+path="res://.godot/imported/Cartoon RPG UI_Window - Popup.png-d90c4c3b003fbb4fd9386773c77b6421.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Models/Heroes/BlackDragon/blackDragon.png"
-dest_files=["res://.godot/imported/blackDragon.png-dfa3389f0dd5f97267e0d6cb92aaef01.ctex"]
+source_file="res://Assets/windows/Cartoon RPG UI_Window - Popup.png"
+dest_files=["res://.godot/imported/Cartoon RPG UI_Window - Popup.png-d90c4c3b003fbb4fd9386773c77b6421.ctex"]
 
 [params]
 

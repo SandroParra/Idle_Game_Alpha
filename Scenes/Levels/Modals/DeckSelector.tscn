@@ -1,16 +1,25 @@
-[gd_scene load_steps=9 format=3 uid="uid://dsdu0tkmtm87g"]
+[gd_scene load_steps=15 format=3 uid="uid://dsdu0tkmtm87g"]
 
-[ext_resource type="Texture2D" uid="uid://chl813fh6crc7" path="res://Resources/Game_Icon/icon.svg" id="1_4v777"]
 [ext_resource type="Script" uid="uid://dc2ie7fioid0" path="res://Scripts/UI/DeckSelector.gd" id="1_c82rk"]
 [ext_resource type="Script" uid="uid://fses6prrp6qw" path="res://Scripts/Resources/HeroData.gd" id="2_susjv"]
 [ext_resource type="Resource" uid="uid://c2mffwrbagbge" path="res://Resources/Data/Heroes/BlackDragon.tres" id="3_44i3q"]
 [ext_resource type="Resource" uid="uid://5jm53d3cp8pj" path="res://Resources/Data/Heroes/MaleViking.tres" id="4_4ouvp"]
 [ext_resource type="Resource" uid="uid://b8eiuy2ardfig" path="res://Resources/Data/Heroes/MaleKnight.tres" id="5_4ouvp"]
+[ext_resource type="FontFile" uid="uid://dim8n0o7xn7t7" path="res://Assets/Fonts/Handron-Filled.otf" id="6_eubvj"]
+[ext_resource type="Texture2D" uid="uid://b47m0ewi26op3" path="res://Assets/Buttons/BtnDarkGray.png" id="8_eubvj"]
+[ext_resource type="Texture2D" uid="uid://3627tre514e" path="res://Assets/windows/Cartoon RPG UI_Window - Wide.png" id="8_jlev2"]
 
-[sub_resource type="Theme" id="Theme_44i3q"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rnqs7"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_44i3q"]
-bg_color = Color(0.5535849, 0.57407224, 0.67511475, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_73fuk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jlev2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eubvj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bq5pg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rxuoi"]
 
 [node name="DeckSelector" type="Panel"]
 anchors_preset = 15
@@ -23,15 +32,19 @@ offset_bottom = -337.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme = SubResource("Theme_44i3q")
-theme_override_styles/panel = SubResource("StyleBoxFlat_44i3q")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_rnqs7")
 script = ExtResource("1_c82rk")
 all_available_cards = Array[ExtResource("2_susjv")]([ExtResource("3_44i3q"), ExtResource("4_4ouvp"), ExtResource("5_4ouvp")])
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_right = 848.0
-offset_bottom = 31.0
+offset_left = 2.0
+offset_top = -12.0
+offset_right = 850.0
+offset_bottom = 35.0
+theme_override_fonts/font = ExtResource("6_eubvj")
+theme_override_font_sizes/font_size = 49
+theme_override_styles/focus = SubResource("StyleBoxEmpty_73fuk")
 text = "Select Heroes"
 horizontal_alignment = 1
 
@@ -48,18 +61,45 @@ grow_vertical = 2
 mouse_filter = 2
 columns = 4
 
+[node name="MainWindow" type="TextureRect" parent="."]
+z_index = -2
+layout_mode = 0
+offset_left = -32.0
+offset_top = -42.0
+offset_right = 883.0
+offset_bottom = 466.0
+mouse_filter = 2
+texture = ExtResource("8_jlev2")
+expand_mode = 1
+
+[node name="StartBtn" type="TextureRect" parent="."]
+z_index = -1
+layout_mode = 0
+offset_left = 253.0
+offset_top = 368.0
+offset_right = 571.0
+offset_bottom = 435.0
+texture = ExtResource("8_eubvj")
+expand_mode = 1
+
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = 145.5
-offset_right = 850.0
-offset_bottom = 281.5
+offset_left = 259.0
+offset_top = 146.5
+offset_right = 15.0
+offset_bottom = 280.5
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("6_eubvj")
+theme_override_font_sizes/font_size = 79
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jlev2")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_eubvj")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_bq5pg")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_rxuoi")
 text = "¡A BATALLAR!"
-icon = ExtResource("1_4v777")
 icon_alignment = 1
