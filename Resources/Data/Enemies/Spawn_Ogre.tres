@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SpawnableEnemy" load_steps=3 format=3 uid="uid://db6ts2j1jppg1"]
+
+[ext_resource type="PackedScene" uid="uid://cqesnfnt1lfr1" path="res://Scenes/Units/Enemies/Ogre.tscn" id="1_485t7"]
+[ext_resource type="Script" uid="uid://b5yd8x5su3pmf" path="res://Scripts/Units/SpawnableEnemy.gd" id="1_iewfo"]
+
+[resource]
+script = ExtResource("1_iewfo")
+scene = ExtResource("1_485t7")
+cost = 3
+metadata/_custom_type_script = "uid://b5yd8x5su3pmf"

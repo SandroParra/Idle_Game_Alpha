@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://br3ghjl824j31"
-path="res://.godot/imported/Mythril Helmet.png-b40004b701b27b08526959f53b69242d.ctex"
+uid="uid://y636mvakj45p"
+path="res://.godot/imported/MythrilGloves.png-b9fadf8bce16964dc44da2149ea9c5ce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Items/Mythril Set/Mythril Helmet.png"
-dest_files=["res://.godot/imported/Mythril Helmet.png-b40004b701b27b08526959f53b69242d.ctex"]
+source_file="res://Assets/Items/Mythril Set/MythrilGloves.png"
+dest_files=["res://.godot/imported/MythrilGloves.png-b9fadf8bce16964dc44da2149ea9c5ce.ctex"]
 
 [params]
 

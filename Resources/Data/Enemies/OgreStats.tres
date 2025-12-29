@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_mjyx6")
 name = "Ogre"
-damage = 25
 speed = 25.0
 attack_speed = 50.0
 xp_gain = 10
+weight = 3
 metadata/_custom_type_script = "uid://7uafb3ow5j1i"

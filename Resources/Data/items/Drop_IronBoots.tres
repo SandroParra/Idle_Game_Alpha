@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="DropData" load_steps=4 format=3 uid="uid://ck8qya0bitopb"]
 
-[ext_resource type="Resource" uid="uid://c4t3y2loq8870" path="res://Resources/Data/items/ironBoots.tres" id="1_0pk00"]
+[ext_resource type="Resource" uid="uid://c4t3y2loq8870" path="res://Resources/Data/Items/ironBoots.tres" id="1_0pk00"]
 [ext_resource type="PackedScene" uid="uid://bb8donf702nb6" path="res://Scenes/Levels/Drop/ItemDrop.tscn" id="1_c2emu"]
 [ext_resource type="Script" uid="uid://d4mxj6g31gpjs" path="res://Scripts/Resources/DropData.gd" id="2_0pk00"]
 

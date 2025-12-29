@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bls8vuryqwa2t" path="res://Assets/Items/Dragonic Set/DragonicChest.png" id="1_kakld"]
 [ext_resource type="Script" uid="uid://b3n3gygtty6ko" path="res://Scripts/Resources/ItemData.gd" id="2_ttvkq"]
 
+
 [resource]
 script = ExtResource("2_ttvkq")
 name = "Draconic Chest"

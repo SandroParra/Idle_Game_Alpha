@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://v2dnhokhewsg"
-path="res://.godot/imported/Leather boots.png-21556d15edd9a10ad079db0f25bd5517.ctex"
+uid="uid://dv3dlj3p8m6gc"
+path="res://.godot/imported/IronGloves.png-7e469db3b7142854563e07ea8f09eb10.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Items/Leather Set/Leather boots.png"
-dest_files=["res://.godot/imported/Leather boots.png-21556d15edd9a10ad079db0f25bd5517.ctex"]
+source_file="res://Assets/Items/Iron Set/IronGloves.png"
+dest_files=["res://.godot/imported/IronGloves.png-7e469db3b7142854563e07ea8f09eb10.ctex"]
 
 [params]
 

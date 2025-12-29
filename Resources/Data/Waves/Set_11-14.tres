@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WaveSet" load_steps=5 format=3 uid="uid://ldgq0mwncslb"]
+
+[ext_resource type="Script" uid="uid://b5yd8x5su3pmf" path="res://Scripts/Units/SpawnableEnemy.gd" id="1_335d1"]
+[ext_resource type="Resource" uid="uid://db6ts2j1jppg1" path="res://Resources/Data/Enemies/Spawn_Ogre.tres" id="2_kaq7o"]
+[ext_resource type="Script" uid="uid://bovsh00xh0g3a" path="res://Scripts/Managers/WaveSet.gd" id="2_yf231"]
+[ext_resource type="Resource" uid="uid://buwbll1o2g0ms" path="res://Resources/Data/Enemies/Spawn_BigTick.tres" id="3_bubmp"]
+
+[resource]
+script = ExtResource("2_yf231")
+min_wave = 11
+max_wave = 14
+possible_enemies = Array[ExtResource("1_335d1")]([ExtResource("2_kaq7o"), ExtResource("3_bubmp")])
+metadata/_custom_type_script = "uid://bovsh00xh0g3a"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://blqtjsjjgwxs"]
+[gd_scene load_steps=17 format=3 uid="uid://blqtjsjjgwxs"]
 
 [ext_resource type="Script" uid="uid://jg0e88yfgkeh" path="res://Scripts/Managers/GameManager.gd" id="1_d4uca"]
 [ext_resource type="Texture2D" uid="uid://bmv6pr26ivn6e" path="res://Assets/Maps/Arena_v2.jpg" id="1_hlfm0"]
@@ -7,8 +7,14 @@
 [ext_resource type="PackedScene" uid="uid://dve1ba77dnbh2" path="res://Scenes/Levels/Modals/WaveRewardUI.tscn" id="3_jbbs8"]
 [ext_resource type="PackedScene" uid="uid://djhi3hrqutyni" path="res://Scenes/Units/Enemies/enemySpawner.tscn" id="3_tqpib"]
 [ext_resource type="PackedScene" uid="uid://dsdu0tkmtm87g" path="res://Scenes/Levels/Modals/DeckSelector.tscn" id="5_hdqf5"]
+[ext_resource type="Script" uid="uid://bovsh00xh0g3a" path="res://Scripts/Managers/WaveSet.gd" id="7_47qav"]
 [ext_resource type="Script" uid="uid://vy0fky3xmvb2" path="res://Scripts/UI/EnergyBar.gd" id="8_a0dhi"]
-
+[ext_resource type="Resource" uid="uid://dq2nloc4rukfq" path="res://Resources/Data/Waves/Set_01-04.tres" id="8_ha74h"]
+[ext_resource type="Resource" uid="uid://br2683143ivgf" path="res://Resources/Data/Waves/Set_05.tres" id="9_rw2hy"]
+[ext_resource type="Resource" uid="uid://c5pnrjkr6x0l8" path="res://Resources/Data/Waves/Set_06-09.tres" id="10_m13tg"]
+[ext_resource type="Resource" uid="uid://c7p0kqb6bpwwj" path="res://Resources/Data/Waves/Set_10.tres" id="11_tk7gy"]
+[ext_resource type="Resource" uid="uid://ldgq0mwncslb" path="res://Resources/Data/Waves/Set_11-14.tres" id="12_uwljo"]
+[ext_resource type="Resource" uid="uid://757dr644nxfu" path="res://Resources/Data/Waves/Set_15.tres" id="13_1x72k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qdov3"]
 bg_color = Color(0.1987254, 0.1987254, 0.1987254, 1)
@@ -60,6 +66,7 @@ position = Vector2(3, 4)
 [node name="enemySpawner" parent="Enemies" instance=ExtResource("3_tqpib")]
 position = Vector2(1869, 699)
 scale = Vector2(1, 2)
+wave_sets = Array[ExtResource("7_47qav")]([ExtResource("8_ha74h"), ExtResource("9_rw2hy"), ExtResource("10_m13tg"), ExtResource("11_tk7gy"), ExtResource("12_uwljo"), ExtResource("13_1x72k")])
 
 [node name="Heroes" type="Node2D" parent="." groups=["heroGroup"]]
 y_sort_enabled = true

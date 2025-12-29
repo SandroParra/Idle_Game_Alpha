@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="WaveSet" load_steps=4 format=3 uid="uid://br2683143ivgf"]
+
+[ext_resource type="Script" uid="uid://b5yd8x5su3pmf" path="res://Scripts/Units/SpawnableEnemy.gd" id="1_1kwjv"]
+[ext_resource type="Resource" uid="uid://db6ts2j1jppg1" path="res://Resources/Data/Enemies/Spawn_Ogre.tres" id="2_03mj7"]
+[ext_resource type="Script" uid="uid://bovsh00xh0g3a" path="res://Scripts/Managers/WaveSet.gd" id="2_je2pv"]
+
+[resource]
+script = ExtResource("2_je2pv")
+min_wave = 5
+max_wave = 5
+possible_enemies = Array[ExtResource("1_1kwjv")]([ExtResource("2_03mj7")])
+metadata/_custom_type_script = "uid://bovsh00xh0g3a"

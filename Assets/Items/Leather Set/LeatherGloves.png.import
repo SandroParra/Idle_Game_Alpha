@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqodj5e71aejj"
-path="res://.godot/imported/LeatherArmor.png-bd2af0e3b1ba25228a7de80b756253cf.ctex"
+uid="uid://w7e6t6pw0o4x"
+path="res://.godot/imported/LeatherGloves.png-726bb778be49ec32505dba97596a329d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Items/Leather Set/LeatherArmor.png"
-dest_files=["res://.godot/imported/LeatherArmor.png-bd2af0e3b1ba25228a7de80b756253cf.ctex"]
+source_file="res://Assets/Items/Leather Set/LeatherGloves.png"
+dest_files=["res://.godot/imported/LeatherGloves.png-726bb778be49ec32505dba97596a329d.ctex"]
 
 [params]
 

@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://du8k8bf1t2g0w"]
 
-[ext_resource type="Texture2D" uid="uid://b3avt4qgde71b" path="res://Assets/Items/Dragonic Set/DragonicBoots.png" id="1_l8guh"]
-[ext_resource type="Script" uid="uid://b3n3gygtty6ko" path="res://Scripts/Resources/ItemData.gd" id="2_ww2ha"]
+[ext_resource type="Texture2D" uid="uid://qberl11krmic" path="res://Assets/Items/Dragonic Set/DragonicGloves.png" id="1_i6cbk"]
+[ext_resource type="Script" uid="uid://b3n3gygtty6ko" path="res://Scripts/Resources/ItemData.gd" id="2_vpc1d"]
 
 [resource]
-script = ExtResource("2_ww2ha")
+script = ExtResource("2_vpc1d")
 name = "Draconic Gloves"
-icon = ExtResource("1_l8guh")
+icon = ExtResource("1_i6cbk")
 slot_type = "gloves"
 physical_defense = 50
 health = 100

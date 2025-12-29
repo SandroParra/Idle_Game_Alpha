@@ -371,7 +371,7 @@ func _on_summary_closed():
 	current_wave_loot.clear()
 	clean_arena_items()
 	
-	# 3. Decimos al spawner que arranque la siguiente
+	# Decimos al spawner que arranque la siguiente
 	if spawner and spawner.has_method("start_next_wave"):
 		spawner.start_next_wave()
 	
@@ -383,9 +383,6 @@ func clean_arena_items():
 		item.queue_free()
 	
 	print("Arena limpiada: ", visual_items.size(), " items eliminados.")
-
-
-
 	
 func _on_game_exit_requested():
 	get_tree().change_scene_to_file("res://Scenes/Levels/MainMenu.tscn")

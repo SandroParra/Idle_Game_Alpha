@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1eg00unwg8p0"
-path="res://.godot/imported/ReinforcedLeather helmet.png-e396e258be722431faa5a00daec1c537.ctex"
+uid="uid://cqodj5e71aejj"
+path="res://.godot/imported/LeatherChest.png-d30992c6c81f16a8729112490f696741.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Items/Reinforced Leather Set/ReinforcedLeather helmet.png"
-dest_files=["res://.godot/imported/ReinforcedLeather helmet.png-e396e258be722431faa5a00daec1c537.ctex"]
+source_file="res://Assets/Items/Leather Set/LeatherChest.png"
+dest_files=["res://.godot/imported/LeatherChest.png-d30992c6c81f16a8729112490f696741.ctex"]
 
 [params]
 

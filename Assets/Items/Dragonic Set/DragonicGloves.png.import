@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://40wdygyo8b7m"
-path="res://.godot/imported/Mythril boots.png-24bb9620076c72f83bcffb01852d5d13.ctex"
+uid="uid://qberl11krmic"
+path="res://.godot/imported/DragonicGloves.png-5169251b7af6c813bc5c8e736cc0b328.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Items/Mythril Set/Mythril boots.png"
-dest_files=["res://.godot/imported/Mythril boots.png-24bb9620076c72f83bcffb01852d5d13.ctex"]
+source_file="res://Assets/Items/Dragonic Set/DragonicGloves.png"
+dest_files=["res://.godot/imported/DragonicGloves.png-5169251b7af6c813bc5c8e736cc0b328.ctex"]
 
 [params]
 
