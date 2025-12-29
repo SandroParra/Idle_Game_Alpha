@@ -247,9 +247,6 @@ func _on_frame_changed():
 					if victim and victim.has_method("take_damage"):
 						victim.take_damage(stats.physical_attack)
 
-func get_xp_reward() -> int:
-	return stats.xp_gain
-
 #Agregada instancia de xp dinamico dependiendo de nuevo campo "xp_gain" en las stats del enemigo
 func spawn_xp():
 	var game = get_tree().get_first_node_in_group("gamemanager")

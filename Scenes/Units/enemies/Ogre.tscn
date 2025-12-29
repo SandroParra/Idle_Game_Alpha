@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cqesnfnt1lfr1"]
+[gd_scene load_steps=34 format=3 uid="uid://cqesnfnt1lfr1"]
 
 [ext_resource type="Script" uid="uid://dwrdhcvslj56q" path="res://Scripts/Units/EnemyUnit.gd" id="1_sw6hu"]
 [ext_resource type="Script" uid="uid://d4mxj6g31gpjs" path="res://Scripts/Resources/DropData.gd" id="2_7wv3i"]
@@ -10,9 +10,10 @@
 [ext_resource type="Resource" uid="uid://bobo0yyqb0if0" path="res://Resources/Data/items/Drop_IronChest.tres" id="8_6pd1g"]
 [ext_resource type="Resource" uid="uid://dc7bueyvmg3pt" path="res://Resources/Data/items/Drop_IronPants.tres" id="9_6e3ro"]
 [ext_resource type="Resource" uid="uid://ck8qya0bitopb" path="res://Resources/Data/items/Drop_IronBoots.tres" id="10_s1uvk"]
+[ext_resource type="Resource" uid="uid://bth8hr22aajh8" path="res://Resources/Data/items/Drop_IronGloves.tres" id="11_ejuni"]
 [ext_resource type="Resource" uid="uid://ckknx3dg5d34r" path="res://Resources/Data/Enemies/OgreStats.tres" id="11_g6x6q"]
 [ext_resource type="Texture2D" uid="uid://mhnpcmy5xbu" path="res://Assets/Models/Enemies/cyclops.png" id="12_5rlqe"]
-
+[ext_resource type="Resource" uid="uid://jfn6vqbxytuf" path="res://Resources/Data/items/Drop_DraconicGloves.tres" id="12_aifrt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ux1ep"]
 atlas = ExtResource("12_5rlqe")
@@ -158,7 +159,7 @@ height = 89.816086
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["enemyGroup", "enemy_hurtbox"]]
 script = ExtResource("1_sw6hu")
-possible_drops = Array[ExtResource("2_7wv3i")]([ExtResource("3_ejuni"), ExtResource("4_aifrt"), ExtResource("5_ef4ic"), ExtResource("6_6ky0b"), ExtResource("7_eevpq"), ExtResource("8_6pd1g"), ExtResource("9_6e3ro"), ExtResource("10_s1uvk")])
+possible_drops = Array[ExtResource("2_7wv3i")]([ExtResource("3_ejuni"), ExtResource("4_aifrt"), ExtResource("5_ef4ic"), ExtResource("6_6ky0b"), ExtResource("7_eevpq"), ExtResource("8_6pd1g"), ExtResource("9_6e3ro"), ExtResource("10_s1uvk"), ExtResource("11_ejuni"), ExtResource("12_aifrt")])
 stats = ExtResource("11_g6x6q")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["enemy_hurtbox"]]

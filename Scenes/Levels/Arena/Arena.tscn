@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dsdu0tkmtm87g" path="res://Scenes/Levels/Modals/DeckSelector.tscn" id="5_hdqf5"]
 [ext_resource type="Script" uid="uid://vy0fky3xmvb2" path="res://Scripts/UI/EnergyBar.gd" id="8_a0dhi"]
 
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qdov3"]
 bg_color = Color(0.1987254, 0.1987254, 0.1987254, 1)
 border_width_left = 3

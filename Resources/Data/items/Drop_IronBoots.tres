@@ -4,9 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://bb8donf702nb6" path="res://Scenes/Levels/Drop/ItemDrop.tscn" id="1_c2emu"]
 [ext_resource type="Script" uid="uid://d4mxj6g31gpjs" path="res://Scripts/Resources/DropData.gd" id="2_0pk00"]
 
-
 [resource]
 script = ExtResource("2_0pk00")
 item_scene = ExtResource("1_c2emu")
-drop_chance = 0.15
+drop_chance = 0.25
 item_data = ExtResource("1_0pk00")

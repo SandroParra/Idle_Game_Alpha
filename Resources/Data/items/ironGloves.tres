@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://vk4oinur0vhg"]
+
+[ext_resource type="Texture2D" uid="uid://b8wl7gximdukf" path="res://Assets/Items/Iron Set/IronBoots.png" id="1_6w6n8"]
+[ext_resource type="Script" uid="uid://b3n3gygtty6ko" path="res://Scripts/Resources/ItemData.gd" id="2_vxx52"]
+
+[resource]
+script = ExtResource("2_vxx52")
+name = "Iron Gloves"
+icon = ExtResource("1_6w6n8")
+slot_type = "gloves"
+physical_defense = 50
+health = 100
+metadata/_custom_type_script = "uid://b3n3gygtty6ko"

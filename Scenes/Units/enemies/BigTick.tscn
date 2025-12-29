@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bn5ad10fvd4xq"]
+[gd_scene load_steps=35 format=3 uid="uid://bn5ad10fvd4xq"]
 
 [ext_resource type="Script" uid="uid://dwrdhcvslj56q" path="res://Scripts/Units/EnemyUnit.gd" id="1_4e8cb"]
 [ext_resource type="Texture2D" uid="uid://von3ed1iy7wt" path="res://Assets/Models/Enemies/bigtick.png" id="1_cjsa8"]
@@ -12,7 +12,8 @@
 [ext_resource type="Resource" uid="uid://r3itrck7ypwo" path="res://Resources/Data/items/Drop_IronHelmet.tres" id="7_pnytl"]
 [ext_resource type="Resource" uid="uid://bobo0yyqb0if0" path="res://Resources/Data/items/Drop_IronChest.tres" id="8_sspsk"]
 [ext_resource type="Resource" uid="uid://dc7bueyvmg3pt" path="res://Resources/Data/items/Drop_IronPants.tres" id="9_ns8pv"]
-
+[ext_resource type="Resource" uid="uid://bth8hr22aajh8" path="res://Resources/Data/items/Drop_IronGloves.tres" id="11_ns8pv"]
+[ext_resource type="Resource" uid="uid://jfn6vqbxytuf" path="res://Resources/Data/items/Drop_DraconicGloves.tres" id="12_lpa6c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5okmp"]
 atlas = ExtResource("1_cjsa8")
@@ -170,7 +171,7 @@ size = Vector2(12, 5.5)
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["enemyGroup", "enemy_hurtbox"]]
 script = ExtResource("1_4e8cb")
-possible_drops = Array[ExtResource("4_28f86")]([ExtResource("3_q7njg"), ExtResource("4_uxg0r"), ExtResource("5_b3gmr"), ExtResource("6_tfqu6"), ExtResource("7_pnytl"), ExtResource("8_sspsk"), ExtResource("9_ns8pv"), ExtResource("3_a5gmt")])
+possible_drops = Array[ExtResource("4_28f86")]([ExtResource("3_q7njg"), ExtResource("4_uxg0r"), ExtResource("5_b3gmr"), ExtResource("6_tfqu6"), ExtResource("7_pnytl"), ExtResource("8_sspsk"), ExtResource("9_ns8pv"), ExtResource("3_a5gmt"), ExtResource("11_ns8pv"), ExtResource("12_lpa6c")])
 stats = ExtResource("2_5h2ho")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["enemy_hurtbox"]]

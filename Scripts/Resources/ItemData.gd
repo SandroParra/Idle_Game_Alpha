@@ -5,7 +5,6 @@ class_name ItemData
 @export var name: String = "Item Name"
 @export var icon: Texture2D
 @export var rarity: String = "Common"
-#@export var price: int = 0
 
 @export_group("System")
 # Tipos: boots, chestplate, gloves, helmet, weapon, ring, amulet

@@ -108,53 +108,43 @@ func unequip_item(hero_id, slot):
 # Stats Calculator (Igual que antes)
 func calculate_hero_stats(hero_id: String, base_resource: Resource) -> Dictionary:
 	var totals = {
-		"attack_range": base_resource.attack_range,
 		"health": base_resource.health,
-		"attack": base_resource.attack,
-		"defense": base_resource.defense,
-		"accuracy": base_resource.accuracy,
-		"speed": base_resource.speed,
-		"evasion": base_resource.evasion,
-		"block_rate": base_resource.block_rate,
+		"phyical_attack": base_resource.physical_attack,
+		"magical_attack": base_resource.magical_attack,
+		"phyical_defense": base_resource.phyical_defense,
+		"magical_defense": base_resource.magical_defense,
 		"defense_penetration": base_resource.defense_penetration,
 		"critical_rate": base_resource.critical_rate,
 		"critical_damage": base_resource.critical_damage,
-		"attack_speed": base_resource.attack_speed,
-		"bonus_attack_range": 0,
 		"bonus_health": 0, 
-		"bonus_attack": 0, 
-		"bonus_defense": 0,
-		"bonus_accuracy": 0,
+		"bonus_physical_attack": 0,
+		"bonus_magical_attack": 0,
+		"bonus_physical_defense": 0,
+		"bonus_magical_defense": 0,
 		"bonus_critical_rate": 0,
 		"bonus_critical_damage": 0,
-		"bonus_defense_penetration": 0,
-		"bonus_evasion": 0,
-		"bonus_block_rate": 0		
+		"bonus_defense_penetration": 0
 	}
 	if saved_data.hero_equipment.has(hero_id):
 		var hero_inv = saved_data.hero_equipment[hero_id]["inventory"]
 		for slot in hero_inv:
 			var item = hero_inv[slot]
 			if item is ItemData:
-					totals["bonus_attack_range"] += totals["attack_range"]*item.range_mod
-					totals["bonus_health"] += totals["health"]*item.health + item.health
-					totals["bonus_attack"] += totals["attack"]*item.attack_mod + item.attack
-					totals["bonus_defense"] += totals["defense"]*item.defense_mod + item.defense
-					totals["bonus_accuracy"] += item.accuracy
+					totals["bonus_health"] += totals["health"]*item.health_mod + item.health
+					totals["bonus_physical_attack"] += totals["physical_attack"]*item.attack_mod + item.physical_attack
+					totals["bonus_magical_attack"] += totals["magical_attack"]*item.attack_mod + item.magical_attack
+					totals["bonus_physical_defense"] += totals["physical_defense"]*item.defense_mod + item.physical_defense
+					totals["bonus_magical_defense"] += totals["magical_defense"]*item.defense_mod + item.magical_defense
 					totals["bonus_critical_rate"] += item.critical_rate
 					totals["bonus_critical_damage"] += item.critical_damage
 					totals["bonus_defense_penetration"] += item.defense_penetration
-					totals["bonus_evasion"] += item.evasion
-					totals["bonus_block_rate"] += item.block_rate
 
-	totals["attack_range"] += totals["bonus_attack_range"]
 	totals["health"] += totals["bonus_health"]
-	totals["attack"] += totals["bonus_attack"]
-	totals["defense"] += totals["bonus_defense"]
-	totals["accuracy"] += totals["bonus_accuracy"]
+	totals["physical_attack"] += totals["bonus_physical_attack"]
+	totals["magical_attack"] += totals["bonus_magical_attack"]
+	totals["physical_defense"] += totals["bonus_physical_defense"]
+	totals["magical_defense"] += totals["bonus_magical_defense"]
 	totals["critical_rate"] += totals["bonus_critical_rate"]
 	totals["critical_damage"] += totals["bonus_critical_damage"]
 	totals["defense_penetration"] += totals["bonus_defense_penetration"]
-	totals["evasion"] += totals["bonus_evasion"]
-	totals["block_rate"] += totals["bonus_block_rate"]
 	return totals

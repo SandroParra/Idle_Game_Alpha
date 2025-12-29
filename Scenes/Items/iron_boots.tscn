@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c2umm1x32baqp"]
 
-[ext_resource type="Script" uid="uid://dm7738q8rigxc" path="res://Scripts/Resources/DropData.gd" id="1_7e5x0"]
+[ext_resource type="Script" uid="uid://d4mxj6g31gpjs" path="res://Scripts/Resources/DropData.gd" id="1_7e5x0"]
 [ext_resource type="Texture2D" uid="uid://ds2s0tkxgyden" path="res://Assets/Items/ironBoots.png" id="2_8ykqe"]
 
 [node name="ironBoots" type="Node2D"]
