@@ -323,8 +323,15 @@ func calculate_upgrade_cost(data: HeroData) -> int:
 	return current_lvl * 30 # Ejemplo: Nivel 1 cuesta 30, Nivel 2 cuesta 60
 
 func register_drop(data: DropData):
-	#print("Item recolectado: ", data.item_data.name)
+	# 1. Lo agregamos a la lista TEMPORAL solo para mostrarlo en el resumen visual al final
 	current_wave_loot.append(data)
+	
+	# 2. GUARDADO INMEDIATO (PERSISTENTE)
+	# Guardamos el item en la BD y en el disco ahora mismo.
+	if data.item_data:
+		print("Drop seguro: Guardando ", data.item_data.name, " inmediatamente.")
+		PlayerData.add_item_to_bag(data.item_data)
+		# Nota: PlayerData.add_item_to_bag ya llama a save_game() internamente.
 
 func _on_wave_completed():
 	if is_normal_mode:
@@ -361,10 +368,6 @@ func show_wave_summary(is_final_game: bool = false):
 		_on_summary_closed()
 
 func _on_summary_closed():
-	# 1. GUARDAR LOOT EN INVENTARIO GLOBAL
-	print("Guardando ", current_wave_loot.size(), " items en el inventario...")
-	process_current_loot()
-	# 2. Limpiamos la lista para la nueva ola
 	current_wave_loot.clear()
 	clean_arena_items()
 	
@@ -382,19 +385,9 @@ func clean_arena_items():
 	print("Arena limpiada: ", visual_items.size(), " items eliminados.")
 
 
-func process_current_loot():
-	print("Procesando loot antes de salir/continuar...")
-	for drop in current_wave_loot:
-		if drop.item_data:
-			PlayerData.add_item_to_bag(drop.item_data)
-			print("Guardado item real: ", drop.item_data.name)
-	# Guardamos inmediatamente en disco para no perder nada
-	PlayerData.save_game()
+
 	
 func _on_game_exit_requested():
-	# 1. Guardamos los items de ESTA ola
-	process_current_loot()
-	
 	get_tree().change_scene_to_file("res://Scenes/Levels/MainMenu.tscn")
 
 func clear_living_enemies():
