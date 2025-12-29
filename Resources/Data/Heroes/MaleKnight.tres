@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://w3evkrx831dq" path="res://Assets/Skills/skill icon 79.png" id="2_qss7m"]
 [ext_resource type="Texture2D" uid="uid://bnp4bw0b8dmf6" path="res://Assets/UI/MaleKnight/MaleKnight.png" id="3_qss7m"]
 [ext_resource type="Script" uid="uid://fses6prrp6qw" path="res://Scripts/Resources/HeroData.gd" id="4_p5ybc"]
-[ext_resource type="PackedScene" uid="uid://bfl57530v6vqi" path="res://Scenes/Units/heroes/MaleKnight.tscn" id="5_rlgbn"]
+[ext_resource type="PackedScene" uid="uid://bfl57530v6vqi" path="res://Scenes/Units/Heroes/MaleKnight.tscn" id="5_rlgbn"]
 
 [sub_resource type="Resource" id="Resource_xnkdl"]
 script = ExtResource("1_qss7m")

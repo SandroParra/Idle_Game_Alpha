@@ -4,8 +4,8 @@ signal exit_with_loot_requested
 signal continue_pressed
 
 @export var grid: Container 
-@onready var continue_btn = $Panel/ContinueButton
-@onready var exit_btn = $Panel/ExitButton
+@onready var continue_btn = $Panel/ContinueBtn/ContinueButton
+@onready var exit_btn = $Panel/ExitBtn/ExitButton
 
 # Diccionario de colores para el texto
 const RARITY_COLORS = {

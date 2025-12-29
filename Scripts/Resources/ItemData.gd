@@ -104,8 +104,9 @@ const STATS_ATTACK = ["attack_mod", "physical_attack", "magical_attack", "critic
 const STATS_DEFENSE = ["physical_defense", "magical_defense", "defense_mod", "health", "health_mod"]
 
 # Grupos de Slots
-const SLOTS_ARMOR = ["boots", "chestplate", "helmet"] # Gloves tiene reglas especiales en Uncommon
+const SLOTS_ARMOR = ["boots", "chestplate", "helmet"]
 const SLOTS_JEWELRY_WEAPON = ["weapon", "ring", "amulet"]
+const SLOTS_MIXED = ["pants", "gloves"]
 
 func create_instance(rarity_level: String) -> ItemData:
 	var new_item = self.duplicate()
@@ -148,7 +149,7 @@ func _pick_stats_based_on_rules(slot: String, rarity: String, count: int) -> Arr
 	
 	# --- REGLAS PARA COMMON (1 Stat) ---
 	if rarity == "Common":
-		if slot in SLOTS_ARMOR or slot == "gloves":
+		if slot in SLOTS_ARMOR or SLOTS_MIXED:
 			picked.append(STATS_DEFENSE.pick_random()) # Regla 6
 		elif slot in SLOTS_JEWELRY_WEAPON:
 			picked.append(STATS_ATTACK.pick_random()) # Regla 7
@@ -161,7 +162,7 @@ func _pick_stats_based_on_rules(slot: String, rarity: String, count: int) -> Arr
 		elif slot in SLOTS_JEWELRY_WEAPON: # Weapon, Ring, Amulet (Regla 9)
 			picked = _pick_unique_from_pool(STATS_ATTACK, 2)
 			
-		elif slot == "gloves": # Regla 10 (Especial)
+		elif slot in SLOTS_MIXED: # Regla 10 (Especial)
 			# 1er stat: Defensa
 			var stat_1 = STATS_DEFENSE.pick_random()
 			picked.append(stat_1)

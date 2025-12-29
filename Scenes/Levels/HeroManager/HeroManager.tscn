@@ -45,11 +45,11 @@ expand_mode = 2
 stretch_mode = 2
 
 [node name="TopBar" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 845.0
-offset_top = 915.0
-offset_right = 1101.0
-offset_bottom = 983.0
+layout_mode = 1
+offset_left = 837.0
+offset_top = 995.0
+offset_right = 1093.0
+offset_bottom = 1063.0
 alignment = 1
 
 [node name="Prev" type="Button" parent="TopBar"]
@@ -62,10 +62,10 @@ text = "Next >>"
 
 [node name="MainArea" type="VBoxContainer" parent="."]
 layout_mode = 1
-offset_left = 101.0
-offset_top = 101.0
-offset_right = 938.0
-offset_bottom = 857.0
+offset_left = 186.0
+offset_top = 56.0
+offset_right = 831.0
+offset_bottom = 877.0
 
 [node name="HeroName" type="Label" parent="MainArea"]
 layout_mode = 2
@@ -199,10 +199,10 @@ text = "Facet 3"
 
 [node name="InventoryPanel" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 1051.0
-offset_top = 148.0
-offset_right = 1751.0
-offset_bottom = 848.0
+offset_left = 1003.0
+offset_top = 81.0
+offset_right = 1703.0
+offset_bottom = 781.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="InventoryPanel"]
 layout_mode = 0
@@ -232,12 +232,8 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 columns = 8
 
-[node name="CloseButton" type="Button" parent="InventoryPanel/VBoxContainer"]
-layout_mode = 2
-text = "Close"
-
 [node name="UnequipButton" type="Button" parent="InventoryPanel/VBoxContainer"]
-visible = false
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [node name="BackButton" type="Button" parent="."]
@@ -251,10 +247,10 @@ text = "Back to Main Menu"
 [node name="ComparisonModal" type="Panel" parent="."]
 visible = false
 layout_mode = 1
-offset_left = 1101.0
-offset_top = 198.0
-offset_right = 1701.0
-offset_bottom = 798.0
+offset_left = 1083.0
+offset_top = 276.0
+offset_right = 1658.0
+offset_bottom = 833.0
 
 [node name="Title" type="Label" parent="ComparisonModal"]
 layout_mode = 1
@@ -278,7 +274,7 @@ anchor_bottom = 0.5
 offset_left = 1.0
 offset_top = -252.0
 offset_right = 1.0
-offset_bottom = 293.0
+offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -286,6 +282,7 @@ grow_vertical = 2
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 6
+size_flags_vertical = 0
 
 [node name="Label" type="Label" parent="ComparisonModal/HBoxContainer/LeftPanel"]
 layout_mode = 2
@@ -299,6 +296,7 @@ horizontal_alignment = 1
 [node name="EqItemIcon" type="TextureRect" parent="ComparisonModal/HBoxContainer/LeftPanel"]
 custom_minimum_size = Vector2(125, 125)
 layout_mode = 2
+size_flags_vertical = 0
 expand_mode = 1
 stretch_mode = 4
 
@@ -318,6 +316,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 6
+size_flags_vertical = 0
 
 [node name="Label" type="Label" parent="ComparisonModal/HBoxContainer/RightPanel"]
 layout_mode = 2
@@ -349,10 +348,8 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 2.0
-offset_top = 304.0
-offset_right = 2.0
-offset_bottom = 335.0
+offset_top = 282.5
+offset_bottom = 313.5
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1

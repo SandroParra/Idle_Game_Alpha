@@ -68,12 +68,14 @@ func _ready():
 
 	# 3. NUEVO: Conectar botones del panel de inventario
 	if btn_clear_filter:
-		btn_clear_filter.pressed.connect(_on_clear_filter_pressed)
-		btn_clear_filter.hide() # Oculto al inicio porque mostramos todo
+		if not btn_clear_filter.pressed.is_connected(_on_clear_filter_pressed):
+			btn_clear_filter.pressed.connect(_on_clear_filter_pressed)
+		btn_clear_filter.hide() 
 		
 	if btn_unequip_fixed:
-		btn_unequip_fixed.pressed.connect(_on_unequip_item)
-		btn_unequip_fixed.hide() # Solo visible cuando hay filtro
+		if not btn_unequip_fixed.pressed.is_connected(_on_unequip_item):
+			btn_unequip_fixed.pressed.connect(_on_unequip_item)
+		btn_unequip_fixed.hide()
 
 	if back_btn: back_btn.pressed.connect(_on_back_pressed)
 	
@@ -269,14 +271,12 @@ func _on_item_selected_from_grid(item: ItemData):
 # ==============================================================================
 
 func show_comparison_modal(new_item: ItemData, slot_name: String):
-	# Importante: Guardamos el slot que se va a modificar (por si venimos del filtro general)
-	active_slot_filter = slot_name 
-	
+	var slot_to_compare = slot_name
 	var current_hero_id = hero_ids[current_hero_index]
 	var current_inv = PlayerData.heroes_data[current_hero_id]["inventory"]
-	var equipped_item = current_inv.get(slot_name)
+	var equipped_item = current_inv.get(slot_to_compare)
 	
-	# Llenar lado Izquierdo (Equipado)
+# Llenar lado Izquierdo (Equipado)
 	if equipped_item:
 		left_name.text = equipped_item.name
 		left_icon.texture = equipped_item.icon
@@ -298,7 +298,6 @@ func show_comparison_modal(new_item: ItemData, slot_name: String):
 		right_stats.text = generate_comparison_text(equipped_item, new_item)
 		
 	comparison_modal.show()
-	# NO ocultamos inv_panel, queremos que siga viéndose atrás
 
 func _on_confirm_equip():
 	if item_pending_equip == null: return
@@ -327,10 +326,23 @@ func _on_unequip_item():
 	if active_slot_filter == "": return
 	
 	var current_id = hero_ids[current_hero_index]
+	
+	# 1. Mover item del héroe a la bolsa global
 	PlayerData.unequip_item(current_id, active_slot_filter)
 	
+	# 2. Actualizar el Paper Doll (lado izquierdo) para que se vea vacío
 	update_ui()
-	update_unequip_button_state() # Ocultar el botón si ya no hay nada
+	
+	# 3. Refrescar la grilla para ver el item que acaba de caer ---
+	# Esto vuelve a leer el inventario global y dibuja el botón del item
+	refresh_inventory_grid(active_slot_filter)
+
+	# update_unequip_button_state() <-- Ya no hace falta llamarlo manual, refresh_inventory_grid lo hace
+	
+	# 4. Cerrar comparación si estaba abierta (para evitar estados raros)
+	comparison_modal.hide()
+	if item_pending_equip: item_pending_equip = null
+	
 	PlayerData.save_game()
 
 # --- HELPERS DE TEXTO ---

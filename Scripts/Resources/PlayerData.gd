@@ -7,7 +7,7 @@ const SAVE_PATH = "user://savegame.tres"
 var saved_data: SaveGame
 
 const SLOTS = [
-	"helmet", "amulet", "chest", "gloves", 
+	"helmet", "amulet", "chestplate", "gloves", 
 	"bracelet", "left_ring", "right_ring", 
 	"belt", "pants", "boots","left_weapon", "right_weapon"
 ]
