@@ -109,9 +109,9 @@ func unequip_item(hero_id, slot):
 func calculate_hero_stats(hero_id: String, base_resource: Resource) -> Dictionary:
 	var totals = {
 		"health": base_resource.health,
-		"phyical_attack": base_resource.physical_attack,
+		"physical_attack": base_resource.physical_attack,
 		"magical_attack": base_resource.magical_attack,
-		"phyical_defense": base_resource.phyical_defense,
+		"physical_defense": base_resource.physical_defense,
 		"magical_defense": base_resource.magical_defense,
 		"defense_penetration": base_resource.defense_penetration,
 		"critical_rate": base_resource.critical_rate,

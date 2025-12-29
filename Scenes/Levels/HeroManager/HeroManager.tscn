@@ -1,17 +1,26 @@
-[gd_scene load_steps=12 format=3 uid="uid://d2ydy1abbjh0j"]
+[gd_scene load_steps=15 format=3 uid="uid://d2ydy1abbjh0j"]
 
 [ext_resource type="Texture2D" uid="uid://cm4nxx7rrrt3a" path="res://Assets/Backgrounds/HeroManager.jpg" id="1_un4wi"]
 [ext_resource type="Script" uid="uid://ohrwqodlyyya" path="res://Scripts/Managers/HeroManager.gd" id="1_uw58c"]
 [ext_resource type="FontFile" uid="uid://dim8n0o7xn7t7" path="res://Assets/Fonts/Handron-Filled.otf" id="3_5aa8q"]
-[ext_resource type="Texture2D" uid="uid://bsto42gb8qq5k" path="res://Assets/windows/Cartoon RPG UI_Window - Tall.png" id="5_y4eqm"]
-[ext_resource type="Texture2D" uid="uid://d2xkt15t6h8u0" path="res://Assets/windows/Cartoon RPG UI_Slot - Avatar.png" id="6_mi8lm"]
-[ext_resource type="Texture2D" uid="uid://c83a84hr13nrj" path="res://Assets/windows/Cartoon RPG UI_Slot - Armor.png" id="7_8iytd"]
-[ext_resource type="Texture2D" uid="uid://c76luxp7ipqqs" path="res://Assets/windows/Cartoon RPG UI_Slot - Weapon.png" id="8_djdfy"]
+[ext_resource type="Texture2D" uid="uid://bsto42gb8qq5k" path="res://Assets/Windows/Cartoon RPG UI_Window - Tall.png" id="5_y4eqm"]
+[ext_resource type="Texture2D" uid="uid://d2xkt15t6h8u0" path="res://Assets/Windows/Cartoon RPG UI_Slot - Avatar.png" id="6_mi8lm"]
+[ext_resource type="Texture2D" uid="uid://c83a84hr13nrj" path="res://Assets/Windows/Cartoon RPG UI_Slot - Armor.png" id="7_8iytd"]
+[ext_resource type="Texture2D" uid="uid://c76luxp7ipqqs" path="res://Assets/Windows/Cartoon RPG UI_Slot - Weapon.png" id="8_djdfy"]
 [ext_resource type="Texture2D" uid="uid://omxi35x86pgy" path="res://Assets/Backgrounds/Box_Background.png" id="9_5aa8q"]
-[ext_resource type="Texture2D" uid="uid://bdbmllklwucd4" path="res://Assets/windows/Cartoon RPG UI_Slot - Amulet.png" id="9_ya0k1"]
+[ext_resource type="Texture2D" uid="uid://bdbmllklwucd4" path="res://Assets/Windows/Cartoon RPG UI_Slot - Amulet.png" id="9_ya0k1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y4eqm"]
 texture = ExtResource("9_5aa8q")
+
+[sub_resource type="LabelSettings" id="LabelSettings_5aa8q"]
+font_size = 21
+
+[sub_resource type="LabelSettings" id="LabelSettings_y4eqm"]
+font_size = 22
+
+[sub_resource type="LabelSettings" id="LabelSettings_mi8lm"]
+font_size = 22
 
 [sub_resource type="LabelSettings" id="LabelSettings_7rcuf"]
 font_size = 18
@@ -19,7 +28,7 @@ font_color = Color(0.36015666, 0.75987715, 0.6738751, 1)
 shadow_size = 3
 shadow_color = Color(0.47382104, 0.75753784, 0.41767618, 0)
 
-[node name="HeroManager" type="Control" node_paths=PackedStringArray("hero_name_label", "facet_buttons", "inventory_slots_ui", "btn_prev", "btn_next", "inv_panel", "inv_grid", "inv_title", "btn_clear_filter", "btn_unequip_fixed", "comparison_modal", "comp_equip_btn", "comp_cancel_btn", "left_icon", "left_name", "left_stats", "left_rarity", "right_icon", "right_name", "right_stats", "right_rarity")]
+[node name="HeroManager" type="Control" node_paths=PackedStringArray("hero_name_label", "facet_buttons", "inventory_slots_ui", "btn_prev", "btn_next", "inv_panel", "inv_grid", "inv_title", "btn_clear_filter", "btn_unequip_fixed", "comparison_modal", "comp_equip_btn", "comp_cancel_btn", "left_icon", "left_name", "left_stats", "left_rarity", "right_icon", "right_name", "right_stats", "right_rarity", "hero_portrait", "lbl_health", "lbl_phys_atk", "lbl_magic_atk", "lbl_phys_def", "lbl_magic_def", "lbl_crit_rate", "lbl_crit_dmg", "lbl_def_pen")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_uw58c")
@@ -44,6 +53,15 @@ right_icon = NodePath("ComparisonModal/HBoxContainer/RightPanel/NewItemIcon")
 right_name = NodePath("ComparisonModal/HBoxContainer/RightPanel/NewItemName")
 right_stats = NodePath("ComparisonModal/HBoxContainer/RightPanel/NewItemStats")
 right_rarity = NodePath("ComparisonModal/HBoxContainer/RightPanel/Label")
+hero_portrait = NodePath("MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame/HeroPortrait")
+lbl_health = NodePath("MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame/HealthText/HealthNumber")
+lbl_phys_atk = NodePath("MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame/PhysicalAtkText/PhysicalAtkNumber")
+lbl_magic_atk = NodePath("MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame/MagicalAtkText/MagicalAtkNumber")
+lbl_phys_def = NodePath("MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame/PhyisicalDefText/PhyisicalDefNumber")
+lbl_magic_def = NodePath("MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame/MagicalDefenseText/MagicalDefenseNumber")
+lbl_crit_rate = NodePath("MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame/CritRateText/CritRateNumber")
+lbl_crit_dmg = NodePath("MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame/CritDamageText/CritDamageNumber")
+lbl_def_pen = NodePath("MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame/DefensePenText/DefensePenNumber")
 
 [node name="Background" type="TextureRect" parent="."]
 visible = false
@@ -57,10 +75,10 @@ stretch_mode = 2
 
 [node name="TopBar" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 749.0
-offset_top = 989.0
-offset_right = 1144.0
-offset_bottom = 1057.0
+offset_left = 803.0
+offset_top = 939.0
+offset_right = 1198.0
+offset_bottom = 1007.0
 alignment = 1
 
 [node name="Prev" type="Button" parent="TopBar"]
@@ -109,6 +127,18 @@ offset_top = 216.0
 offset_right = 505.0
 offset_bottom = 494.0
 texture = ExtResource("6_mi8lm")
+
+[node name="HeroPortrait" type="TextureRect" parent="MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.072000004
+anchor_bottom = 0.072000004
+offset_left = 23.0
+offset_top = 24.0
+offset_right = 232.984
+offset_bottom = 233.984
+expand_mode = 1
+stretch_mode = 5
 
 [node name="ArmorFrame" type="TextureRect" parent="MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame"]
 layout_mode = 0
@@ -192,6 +222,7 @@ texture = ExtResource("9_ya0k1")
 expand_mode = 1
 
 [node name="DefenseModText" type="Label" parent="MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame"]
+visible = false
 layout_mode = 0
 offset_left = 166.0
 offset_top = 480.0
@@ -199,7 +230,7 @@ offset_right = 342.0
 offset_bottom = 504.0
 theme_override_fonts/font = ExtResource("3_5aa8q")
 theme_override_font_sizes/font_size = 25
-text = "Defense Mod.:"
+text = "Defense Mod:"
 
 [node name="DefenseModNumber" type="Label" parent="MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame/DefenseModText"]
 layout_mode = 0
@@ -213,12 +244,35 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_y4eqm")
 text = "0"
 horizontal_alignment = 1
 
+[node name="DefensePenText" type="Label" parent="MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame"]
+layout_mode = 0
+offset_left = 177.0
+offset_top = 538.0
+offset_right = 353.0
+offset_bottom = 562.0
+theme_override_fonts/font = ExtResource("3_5aa8q")
+theme_override_font_sizes/font_size = 25
+text = "Defense Pen:"
+
+[node name="DefensePenNumber" type="Label" parent="MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame/DefensePenText"]
+layout_mode = 0
+offset_left = 155.0
+offset_top = -1.0
+offset_right = 261.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_5aa8q")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxTexture_y4eqm")
+text = "0"
+label_settings = SubResource("LabelSettings_5aa8q")
+horizontal_alignment = 1
+
 [node name="CritDamageText" type="Label" parent="MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame"]
 layout_mode = 0
-offset_left = -170.0
-offset_top = 543.0
-offset_right = -4.0
-offset_bottom = 567.0
+offset_left = -169.0
+offset_top = 536.0
+offset_right = -3.0
+offset_bottom = 560.0
 theme_override_fonts/font = ExtResource("3_5aa8q")
 theme_override_font_sizes/font_size = 25
 text = "Crit. Damage:"
@@ -233,14 +287,15 @@ theme_override_fonts/font = ExtResource("3_5aa8q")
 theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = SubResource("StyleBoxTexture_y4eqm")
 text = "0"
+label_settings = SubResource("LabelSettings_y4eqm")
 horizontal_alignment = 1
 
 [node name="MagicalDefenseText" type="Label" parent="MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame"]
 layout_mode = 0
-offset_left = 164.0
-offset_top = 453.0
-offset_right = 340.0
-offset_bottom = 477.0
+offset_left = 162.0
+offset_top = 469.0
+offset_right = 338.0
+offset_bottom = 493.0
 theme_override_fonts/font = ExtResource("3_5aa8q")
 theme_override_font_sizes/font_size = 25
 text = "Mag. Defense:"
@@ -259,10 +314,10 @@ horizontal_alignment = 1
 
 [node name="CritRateText" type="Label" parent="MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame"]
 layout_mode = 0
-offset_left = -131.0
-offset_top = 516.0
-offset_right = -5.0
-offset_bottom = 540.0
+offset_left = -130.0
+offset_top = 501.0
+offset_right = -4.0
+offset_bottom = 525.0
 theme_override_fonts/font = ExtResource("3_5aa8q")
 theme_override_font_sizes/font_size = 25
 text = "Crit. Rate:"
@@ -277,14 +332,15 @@ theme_override_fonts/font = ExtResource("3_5aa8q")
 theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = SubResource("StyleBoxTexture_y4eqm")
 text = "0"
+label_settings = SubResource("LabelSettings_mi8lm")
 horizontal_alignment = 1
 
 [node name="PhyisicalDefText" type="Label" parent="MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame"]
 layout_mode = 0
-offset_left = 158.0
-offset_top = 426.0
-offset_right = 334.0
-offset_bottom = 450.0
+offset_left = 155.0
+offset_top = 430.0
+offset_right = 331.0
+offset_bottom = 454.0
 theme_override_fonts/font = ExtResource("3_5aa8q")
 theme_override_font_sizes/font_size = 25
 text = "Phys. Defense:"
@@ -325,10 +381,10 @@ horizontal_alignment = 1
 
 [node name="MagicalAtkText" type="Label" parent="MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame"]
 layout_mode = 0
-offset_left = -163.0
-offset_top = 457.0
-offset_right = -3.0
-offset_bottom = 481.0
+offset_left = -162.0
+offset_top = 468.0
+offset_right = -2.0
+offset_bottom = 492.0
 theme_override_fonts/font = ExtResource("3_5aa8q")
 theme_override_font_sizes/font_size = 25
 text = "Mag. Attack:"
@@ -346,6 +402,7 @@ text = "0"
 horizontal_alignment = 1
 
 [node name="AttackModText" type="Label" parent="MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame"]
+visible = false
 layout_mode = 0
 offset_left = -159.0
 offset_top = 488.0
@@ -369,10 +426,10 @@ horizontal_alignment = 1
 
 [node name="HealthText" type="Label" parent="MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame"]
 layout_mode = 0
-offset_left = 243.0
-offset_top = 508.0
-offset_right = 342.0
-offset_bottom = 532.0
+offset_left = 242.0
+offset_top = 505.0
+offset_right = 341.0
+offset_bottom = 529.0
 theme_override_fonts/font = ExtResource("3_5aa8q")
 theme_override_font_sizes/font_size = 25
 text = "HEALTH: "
@@ -390,6 +447,7 @@ text = "0"
 horizontal_alignment = 1
 
 [node name="HealthModText" type="Label" parent="MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame"]
+visible = false
 layout_mode = 0
 offset_left = 183.0
 offset_top = 541.0
@@ -508,7 +566,7 @@ layout_mode = 0
 offset_left = 213.0
 offset_top = 884.0
 offset_right = 863.0
-offset_bottom = 984.0
+offset_bottom = 953.0
 
 [node name="Innate Facets" type="Label" parent="Facets"]
 layout_mode = 2

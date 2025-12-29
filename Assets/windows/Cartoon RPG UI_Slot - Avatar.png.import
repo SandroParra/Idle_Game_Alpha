@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d2xkt15t6h8u0"
-path="res://.godot/imported/Cartoon RPG UI_Slot - Avatar.png-0a5873769238b7e58c8f1e9829dd9f1f.ctex"
+path="res://.godot/imported/Cartoon RPG UI_Slot - Avatar.png-6af7ebf54b395e4c6a513c620f4d0715.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/windows/Cartoon RPG UI_Slot - Avatar.png"
-dest_files=["res://.godot/imported/Cartoon RPG UI_Slot - Avatar.png-0a5873769238b7e58c8f1e9829dd9f1f.ctex"]
+source_file="res://Assets/Windows/Cartoon RPG UI_Slot - Avatar.png"
+dest_files=["res://.godot/imported/Cartoon RPG UI_Slot - Avatar.png-6af7ebf54b395e4c6a513c620f4d0715.ctex"]
 
 [params]
 

@@ -7,17 +7,18 @@ extends Resource
 @export var unit_scene: PackedScene  # La escena del personaje (Unit.tscn)
 
 @export_group("Stats")
-@export var cost: int = 3
+@export var cost: int = 1
 @export var health: int = 100
-@export var attack: int = 15
-@export var accuracy: int = 0
+@export var physical_attack: int = 15
+@export var magical_attack: int = 15
+#@export var accuracy: int = 0
 @export var speed: float = 50.0     # Velocidad en píxeles/segundo
 @export var attack_range: float = 50.0
 @export var physical_defense: float = 10.0
 @export var magical_defense: float = 10.0
-@export var evasion: float = 0.0
-@export var block_rate: float = 0.0
-@export var penetration: float = 0.0
+#@export var evasion: float = 0.0
+#@export var block_rate: float = 0.0
+@export var defense_penetration: float = 0.0
 @export var critical_rate: float = 5.0
 @export var critical_damage: float = 50.0
 @export var attack_speed: float = 100.0

@@ -40,6 +40,24 @@ var item_pending_equip: ItemData = null
 @export var right_stats: RichTextLabel
 @export var right_rarity: Label
 
+# --- IMAGEN DEL HEROE ---
+@export_group("Hero Portrait")
+@export var hero_portrait: TextureRect
+
+# --- REFERENCIAS A STATS ---
+@export_group("Hero Stats Labels")
+@export var lbl_health: Label
+@export var lbl_phys_atk: Label
+@export var lbl_magic_atk: Label
+@export var lbl_phys_def: Label
+@export var lbl_magic_def: Label
+@export var lbl_crit_rate: Label
+@export var lbl_crit_dmg: Label
+@export var lbl_def_pen: Label
+# Nota: PlayerData devuelve el total calculado, no el % de mod separado.
+
+
+
 # Recursos
 var hero_resources = {
 	"BlackDragon": preload("res://Resources/Data/Heroes/BlackDragon.tres"),
@@ -101,6 +119,20 @@ func update_ui():
 	# 1. Nombre
 	if hero_name_label: hero_name_label.text = current_res.name
 	
+	if hero_portrait:
+		# Asumimos que hero_ids (ej. "BlackDragon") ya viene sin espacios.
+		# Si tus IDs tuvieran espacios, usaríamos: var folder_name = current_id.replace(" ", "")
+		
+		var path = "res://Assets/UI/%s/%s.png" % [current_id, current_id]
+		
+		# Verificamos si existe la imagen para evitar errores rojos
+		if ResourceLoader.exists(path):
+			var texture = load(path)
+			hero_portrait.texture = texture
+		else:
+			print("ADVERTENCIA: No se encontró imagen de héroe en: ", path)
+			hero_portrait.texture = null # O una imagen por defecto
+			
 	# 2. Paper Doll (Lado Izquierdo)
 	var inv_data = current_data["inventory"]
 	var slot_names = PlayerData.SLOTS
@@ -128,7 +160,7 @@ func update_ui():
 					ui_slot.texture_normal = null # Imagen vacía
 					ui_slot.tooltip_text = slot_name
 	
-	# 3. Facetas (Sin cambios)
+	# 3. Facetas
 	var active_facet_idx = current_data.get("selected_facet_index", 0)
 	for i in range(facet_buttons.size()):
 		if i < current_res.available_facets.size():
@@ -146,7 +178,49 @@ func update_ui():
 			facet_buttons[i].pressed.connect(_on_facet_selected.bind(i, current_id))
 		else:
 			facet_buttons[i].hide()
+	
+	# ACTUALIZAR STATS NUMÉRICOS (NUEVO)
+	update_hero_stats_labels(current_id, current_res)
 
+func update_hero_stats_labels(hero_id: String, base_res: Resource):
+	# Pedimos a PlayerData que calcule todo (Base + Items)
+	var stats = PlayerData.calculate_hero_stats(hero_id, base_res)
+	
+	# Asignamos a los labels si existen (chequeo de seguridad)
+	if lbl_health:
+		var val_health = stats["health"] 
+		lbl_health.text = str(int(ceil(val_health)))
+	
+	if lbl_phys_atk:
+		var val_physical_attack = stats["physical_attack"]
+		lbl_phys_atk.text = str(int(ceil(val_physical_attack)))
+		 
+	if lbl_magic_atk: 
+		var val_magical_attack = stats["magical_attack"]
+		lbl_magic_atk.text = str(int(ceil(val_magical_attack)))
+	
+	if lbl_phys_def: 
+		var val_physical_defense = stats["physical_defense"]
+		lbl_phys_def.text = str(int(ceil(val_physical_defense)))
+		
+	if lbl_magic_def: 
+		var val_magical_defense = stats["magical_defense"]
+		lbl_magic_def.text = str(int(ceil(val_magical_defense)))
+	
+# --- PORCENTAJES --- EXCEPCIÓN: Critical Rate con 1 decimal (Ej: 15.5%)
+	if lbl_crit_rate: 
+		# "%.1f" fuerza 1 decimal
+		lbl_crit_rate.text = "%.1f%%" % (stats["critical_rate"])
+		
+	# Defense Penetration: Redondeado hacia arriba sin decimales (Ej: 10.1% -> 11%)
+	if lbl_def_pen: 
+		var val = stats["defense_penetration"]
+		lbl_def_pen.text = str(int(ceil(val))) + "%"
+		
+	# Crit Damage: Redondeado hacia arriba sin decimales (Ej: 150%)
+	if lbl_crit_dmg: 
+		lbl_crit_dmg.text = str(int(ceil(stats["critical_damage"]))) + "%"
+		
 # --- NAVEGACIÓN HÉROES ---
 func _on_next_hero_pressed():
 	comparison_modal.hide()      # Cierra el modal de comparación

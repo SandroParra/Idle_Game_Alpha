@@ -29,6 +29,6 @@ script = ExtResource("4_csfcr")
 name = "Black Dragon"
 icon = ExtResource("1_uk10f")
 unit_scene = ExtResource("3_sk0s7")
-health = 500
+health = 200
 available_facets = Array[ExtResource("1_pfl3v")]([SubResource("Resource_6ra7j")])
 metadata/_custom_type_script = "uid://fses6prrp6qw"

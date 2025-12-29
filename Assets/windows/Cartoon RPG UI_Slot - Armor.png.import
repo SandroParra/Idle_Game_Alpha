@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c83a84hr13nrj"
-path="res://.godot/imported/Cartoon RPG UI_Slot - Armor.png-00e142a29a55eb7264054242ec7e8255.ctex"
+path="res://.godot/imported/Cartoon RPG UI_Slot - Armor.png-09d81ab1aa3cc498632e17fa32c9b471.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/windows/Cartoon RPG UI_Slot - Armor.png"
-dest_files=["res://.godot/imported/Cartoon RPG UI_Slot - Armor.png-00e142a29a55eb7264054242ec7e8255.ctex"]
+source_file="res://Assets/Windows/Cartoon RPG UI_Slot - Armor.png"
+dest_files=["res://.godot/imported/Cartoon RPG UI_Slot - Armor.png-09d81ab1aa3cc498632e17fa32c9b471.ctex"]
 
 [params]
 
