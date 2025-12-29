@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c76luxp7ipqqs"
-path="res://.godot/imported/Cartoon RPG UI_Slot - Weapon.png-0f85b0b5ae2f471ac242ca924fa68593.ctex"
+path="res://.godot/imported/Cartoon RPG UI_Slot - Weapon.png-9b58ac3c7157f6b824d78078d96f0129.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/windows/Cartoon RPG UI_Slot - Weapon.png"
-dest_files=["res://.godot/imported/Cartoon RPG UI_Slot - Weapon.png-0f85b0b5ae2f471ac242ca924fa68593.ctex"]
+source_file="res://Assets/Windows/Cartoon RPG UI_Slot - Weapon.png"
+dest_files=["res://.godot/imported/Cartoon RPG UI_Slot - Weapon.png-9b58ac3c7157f6b824d78078d96f0129.ctex"]
 
 [params]
 

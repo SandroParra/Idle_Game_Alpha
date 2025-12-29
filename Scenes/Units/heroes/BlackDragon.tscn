@@ -1,8 +1,7 @@
 [gd_scene load_steps=22 format=3 uid="uid://bixiv0365lcn6"]
 
 [ext_resource type="Script" uid="uid://c8x3gimh43cko" path="res://Scripts/Units/HeroUnit.gd" id="1_1b7vl"]
-[ext_resource type="Texture2D" uid="uid://5nety2tfsvs4" path="res://Assets/Models/Heroes/BlackDragon/BlackDragon.png" id="1_3xuus"]
-
+[ext_resource type="Texture2D" uid="uid://do2ldfggkafb1" path="res://Assets/Models/Heroes/BlackDragon/BlackDragon.png" id="1_3xuus"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ojeot"]
 atlas = ExtResource("1_3xuus")

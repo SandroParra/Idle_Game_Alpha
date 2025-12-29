@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://b8qui668wpwy0"]
 
-[ext_resource type="Texture2D" uid="uid://vvqs030mj8qs" path="res://Assets/Items/Iron Set/IronPants.png" id="1_h8sdx"]
-[ext_resource type="Script" uid="uid://b3n3gygtty6ko" path="res://Scripts/Resources/ItemData.gd" id="2_uhdc0"]
+[ext_resource type="Texture2D" uid="uid://vvqs030mj8qs" path="res://Assets/Items/Iron Set/IronPants.png" id="1_iyfn0"]
+[ext_resource type="Script" uid="uid://b3n3gygtty6ko" path="res://Scripts/Resources/ItemData.gd" id="2_4134o"]
 
 [resource]
-script = ExtResource("2_uhdc0")
+script = ExtResource("2_4134o")
 name = "Iron Pants"
-icon = ExtResource("1_h8sdx")
+icon = ExtResource("1_iyfn0")
 slot_type = "pants"
 physical_defense = 50
 health = 100

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bb2fvmc1w4wxk"
-path="res://.godot/imported/Cartoon RPG UI_Slot - Shield.png-f8a649b549c7075a3bcd37e6ba492754.ctex"
+path="res://.godot/imported/Cartoon RPG UI_Slot - Shield.png-394b56e4f30b59024c8b2d58b911750b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/windows/Cartoon RPG UI_Slot - Shield.png"
-dest_files=["res://.godot/imported/Cartoon RPG UI_Slot - Shield.png-f8a649b549c7075a3bcd37e6ba492754.ctex"]
+source_file="res://Assets/Windows/Cartoon RPG UI_Slot - Shield.png"
+dest_files=["res://.godot/imported/Cartoon RPG UI_Slot - Shield.png-394b56e4f30b59024c8b2d58b911750b.ctex"]
 
 [params]
 

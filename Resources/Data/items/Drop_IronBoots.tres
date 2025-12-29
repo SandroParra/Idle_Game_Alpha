@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="DropData" load_steps=4 format=3 uid="uid://ck8qya0bitopb"]
 
-[ext_resource type="Script" uid="uid://dm7738q8rigxc" path="res://Scripts/Resources/DropData.gd" id="1_aw5fc"]
-[ext_resource type="Resource" uid="uid://dvt55apjym3e5" path="res://Resources/Data/items/IronBoots.tres" id="1_v8my6"]
-[ext_resource type="PackedScene" uid="uid://bb8donf702nb6" path="res://Scenes/Levels/Drop/ItemDrop.tscn" id="2_jpbsv"]
+[ext_resource type="Resource" uid="uid://c4t3y2loq8870" path="res://Resources/Data/Items/IronBoots.tres" id="1_0pk00"]
+[ext_resource type="PackedScene" uid="uid://bb8donf702nb6" path="res://Scenes/Levels/Drop/ItemDrop.tscn" id="1_c2emu"]
+[ext_resource type="Script" uid="uid://d4mxj6g31gpjs" path="res://Scripts/Resources/DropData.gd" id="2_0pk00"]
 
 [resource]
-script = ExtResource("1_aw5fc")
-item_scene = ExtResource("2_jpbsv")
+script = ExtResource("2_0pk00")
+item_scene = ExtResource("1_c2emu")
 drop_chance = 0.15
-item_data = ExtResource("1_v8my6")
+item_data = ExtResource("1_0pk00")

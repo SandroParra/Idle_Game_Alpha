@@ -4,7 +4,8 @@
 [ext_resource type="FontFile" uid="uid://dim8n0o7xn7t7" path="res://Assets/Fonts/Handron-Filled.otf" id="2_th7dq"]
 [ext_resource type="Texture2D" uid="uid://oo7ycocbpp7l" path="res://Assets/Buttons/BtnSmallGreen.png" id="4_ml83b"]
 [ext_resource type="Texture2D" uid="uid://c4b7211m5hxpg" path="res://Assets/Buttons/BtnSmallOrange.png" id="5_ixwne"]
-[ext_resource type="Texture2D" uid="uid://3627tre514e" path="res://Assets/windows/Cartoon RPG UI_Window - Wide.png" id="5_ml83b"]
+[ext_resource type="Texture2D" uid="uid://3627tre514e" path="res://Assets/Windows/Cartoon RPG UI_Window - Wide.png" id="5_ml83b"]
+
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ml83b"]
 

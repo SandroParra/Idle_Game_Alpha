@@ -7,7 +7,8 @@
 [ext_resource type="Resource" uid="uid://b8eiuy2ardfig" path="res://Resources/Data/Heroes/MaleKnight.tres" id="5_4ouvp"]
 [ext_resource type="FontFile" uid="uid://dim8n0o7xn7t7" path="res://Assets/Fonts/Handron-Filled.otf" id="6_eubvj"]
 [ext_resource type="Texture2D" uid="uid://b47m0ewi26op3" path="res://Assets/Buttons/BtnDarkGray.png" id="8_eubvj"]
-[ext_resource type="Texture2D" uid="uid://3627tre514e" path="res://Assets/windows/Cartoon RPG UI_Window - Wide.png" id="8_jlev2"]
+[ext_resource type="Texture2D" uid="uid://3627tre514e" path="res://Assets/Windows/Cartoon RPG UI_Window - Wide.png" id="8_jlev2"]
+
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rnqs7"]
 

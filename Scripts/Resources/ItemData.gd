@@ -149,7 +149,7 @@ func _pick_stats_based_on_rules(slot: String, rarity: String, count: int) -> Arr
 	
 	# --- REGLAS PARA COMMON (1 Stat) ---
 	if rarity == "Common":
-		if slot in SLOTS_ARMOR or SLOTS_MIXED:
+		if slot in SLOTS_ARMOR or slot in SLOTS_MIXED:
 			picked.append(STATS_DEFENSE.pick_random()) # Regla 6
 		elif slot in SLOTS_JEWELRY_WEAPON:
 			picked.append(STATS_ATTACK.pick_random()) # Regla 7

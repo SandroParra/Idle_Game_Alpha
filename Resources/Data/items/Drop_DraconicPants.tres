@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="DropData" load_steps=4 format=3 uid="uid://d3hu8f6s7aqnq"]
 
-[ext_resource type="Resource" uid="uid://dhrjhfmolm3lj" path="res://Resources/Data/items/DraconicPants.tres" id="1_fdi70"]
-[ext_resource type="PackedScene" uid="uid://bb8donf702nb6" path="res://Scenes/Levels/Drop/ItemDrop.tscn" id="2_o4l3m"]
-[ext_resource type="Script" uid="uid://dm7738q8rigxc" path="res://Scripts/Resources/DropData.gd" id="3_67dpl"]
+[ext_resource type="PackedScene" uid="uid://bb8donf702nb6" path="res://Scenes/Levels/Drop/ItemDrop.tscn" id="1_qt3at"]
+[ext_resource type="Resource" uid="uid://dhrjhfmolm3lj" path="res://Resources/Data/Items/DraconicPants.tres" id="1_ts8nc"]
+[ext_resource type="Script" uid="uid://d4mxj6g31gpjs" path="res://Scripts/Resources/DropData.gd" id="2_ts8nc"]
 
 [resource]
-script = ExtResource("3_67dpl")
-item_scene = ExtResource("2_o4l3m")
+script = ExtResource("2_ts8nc")
+item_scene = ExtResource("1_qt3at")
 drop_chance = 0.2
-item_data = ExtResource("1_fdi70")
+item_data = ExtResource("1_ts8nc")
