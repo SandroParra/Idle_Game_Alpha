@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" uid="uid://b8qui668wpwy0" path="res://Resources/Data/items/IronPants.tres" id="1_1h413"]
 [ext_resource type="PackedScene" uid="uid://bb8donf702nb6" path="res://Scenes/Levels/Drop/ItemDrop.tscn" id="2_lmneh"]
-[ext_resource type="Script" uid="uid://dm7738q8rigxc" path="res://Scripts/Resources/DropData.gd" id="3_j8xiy"]
+[ext_resource type="Script" uid="uid://dm7738q8rigxc" path="res://Scripts/Resources/dropData.gd" id="3_j8xiy"]
 
 [resource]
 script = ExtResource("3_j8xiy")
