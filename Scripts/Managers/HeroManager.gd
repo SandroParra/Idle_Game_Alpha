@@ -149,6 +149,8 @@ func update_ui():
 
 # --- NAVEGACIÓN HÉROES ---
 func _on_next_hero_pressed():
+	comparison_modal.hide()      # Cierra el modal de comparación
+	item_pending_equip = null    # Olvida el item que estabas a punto de equipar
 	current_hero_index = (current_hero_index + 1) % hero_ids.size()
 	# Al cambiar de héroe, ¿quieres resetear el filtro o mantenerlo?
 	# Opción A: Resetear filtro
@@ -160,6 +162,8 @@ func _on_next_hero_pressed():
 		update_unequip_button_state()
 
 func _on_prev_hero_pressed():
+	comparison_modal.hide()      # Cierra el modal de comparación
+	item_pending_equip = null    # Olvida el item que estabas a punto de equipar
 	current_hero_index = (current_hero_index - 1 + hero_ids.size()) % hero_ids.size()
 	update_ui()
 	if active_slot_filter != "":
