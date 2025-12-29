@@ -3,13 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://cm4nxx7rrrt3a" path="res://Assets/Backgrounds/HeroManager.jpg" id="1_un4wi"]
 [ext_resource type="Script" uid="uid://ohrwqodlyyya" path="res://Scripts/Managers/HeroManager.gd" id="1_uw58c"]
 [ext_resource type="FontFile" uid="uid://dim8n0o7xn7t7" path="res://Assets/Fonts/Handron-Filled.otf" id="3_5aa8q"]
-[ext_resource type="Texture2D" uid="uid://bsto42gb8qq5k" path="res://Assets/Windows/Cartoon RPG UI_Window - Tall.png" id="5_y4eqm"]
-[ext_resource type="Texture2D" uid="uid://d2xkt15t6h8u0" path="res://Assets/Windows/Cartoon RPG UI_Slot - Avatar.png" id="6_mi8lm"]
-[ext_resource type="Texture2D" uid="uid://c83a84hr13nrj" path="res://Assets/Windows/Cartoon RPG UI_Slot - Armor.png" id="7_8iytd"]
-[ext_resource type="Texture2D" uid="uid://c76luxp7ipqqs" path="res://Assets/Windows/Cartoon RPG UI_Slot - Weapon.png" id="8_djdfy"]
+[ext_resource type="Texture2D" uid="uid://bsto42gb8qq5k" path="res://Assets/windows/Cartoon RPG UI_Window - Tall.png" id="5_y4eqm"]
+[ext_resource type="Texture2D" uid="uid://d2xkt15t6h8u0" path="res://Assets/windows/Cartoon RPG UI_Slot - Avatar.png" id="6_mi8lm"]
+[ext_resource type="Texture2D" uid="uid://c83a84hr13nrj" path="res://Assets/windows/Cartoon RPG UI_Slot - Armor.png" id="7_8iytd"]
+[ext_resource type="Texture2D" uid="uid://c76luxp7ipqqs" path="res://Assets/windows/Cartoon RPG UI_Slot - Weapon.png" id="8_djdfy"]
 [ext_resource type="Texture2D" uid="uid://omxi35x86pgy" path="res://Assets/Backgrounds/Box_Background.png" id="9_5aa8q"]
-[ext_resource type="Texture2D" uid="uid://bdbmllklwucd4" path="res://Assets/Windows/Cartoon RPG UI_Slot - Amulet.png" id="9_ya0k1"]
-
+[ext_resource type="Texture2D" uid="uid://bdbmllklwucd4" path="res://Assets/windows/Cartoon RPG UI_Slot - Amulet.png" id="9_ya0k1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y4eqm"]
 texture = ExtResource("9_5aa8q")
@@ -192,21 +191,21 @@ offset_bottom = 372.0
 texture = ExtResource("9_ya0k1")
 expand_mode = 1
 
-[node name="DefensePenText" type="Label" parent="MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame"]
+[node name="DefenseModText" type="Label" parent="MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame"]
 layout_mode = 0
-offset_left = 172.0
+offset_left = 166.0
 offset_top = 480.0
-offset_right = 348.0
+offset_right = 342.0
 offset_bottom = 504.0
 theme_override_fonts/font = ExtResource("3_5aa8q")
 theme_override_font_sizes/font_size = 25
-text = "Defense Pen.:"
+text = "Defense Mod.:"
 
-[node name="DefensePenNumber" type="Label" parent="MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame/DefensePenText"]
+[node name="DefenseModNumber" type="Label" parent="MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame/DefenseModText"]
 layout_mode = 0
-offset_left = 160.0
+offset_left = 166.0
 offset_top = -1.0
-offset_right = 266.0
+offset_right = 272.0
 offset_bottom = 23.0
 theme_override_fonts/font = ExtResource("3_5aa8q")
 theme_override_font_sizes/font_size = 25

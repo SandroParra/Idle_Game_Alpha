@@ -62,7 +62,7 @@ func start_next_wave():
 			return 
 
 	# 2. Calcular presupuesto base * multiplicador del set
-	var base_budget = 5 + current_wave * 2
+	var base_budget = 10 + current_wave * 3
 	wave_budget = int(base_budget * current_active_set.budget_multiplier)
 	print("Presupuesto calculado: ", wave_budget) # Debug 2
 	print("Ola %d iniciada (Set: %d-%d) Presupuesto: %d" % [current_wave, current_active_set.min_wave, current_active_set.max_wave, wave_budget])

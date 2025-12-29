@@ -67,6 +67,7 @@ position = Vector2(3, 4)
 position = Vector2(1869, 699)
 scale = Vector2(1, 2)
 wave_sets = Array[ExtResource("7_47qav")]([ExtResource("8_ha74h"), ExtResource("9_rw2hy"), ExtResource("10_m13tg"), ExtResource("11_tk7gy"), ExtResource("12_uwljo"), ExtResource("13_1x72k")])
+spawn_interval = 0.5
 
 [node name="Heroes" type="Node2D" parent="." groups=["heroGroup"]]
 y_sort_enabled = true
