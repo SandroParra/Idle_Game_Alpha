@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://dvt55apjym3e5"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://c4t3y2loq8870"]
 
 [ext_resource type="Texture2D" uid="uid://b8wl7gximdukf" path="res://Assets/Items/Iron Set/IronBoots.png" id="1_a08fl"]
 [ext_resource type="Script" uid="uid://b3n3gygtty6ko" path="res://Scripts/Resources/ItemData.gd" id="1_fvddv"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" uid="uid://c76mybrwhpsyq" path="res://Resources/Data/items/DraconicBoots.tres" id="1_x48ll"]
 [ext_resource type="PackedScene" uid="uid://bb8donf702nb6" path="res://Scenes/Levels/Drop/ItemDrop.tscn" id="2_wu48k"]
-[ext_resource type="Script" uid="uid://dm7738q8rigxc" path="res://Scripts/Resources/dropData.gd" id="3_6dayl"]
+[ext_resource type="Script" uid="uid://dm7738q8rigxc" path="res://Scripts/Resources/DropData.gd" id="3_6dayl"]
 
 [resource]
 script = ExtResource("3_6dayl")
