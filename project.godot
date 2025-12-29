@@ -10,7 +10,29 @@ config_version=5
 
 [application]
 
-config/name="Race_Game"
-run/main_scene="uid://blqtjsjjgwxs"
-config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://Game_Icon/icon.svg"
+config/name="Wave Survival"
+run/main_scene="uid://cmywxu2b6qxjt"
+config/features=PackedStringArray("4.5", "Forward Plus")
+config/icon="res://Resources/Game_Icon/icon.svg"
+
+[autoload]
+
+PlayerData="*res://Scripts/Resources/PlayerData.gd"
+ItemDatabase="*res://Scripts/Resources/ItemDatabase.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="viewport"
+
+[global_group]
+
+enemyGroup=""
+heroGroup=""
+enemy_hurtbox=""
+hero_hurtbox=""
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
