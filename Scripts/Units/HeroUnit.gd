@@ -154,7 +154,7 @@ func _on_hitbox_area_entered(area):
 	if (is_hero and is_enemy_hurtbox) or (not is_hero and is_hero_hurtbox):
 		var victim = area.get_parent()
 		if victim.has_method("take_damage"):
-			var did_damage = await victim.take_damage(stats.attack)
+			var did_damage = await victim.take_damage(stats.physical_attack)
 			if did_damage:
 				damage_dealt = true
 				attack_attempting = false
@@ -179,7 +179,7 @@ func _on_frame_changed():
 			if area.is_in_group("enemy_hurtbox"):
 				var victim = area.get_parent()
 				if victim and victim.has_method("take_damage"):
-					var did_damage = await victim.take_damage(stats.attack)
+					var did_damage = await victim.take_damage(stats.physical_attack)
 					if did_damage:
 						# Recibimos respuesta de daño, mantener objetivo actual
 						attack_attempting = false

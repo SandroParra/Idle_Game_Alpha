@@ -1,0 +1,395 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbwsory56xq1h"]
+
+[ext_resource type="Script" uid="uid://b8dhaaowkr1kv" path="res://Scripts/Managers/ForgeManager.gd" id="1_aklkm"]
+[ext_resource type="Resource" uid="uid://dhfylfvh7s6mm" path="res://Resources/Config/Forge/DefaultForgeConfig.tres" id="2_gelr8"]
+[ext_resource type="Texture2D" uid="uid://coxjmut77ldgn" path="res://Assets/Backgrounds/Forge.png" id="3_qdkpf"]
+[ext_resource type="Texture2D" uid="uid://b2m8gmldwlu6n" path="res://Assets/UI/RightArrow.png" id="4_gelr8"]
+
+[node name="ForgeMenu" type="Control" node_paths=PackedStringArray("main_menu_node", "upgrade_panel_node", "recycle_panel_node", "btn_goto_upgrade", "btn_goto_recycle", "btn_back_upgrade", "btn_back_recycle", "btn_back_to_game", "confirm_dialog", "result_popup", "result_label", "btn_recycle_common", "btn_recycle_uncommon", "btn_recycle_rare", "btn_recycle_epic", "btn_recycle_legendary", "inventory_grid", "comp_current_slot", "comp_current_name", "comp_next_slot", "comp_next_name", "comp_stats_container", "action_info_lbl", "success_chance_lbl", "action_btn", "stone_selector", "lbl_mat_common", "lbl_mat_uncommon", "lbl_mat_rare", "lbl_mat_epic", "lbl_mat_legendary", "lbl_mat_bless", "lbl_mat_soul")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1920.0
+offset_bottom = -1080.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aklkm")
+config = ExtResource("2_gelr8")
+main_menu_node = NodePath("MainMenu")
+upgrade_panel_node = NodePath("UpgradePanel")
+recycle_panel_node = NodePath("RecyclePanel")
+btn_goto_upgrade = NodePath("MainMenu/BtnGoToUpgrade")
+btn_goto_recycle = NodePath("MainMenu/BtnGoToRecycle")
+btn_back_upgrade = NodePath("UpgradePanel/MainLayout/Actions/Buttons/BtnBackToMenu")
+btn_back_recycle = NodePath("RecyclePanel/BtnBackToMenu")
+btn_back_to_game = NodePath("BtnBackMainMenu")
+confirm_dialog = NodePath("ConfirmationDialog")
+result_popup = NodePath("ResultPopup")
+result_label = NodePath("ResultPopup/ResultsLabel")
+btn_recycle_common = NodePath("RecyclePanel/ActionButtons/BtnRecycleCommon")
+btn_recycle_uncommon = NodePath("RecyclePanel/ActionButtons/BtnRecycleUncommon")
+btn_recycle_rare = NodePath("RecyclePanel/ActionButtons/BtnRecycleRare")
+btn_recycle_epic = NodePath("RecyclePanel/ActionButtons/BtnRecycleEpic")
+btn_recycle_legendary = NodePath("RecyclePanel/ActionButtons/BtnRecycleLegendary")
+inventory_grid = NodePath("UpgradePanel/MainLayout/Inventory/ScrollContainer/InventoryGrid")
+comp_current_slot = NodePath("UpgradePanel/MainLayout/Actions/ComparisonHeader/CurrentItem/IconSlot")
+comp_current_name = NodePath("UpgradePanel/MainLayout/Actions/ComparisonHeader/CurrentItem/NameLabel")
+comp_next_slot = NodePath("UpgradePanel/MainLayout/Actions/ComparisonHeader/NextItem/IconSlot")
+comp_next_name = NodePath("UpgradePanel/MainLayout/Actions/ComparisonHeader/NextItem/NameLabel")
+comp_stats_container = NodePath("UpgradePanel/MainLayout/Actions/StatsContainer")
+action_info_lbl = NodePath("UpgradePanel/MainLayout/Actions/ActionInfoLabel")
+success_chance_lbl = NodePath("UpgradePanel/MainLayout/Actions/SuccessChanceLabel")
+action_btn = NodePath("UpgradePanel/MainLayout/Actions/Buttons/BtnAction")
+stone_selector = NodePath("UpgradePanel/MainLayout/Actions/StoneSelector")
+lbl_mat_common = NodePath("RecyclePanel/MaterialIndicators/CommonStonesCount")
+lbl_mat_uncommon = NodePath("RecyclePanel/MaterialIndicators/UncommonStonesCount")
+lbl_mat_rare = NodePath("RecyclePanel/MaterialIndicators/RareStonesCount")
+lbl_mat_epic = NodePath("RecyclePanel/MaterialIndicators/EpicStonesCount")
+lbl_mat_legendary = NodePath("RecyclePanel/MaterialIndicators/LegendaryStonesCount")
+lbl_mat_bless = NodePath("RecyclePanel/MaterialIndicators/BlessStonesCount")
+lbl_mat_soul = NodePath("RecyclePanel/MaterialIndicators/SoulStonesCount")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+offset_right = 1916.0
+offset_bottom = 23.0
+text = "The Forge"
+horizontal_alignment = 1
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(0.61499965, 0.6149997, 0.61499965, 1)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_qdkpf")
+
+[node name="MainMenu" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 188.0
+offset_top = 214.0
+offset_right = 1660.0
+offset_bottom = 850.0
+
+[node name="BtnGoToUpgrade" type="Button" parent="MainMenu"]
+layout_mode = 0
+offset_left = 838.0
+offset_top = 152.0
+offset_right = 1247.0
+offset_bottom = 317.0
+text = "UPGRADE"
+
+[node name="BtnGoToRecycle" type="Button" parent="MainMenu"]
+layout_mode = 0
+offset_left = 286.0
+offset_top = 155.0
+offset_right = 673.0
+offset_bottom = 310.0
+text = "RECYCLE"
+
+[node name="UpgradePanel" type="Control" parent="."]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 1
+anchors_preset = 0
+offset_right = 1921.0
+offset_bottom = 1078.0
+
+[node name="MainLayout" type="HBoxContainer" parent="UpgradePanel"]
+layout_mode = 0
+offset_left = 227.0
+offset_top = 191.0
+offset_right = 1772.0
+offset_bottom = 886.0
+
+[node name="Inventory" type="VBoxContainer" parent="UpgradePanel/MainLayout"]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+
+[node name="SelectItem" type="Label" parent="UpgradePanel/MainLayout/Inventory"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UpgradePanel/MainLayout/Inventory"]
+custom_minimum_size = Vector2(500, 550)
+layout_mode = 2
+
+[node name="InventoryGrid" type="GridContainer" parent="UpgradePanel/MainLayout/Inventory/ScrollContainer"]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
+columns = 8
+
+[node name="VSeparator" type="VSeparator" parent="UpgradePanel/MainLayout"]
+layout_mode = 2
+
+[node name="Actions" type="VBoxContainer" parent="UpgradePanel/MainLayout"]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+
+[node name="ComparisonHeader" type="HBoxContainer" parent="UpgradePanel/MainLayout/Actions"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="CurrentItem" type="VBoxContainer" parent="UpgradePanel/MainLayout/Actions/ComparisonHeader"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="UpgradePanel/MainLayout/Actions/ComparisonHeader/CurrentItem"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="IconSlot" type="Panel" parent="UpgradePanel/MainLayout/Actions/ComparisonHeader/CurrentItem"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="ArrowIcon" type="TextureRect" parent="UpgradePanel/MainLayout/Actions/ComparisonHeader"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("4_gelr8")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="NextItem" type="VBoxContainer" parent="UpgradePanel/MainLayout/Actions/ComparisonHeader"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="UpgradePanel/MainLayout/Actions/ComparisonHeader/NextItem"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="IconSlot" type="Panel" parent="UpgradePanel/MainLayout/Actions/ComparisonHeader/NextItem"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="UpgradePanel/MainLayout/Actions"]
+layout_mode = 2
+
+[node name="StatsContainer" type="VBoxContainer" parent="UpgradePanel/MainLayout/Actions"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="UpgradePanel/MainLayout/Actions"]
+layout_mode = 2
+
+[node name="StoneSelector" type="OptionButton" parent="UpgradePanel/MainLayout/Actions"]
+layout_mode = 2
+
+[node name="ActionInfoLabel" type="Label" parent="UpgradePanel/MainLayout/Actions"]
+layout_mode = 2
+text = "Cost: 5 Stones"
+
+[node name="SuccessChanceLabel" type="Label" parent="UpgradePanel/MainLayout/Actions"]
+layout_mode = 2
+text = "Success Chance"
+
+[node name="Buttons" type="HBoxContainer" parent="UpgradePanel/MainLayout/Actions"]
+layout_mode = 2
+alignment = 1
+
+[node name="BtnBackToMenu" type="Button" parent="UpgradePanel/MainLayout/Actions/Buttons"]
+layout_mode = 2
+text = "<< BACK"
+
+[node name="BtnAction" type="Button" parent="UpgradePanel/MainLayout/Actions/Buttons"]
+layout_mode = 2
+text = "<<DO IT!>>"
+
+[node name="RecyclePanel" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 1923.0
+offset_bottom = 1077.0
+
+[node name="Title" type="Label" parent="RecyclePanel"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 70.0
+offset_right = 1921.0
+offset_bottom = 116.0
+text = "Recycle"
+horizontal_alignment = 1
+
+[node name="MaterialIndicators" type="HBoxContainer" parent="RecyclePanel"]
+layout_mode = 0
+offset_left = 648.0
+offset_top = 109.0
+offset_right = 1334.0
+offset_bottom = 141.0
+
+[node name="CommonStonesCount" type="Label" parent="RecyclePanel/MaterialIndicators"]
+layout_mode = 2
+text = "Common: X"
+
+[node name="UncommonStonesCount" type="Label" parent="RecyclePanel/MaterialIndicators"]
+layout_mode = 2
+text = "Uncommon: X"
+
+[node name="RareStonesCount" type="Label" parent="RecyclePanel/MaterialIndicators"]
+layout_mode = 2
+text = "Rare: X"
+
+[node name="EpicStonesCount" type="Label" parent="RecyclePanel/MaterialIndicators"]
+layout_mode = 2
+text = "Epic: X"
+
+[node name="LegendaryStonesCount" type="Label" parent="RecyclePanel/MaterialIndicators"]
+layout_mode = 2
+text = "Legendary: X"
+
+[node name="BlessStonesCount" type="Label" parent="RecyclePanel/MaterialIndicators"]
+layout_mode = 2
+text = "Bless: X"
+
+[node name="SoulStonesCount" type="Label" parent="RecyclePanel/MaterialIndicators"]
+layout_mode = 2
+text = "Soul: X"
+
+[node name="MainLayout" type="HBoxContainer" parent="RecyclePanel"]
+layout_mode = 0
+offset_left = 227.0
+offset_top = 191.0
+offset_right = 1772.0
+offset_bottom = 886.0
+
+[node name="Inventory" type="VBoxContainer" parent="RecyclePanel/MainLayout"]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+
+[node name="SelectItem" type="Label" parent="RecyclePanel/MainLayout/Inventory"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="RecyclePanel/MainLayout/Inventory"]
+custom_minimum_size = Vector2(500, 550)
+layout_mode = 2
+
+[node name="InventoryGrid" type="GridContainer" parent="RecyclePanel/MainLayout/Inventory/ScrollContainer"]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
+columns = 8
+
+[node name="VSeparator" type="VSeparator" parent="RecyclePanel/MainLayout"]
+layout_mode = 2
+
+[node name="Actions" type="VBoxContainer" parent="RecyclePanel/MainLayout"]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+
+[node name="ItemIcon" type="TextureRect" parent="RecyclePanel/MainLayout/Actions"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ItemLevel" type="Label" parent="RecyclePanel/MainLayout/Actions"]
+layout_mode = 2
+
+[node name="ItemName" type="Label" parent="RecyclePanel/MainLayout/Actions"]
+layout_mode = 2
+
+[node name="StoneSelector" type="OptionButton" parent="RecyclePanel/MainLayout/Actions"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="RecyclePanel/MainLayout/Actions"]
+layout_mode = 2
+
+[node name="ActionInfoLabel" type="Label" parent="RecyclePanel/MainLayout/Actions"]
+layout_mode = 2
+text = "Cost: 5 Stones"
+
+[node name="SuccessChanceLabel" type="Label" parent="RecyclePanel/MainLayout/Actions"]
+layout_mode = 2
+text = "Cost: 5 Stones"
+
+[node name="Buttons" type="HBoxContainer" parent="RecyclePanel/MainLayout/Actions"]
+layout_mode = 2
+alignment = 1
+
+[node name="BtnBackToMenu" type="Button" parent="RecyclePanel/MainLayout/Actions/Buttons"]
+layout_mode = 2
+text = "<< BACK"
+
+[node name="BtnAction" type="Button" parent="RecyclePanel/MainLayout/Actions/Buttons"]
+layout_mode = 2
+text = "<<DO IT!>>"
+
+[node name="ActionButtons" type="HBoxContainer" parent="RecyclePanel"]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 851.0
+offset_right = 1879.0
+offset_bottom = 919.0
+alignment = 1
+
+[node name="BtnRecycleCommon" type="Button" parent="RecyclePanel/ActionButtons"]
+layout_mode = 2
+text = "Common"
+
+[node name="BtnRecycleUncommon" type="Button" parent="RecyclePanel/ActionButtons"]
+layout_mode = 2
+text = "Uncommon"
+
+[node name="BtnRecycleRare" type="Button" parent="RecyclePanel/ActionButtons"]
+layout_mode = 2
+text = "Rare"
+
+[node name="BtnRecycleEpic" type="Button" parent="RecyclePanel/ActionButtons"]
+layout_mode = 2
+text = "Epic"
+
+[node name="BtnRecycleLegendary" type="Button" parent="RecyclePanel/ActionButtons"]
+layout_mode = 2
+text = "Legendary"
+
+[node name="BtnBackToMenu" type="Button" parent="RecyclePanel"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 31.0
+offset_right = 162.0
+offset_bottom = 62.0
+text = "<< Back To Menu"
+
+[node name="BtnBackMainMenu" type="Button" parent="."]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 28.0
+offset_right = 145.0
+offset_bottom = 63.0
+text = "<< Main Menu"
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+oversampling_override = 1.0
+position = Vector2i(900, 500)
+
+[node name="ResultPopup" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 613.0
+offset_top = 297.0
+offset_right = 1355.0
+offset_bottom = 765.0
+
+[node name="Title" type="Label" parent="ResultPopup"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Results"
+horizontal_alignment = 1
+
+[node name="ResultsLabel" type="Label" parent="ResultPopup"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 57.0
+offset_right = 638.0
+offset_bottom = 80.0
+text = "Stones Obtained:"
+
+[node name="BtnCloseResult" type="Button" parent="ResultPopup"]
+layout_mode = 0
+offset_left = 317.0
+offset_top = 385.0
+offset_right = 453.0
+offset_bottom = 447.0
+text = "Close"

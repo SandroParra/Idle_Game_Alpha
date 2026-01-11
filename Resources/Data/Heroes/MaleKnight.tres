@@ -31,7 +31,6 @@ name = "Male Knight"
 icon = ExtResource("3_qss7m")
 unit_scene = ExtResource("5_rlgbn")
 health = 50
-attack = 10
 attack_speed = 75.0
 xp = 0.0
 available_facets = Array[ExtResource("1_qss7m")]([SubResource("Resource_xnkdl")])

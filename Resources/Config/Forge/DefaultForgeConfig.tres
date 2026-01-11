@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="ForgeConfig" load_steps=2 format=3 uid="uid://dhfylfvh7s6mm"]
+
+[ext_resource type="Script" uid="uid://brd875voey3e4" path="res://Scripts/Configs/ForgeConfig.gd" id="1_rrnsd"]
+
+[resource]
+script = ExtResource("1_rrnsd")
+metadata/_custom_type_script = "uid://brd875voey3e4"

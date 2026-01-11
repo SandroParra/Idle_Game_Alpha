@@ -5,6 +5,7 @@ class_name SaveGame
 @export var player_name: String = "Hero"
 @export var gold: int = 0
 @export var current_xp: int = 0
+@export var upgrade_stones: int = 0
 
 # Inventario Global: Guardaremos los ItemData (Resources) directamente.
 # Al ser @export, Godot guardará sus stats únicos (daño, defensa) automáticamente.
@@ -19,3 +20,13 @@ class_name SaveGame
 
 # Niveles de los héroes (diccionario nombre -> nivel)
 @export var hero_levels: Dictionary = {}
+
+@export var materials: Dictionary = {
+	"Common": 0, 
+	"Uncommon": 0, 
+	"Rare": 0, 
+	"Epic": 0, 
+	"Legendary": 0,
+	"BlessStone": 0,
+	"SoulStone": 0
+}

@@ -28,13 +28,14 @@ font_color = Color(0.36015666, 0.75987715, 0.6738751, 1)
 shadow_size = 3
 shadow_color = Color(0.47382104, 0.75753784, 0.41767618, 0)
 
-[node name="HeroManager" type="Control" node_paths=PackedStringArray("hero_name_label", "facet_buttons", "inventory_slots_ui", "btn_prev", "btn_next", "inv_panel", "inv_grid", "inv_title", "btn_clear_filter", "btn_unequip_fixed", "comparison_modal", "comp_equip_btn", "comp_cancel_btn", "left_icon", "left_name", "left_stats", "left_rarity", "right_icon", "right_name", "right_stats", "right_rarity", "hero_portrait", "lbl_health", "lbl_phys_atk", "lbl_magic_atk", "lbl_phys_def", "lbl_magic_def", "lbl_crit_rate", "lbl_crit_dmg", "lbl_def_pen")]
+[node name="HeroManager" type="Control" node_paths=PackedStringArray("hero_name_label", "facet_buttons", "inventory_slots_ui", "hero_portrait", "btn_prev", "btn_next", "inv_panel", "inv_grid", "inv_title", "btn_clear_filter", "btn_unequip_fixed", "comparison_modal", "comp_equip_btn", "comp_cancel_btn", "left_icon", "left_name", "left_stats", "left_rarity", "right_icon", "right_name", "right_stats", "right_rarity", "lbl_health", "lbl_phys_atk", "lbl_magic_atk", "lbl_phys_def", "lbl_magic_def", "lbl_crit_rate", "lbl_crit_dmg", "lbl_def_pen")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_uw58c")
 hero_name_label = NodePath("MainArea/HeroName")
 facet_buttons = [NodePath("Facets/HBoxContainer/Facet1"), NodePath("Facets/HBoxContainer/Facet2"), NodePath("Facets/HBoxContainer/Facet3")]
 inventory_slots_ui = [NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Helmet"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Amulet"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Chest"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Gloves"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Bracelet"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_LeftRing"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_RightRing"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Belt"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Pants"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_Boots"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_LeftWeapon"), NodePath("MainArea/PaperDoll/EquipmentLayout/Slot_RightWeapon")]
+hero_portrait = NodePath("MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame/HeroPortrait")
 btn_prev = NodePath("TopBar/Prev")
 btn_next = NodePath("TopBar/Next")
 inv_panel = NodePath("InventoryPanel")
@@ -53,7 +54,6 @@ right_icon = NodePath("ComparisonModal/HBoxContainer/RightPanel/NewItemIcon")
 right_name = NodePath("ComparisonModal/HBoxContainer/RightPanel/NewItemName")
 right_stats = NodePath("ComparisonModal/HBoxContainer/RightPanel/NewItemStats")
 right_rarity = NodePath("ComparisonModal/HBoxContainer/RightPanel/Label")
-hero_portrait = NodePath("MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame/HeroPortrait")
 lbl_health = NodePath("MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame/HealthText/HealthNumber")
 lbl_phys_atk = NodePath("MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame/PhysicalAtkText/PhysicalAtkNumber")
 lbl_magic_atk = NodePath("MainArea/PaperDoll/EquipmentLayout/EquipementScreen/MainFrame/MagicalAtkText/MagicalAtkNumber")

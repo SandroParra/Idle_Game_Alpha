@@ -18,6 +18,7 @@ config/icon="res://Resources/Game_Icon/icon.svg"
 [autoload]
 
 PlayerData="*res://Scripts/Resources/PlayerData.gd"
+UIManager="*res://Scripts/Managers/UIManager.gd"
 
 [display]
 

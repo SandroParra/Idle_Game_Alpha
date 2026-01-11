@@ -19,6 +19,11 @@ var global_inventory: Array[ItemData]:
 var heroes_data: Dictionary:
 	get: return saved_data.hero_equipment
 
+# Estructura: "Common": int, "BlessStone": int, etc.
+var materials: Dictionary:
+	get: return saved_data.materials
+	set(value): saved_data.materials = value
+	
 func _ready():
 	load_game()
 
@@ -55,6 +60,11 @@ func create_new_save():
 		saved_data.hero_equipment[h_id]["inventory"] = {}
 		for slot in SLOTS:
 			saved_data.hero_equipment[h_id]["inventory"][slot] = null
+	
+	saved_data.materials = {
+		"Common": 0, "Uncommon": 0, "Rare": 0, "Epic": 0, "Legendary": 0,
+		"BlessStone": 0, "SoulStone": 0
+	}
 
 func verify_data_integrity():
 	# Asegura que si agregaste nuevos héroes en una actualización, existan en el save viejo
@@ -130,14 +140,18 @@ func calculate_hero_stats(hero_id: String, base_resource: Resource) -> Dictionar
 		for slot in hero_inv:
 			var item = hero_inv[slot]
 			if item is ItemData:
-					totals["bonus_health"] += totals["health"]*item.health_mod + item.health
-					totals["bonus_physical_attack"] += totals["physical_attack"]*item.attack_mod + item.physical_attack
-					totals["bonus_magical_attack"] += totals["magical_attack"]*item.attack_mod + item.magical_attack
-					totals["bonus_physical_defense"] += totals["physical_defense"]*item.defense_mod + item.physical_defense
-					totals["bonus_magical_defense"] += totals["magical_defense"]*item.defense_mod + item.magical_defense
-					totals["bonus_critical_rate"] += item.critical_rate
-					totals["bonus_critical_damage"] += item.critical_damage
-					totals["bonus_defense_penetration"] += item.defense_penetration
+				# Cada nivel aumenta los stats base del item un 10% (0.10)
+				var level_multiplier = 1.0 + (item.level * 0.10)
+				
+				# Aplicamos el multiplicador a los stats PLANOS
+				totals["bonus_health"] += totals["health"]*item.health_mod + item.health
+				totals["bonus_physical_attack"] += totals["physical_attack"]*item.attack_mod + item.physical_attack
+				totals["bonus_magical_attack"] += totals["magical_attack"]*item.attack_mod + item.magical_attack
+				totals["bonus_physical_defense"] += totals["physical_defense"]*item.defense_mod + item.physical_defense
+				totals["bonus_magical_defense"] += totals["magical_defense"]*item.defense_mod + item.magical_defense
+				totals["bonus_critical_rate"] += item.critical_rate
+				totals["bonus_critical_damage"] += item.critical_damage
+				totals["bonus_defense_penetration"] += item.defense_penetration
 
 	totals["health"] += totals["bonus_health"]
 	totals["physical_attack"] += totals["bonus_physical_attack"]
@@ -148,3 +162,19 @@ func calculate_hero_stats(hero_id: String, base_resource: Resource) -> Dictionar
 	totals["critical_damage"] += totals["bonus_critical_damage"]
 	totals["defense_penetration"] += totals["bonus_defense_penetration"]
 	return totals
+
+# Helpers para materiales
+func add_material(type: String, amount: int):
+	if not saved_data.materials.has(type): saved_data.materials[type] = 0
+	saved_data.materials[type] += amount
+	save_game()
+
+func consume_material(type: String, amount: int) -> bool:
+	if saved_data.materials.get(type, 0) >= amount:
+		saved_data.materials[type] -= amount
+		save_game()
+		return true
+	return false
+
+func get_material_count(type: String) -> int:
+	return saved_data.materials.get(type, 0)

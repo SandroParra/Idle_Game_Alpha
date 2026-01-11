@@ -5,3 +5,6 @@ func _on_hero_manager_pressed() -> void:
 
 func _on_fight_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/Levels/Arena/Arena.tscn")
+
+func _on_forge_pressed():
+	get_tree().change_scene_to_file("res://Scenes/Levels/Forge/ForgeMenu.tscn")

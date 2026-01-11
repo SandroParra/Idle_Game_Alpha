@@ -25,6 +25,13 @@ class_name ItemData
 @export var defense_mod: float = 0.0
 @export var health: int = 0
 @export var health_mod: float = 0.0
+@export var slot: bool = false
+
+@export_group("Upgrade System")
+@export var level: int = 0 # Nivel de mejora (Ej: +1, +2...)
+@export var buffed_stats: Array[String] = [] # Guarda qué stats recibieron el bono del 25%
+@export var has_gem_slot: bool = false
+const LEVEL_GROWTH_RATE = 1.05 # 5%
 
 # ==============================================================================
 # TABLA DE CONFIGURACIÓN DE RANGOS (AQUÍ SE EDITARÁ EL BALANCE)
@@ -99,13 +106,21 @@ const RARITY_RANGES = {
 }
 
 # --- CONSTANTES DE GRUPOS DE STATS ---
-const STATS_ATTACK = ["attack_mod", "physical_attack", "magical_attack", "critical_rate", "critical_damage", "defense_penetration"]
-const STATS_DEFENSE = ["physical_defense", "magical_defense", "defense_mod", "health", "health_mod"]
+const STATS_ATTACK = ["attack_mod", "physical_attack", "magical_attack", 
+"critical_rate", "critical_damage", "defense_penetration"]
+const STATS_DEFENSE = ["physical_defense", "magical_defense", "defense_mod", 
+"health", "health_mod"]
 
 # Grupos de Slots
 const SLOTS_ARMOR = ["boots", "chestplate", "helmet"]
 const SLOTS_JEWELRY_WEAPON = ["weapon", "ring", "amulet"]
 const SLOTS_MIXED = ["pants", "gloves"]
+
+# Listas de referencia
+const POOL_PHYSICAL = ["physical_attack", "physical_defense", "defense_penetration"]
+const POOL_MAGICAL = ["magical_attack", "magical_defense", "health"]
+const ALL_STATS_POOL = ["physical_attack", "magical_attack", "physical_defense", "magical_defense", 
+"health", "critical_rate", "critical_damage", "defense_penetration"]
 
 func create_instance(rarity_level: String) -> ItemData:
 	var new_item = self.duplicate()
@@ -232,3 +247,117 @@ func _apply_values_from_config(stats_list: Array[String], rarity_level: String):
 				self.set(stat_name, val)
 		else:
 			print("ADVERTENCIA: No hay rango configurado para ", stat_name, " en rareza ", rarity_level)
+
+# --- FUNCIÓN PRINCIPAL DE SUBIDA DE NIVEL ---
+func apply_level_up():
+	level += 1
+	
+	# 1. Crecimiento Base (5%) para todos los stats numéricos existentes
+	_apply_base_growth()
+	
+	# 2. Hitos de Nivel (Milestones)
+	match level:
+		5:
+			_apply_prefix("Tempered")
+			_apply_random_bonus(0.25) # 25% a un stat al azar
+		10:
+			_replace_prefix("Tempered", "Ascended")
+			_apply_random_bonus(0.25) # 25% a OTRO stat diferente
+			has_gem_slot = true
+		15:
+			_add_new_random_stat()
+		20:
+			_replace_prefix("Ascended", "Perfect")
+			_maximize_stats_to_perfect()
+
+# --- HELPERS DE LÓGICA ---
+
+func _apply_base_growth():
+	# Lista de todas las variables que son estadísticas
+	for stat in ALL_STATS_POOL:
+		var val = self.get(stat)
+		# Si el stat existe (es mayor a 0), aplicamos el 5%
+		if typeof(val) == TYPE_INT and val > 0:
+			self.set(stat, int(val * LEVEL_GROWTH_RATE))
+		elif typeof(val) == TYPE_FLOAT and val > 0.0:
+			self.set(stat, val * LEVEL_GROWTH_RATE)
+
+func _apply_prefix(prefix: String):
+	# Ej: "Iron Sword" -> "Tempered Iron Sword"
+	if not name.begins_with(prefix):
+		name = prefix + " " + name
+
+func _replace_prefix(old_prefix: String, new_prefix: String):
+	# Ej: "Tempered Iron Sword" -> "Ascended Iron Sword"
+	name = name.replace(old_prefix, new_prefix)
+
+func _apply_random_bonus(percentage: float):
+	# Buscar stats que tengan valor > 0
+	var available_stats = []
+	for stat in ALL_STATS_POOL:
+		if self.get(stat) > 0 and not stat in buffed_stats:
+			available_stats.append(stat)
+	
+	if available_stats.is_empty(): return
+	
+	var picked_stat = available_stats.pick_random()
+	buffed_stats.append(picked_stat) # Registrar para no repetir en nivel 10
+	
+	var current_val = self.get(picked_stat)
+	if typeof(current_val) == TYPE_INT:
+		self.set(picked_stat, int(current_val * (1.0 + percentage)))
+	else:
+		self.set(picked_stat, current_val * (1.0 + percentage))
+
+func _add_new_random_stat():
+	# Buscar stats que el item NO tenga (valor 0)
+	var candidates = []
+	for stat in ALL_STATS_POOL:
+		if self.get(stat) == 0: # Stats que no tenemos
+			candidates.append(stat)
+	
+	if candidates.is_empty(): return
+	
+	var new_stat = candidates.pick_random()
+	
+	# Asignar un valor base inicial basado en la rareza (Usamos Common como base genérica)
+	# O podríamos usar la configuración de RARITY_RANGES si es accesible.
+	# Por simplicidad, damos un valor base "decente" y aplicamos el crecimiento de nivel 15 niveles.
+	var base_val = 10 # Valor arbitrario inicial
+	if "rate" in new_stat or "penetration" in new_stat:
+		base_val = 0.05 # 5% inicial para porcentajes
+		
+	# Simular crecimiento hasta nivel 15
+	var grown_val = base_val * pow(LEVEL_GROWTH_RATE, 15)
+	
+	if typeof(base_val) == TYPE_INT:
+		self.set(new_stat, int(grown_val))
+	else:
+		self.set(new_stat, grown_val)
+
+func _maximize_stats_to_perfect():
+	# Aquí necesitamos acceder a la tabla de rangos. 
+	# Asumimos que RARITY_RANGES es accesible (static o const en ItemData).
+	var config_ranges = RARITY_RANGES.get(rarity)
+	if not config_ranges: return
+	
+	for stat in ALL_STATS_POOL:
+		var current_val = self.get(stat)
+		if current_val > 0:
+			# 1. Obtener el MAX posible base para esta rareza
+			var range_vals = config_ranges.get(stat)
+			if range_vals:
+				var max_base = range_vals[1] # El segundo valor es el máximo
+				
+				# 2. Recalcular: MaxBase * (1.05 ^ 20)
+				var perfect_val = max_base * pow(LEVEL_GROWTH_RATE, 20)
+				
+				# 3. Si este stat tenía bonos de nivel 5 o 10 (Tempered/Ascended), reaplicarlos
+				if stat in buffed_stats:
+					perfect_val = perfect_val * 1.25
+				
+				# 4. Asignar
+				if typeof(current_val) == TYPE_INT:
+					self.set(stat, int(perfect_val))
+				else:
+					self.set(stat, perfect_val)

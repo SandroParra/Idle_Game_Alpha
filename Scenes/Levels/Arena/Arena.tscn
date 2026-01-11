@@ -2,19 +2,19 @@
 
 [ext_resource type="Script" uid="uid://jg0e88yfgkeh" path="res://Scripts/Managers/GameManager.gd" id="1_d4uca"]
 [ext_resource type="Texture2D" uid="uid://bmv6pr26ivn6e" path="res://Assets/Maps/Arena_v2.jpg" id="1_hlfm0"]
-[ext_resource type="PackedScene" uid="uid://bun51il4b3qtm" path="res://Scenes/Levels/colliders/colliders.tscn" id="2_d4uca"]
+[ext_resource type="PackedScene" uid="uid://bun51il4b3qtm" path="res://Scenes/Levels/Colliders/Colliders.tscn" id="2_d4uca"]
 [ext_resource type="PackedScene" uid="uid://doydumisi600q" path="res://Scenes/UI/CardUI.tscn" id="2_ik3rq"]
 [ext_resource type="PackedScene" uid="uid://dve1ba77dnbh2" path="res://Scenes/Levels/Modals/WaveRewardUI.tscn" id="3_jbbs8"]
 [ext_resource type="PackedScene" uid="uid://djhi3hrqutyni" path="res://Scenes/Units/Enemies/enemySpawner.tscn" id="3_tqpib"]
 [ext_resource type="PackedScene" uid="uid://dsdu0tkmtm87g" path="res://Scenes/Levels/Modals/DeckSelector.tscn" id="5_hdqf5"]
 [ext_resource type="Script" uid="uid://bovsh00xh0g3a" path="res://Scripts/Managers/WaveSet.gd" id="7_47qav"]
 [ext_resource type="Script" uid="uid://vy0fky3xmvb2" path="res://Scripts/UI/EnergyBar.gd" id="8_a0dhi"]
-[ext_resource type="Resource" uid="uid://dq2nloc4rukfq" path="res://Resources/Data/Waves/Set_01-04.tres" id="8_ha74h"]
-[ext_resource type="Resource" uid="uid://br2683143ivgf" path="res://Resources/Data/Waves/Set_05.tres" id="9_rw2hy"]
-[ext_resource type="Resource" uid="uid://c5pnrjkr6x0l8" path="res://Resources/Data/Waves/Set_06-09.tres" id="10_m13tg"]
-[ext_resource type="Resource" uid="uid://c7p0kqb6bpwwj" path="res://Resources/Data/Waves/Set_10.tres" id="11_tk7gy"]
-[ext_resource type="Resource" uid="uid://ldgq0mwncslb" path="res://Resources/Data/Waves/Set_11-14.tres" id="12_uwljo"]
-[ext_resource type="Resource" uid="uid://757dr644nxfu" path="res://Resources/Data/Waves/Set_15.tres" id="13_1x72k"]
+[ext_resource type="Resource" uid="uid://dq2nloc4rukfq" path="res://Resources/Config/Waves/Set_01-04.tres" id="8_ha74h"]
+[ext_resource type="Resource" uid="uid://br2683143ivgf" path="res://Resources/Config/Waves/Set_05.tres" id="9_rw2hy"]
+[ext_resource type="Resource" uid="uid://c5pnrjkr6x0l8" path="res://Resources/Config/Waves/Set_06-09.tres" id="10_m13tg"]
+[ext_resource type="Resource" uid="uid://c7p0kqb6bpwwj" path="res://Resources/Config/Waves/Set_10.tres" id="11_tk7gy"]
+[ext_resource type="Resource" uid="uid://ldgq0mwncslb" path="res://Resources/Config/Waves/Set_11-14.tres" id="12_uwljo"]
+[ext_resource type="Resource" uid="uid://757dr644nxfu" path="res://Resources/Config/Waves/Set_15.tres" id="13_1x72k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qdov3"]
 bg_color = Color(0.1987254, 0.1987254, 0.1987254, 1)
@@ -24,11 +24,21 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color(1, 1, 1, 1)
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("xp_ui_icon", "xp_label", "endless_btn", "normal_btn", "hud_timer_panel", "wave_label", "wave_time", "energy_ui", "selector", "spawner")]
 y_sort_enabled = true
 script = ExtResource("1_d4uca")
 card_ui_scene = ExtResource("2_ik3rq")
 reward_ui_scene = ExtResource("3_jbbs8")
+xp_ui_icon = NodePath("UI/XP_Counter/Icon")
+xp_label = NodePath("UI/XP_Counter/XP_Label")
+endless_btn = NodePath("UI/EndlessBtn")
+normal_btn = NodePath("UI/NormalBtn")
+hud_timer_panel = NodePath("UI/HUD_Timer")
+wave_label = NodePath("UI/HUD_Timer/VBoxContainer/Wave_Label")
+wave_time = NodePath("UI/HUD_Timer/VBoxContainer/Wave_Time")
+energy_ui = NodePath("UI/EnergyBar")
+selector = NodePath("UI/DeckSelector")
+spawner = NodePath("Enemies/enemySpawner")
 
 [node name="Background" type="Sprite2D" parent="."]
 scale = Vector2(0.9994792, 0.84375)

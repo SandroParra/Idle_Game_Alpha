@@ -88,5 +88,30 @@ theme_override_font_sizes/font_size = 112
 theme_override_styles/focus = SubResource("StyleBoxEmpty_iruej")
 text = "FIGHT"
 
+[node name="Forge" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/icon_max_width = 0
+theme_override_constants/align_to_largest_stylebox = 0
+theme_override_constants/line_spacing = 0
+theme_override_icons/icon = ExtResource("3_d2tbo")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cwjnk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8dgdn")
+
+[node name="Label" type="Label" parent="VBoxContainer/Forge"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.067
+anchor_bottom = 0.10300001
+offset_left = 86.0
+offset_top = 53.0
+offset_right = 348.917
+offset_bottom = 153.031
+theme_override_fonts/font = ExtResource("4_cwjnk")
+theme_override_font_sizes/font_size = 112
+theme_override_styles/focus = SubResource("StyleBoxEmpty_iruej")
+text = "FORGE"
+
 [connection signal="pressed" from="VBoxContainer/HeroManager" to="." method="_on_hero_manager_pressed"]
 [connection signal="pressed" from="VBoxContainer/Fight" to="." method="_on_fight_pressed"]
+[connection signal="pressed" from="VBoxContainer/Forge" to="." method="_on_forge_pressed"]
